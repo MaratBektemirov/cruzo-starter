@@ -1,0 +1,12 @@
+.mt_xs  { margin-top: var(--xs); }
+.mt_s   { margin-top: var(--s); }
+.mt_m   { margin-top: var(--m); }
+.mt_l   { margin-top: var(--l); }
+.mt_xl  { margin-top: var(--xl); }
+.mb_xs  { margin-bottom: var(--xs); }
+.mb_s   { margin-bottom: var(--s); }
+.mb_m   { margin-bottom: var(--m); }
+.mb_xl  { margin-bottom: var(--xl); }
+.ml_xs  { margin-left: var(--xs); }
+.ml_s   { margin-left: var(--s); }
+.mr_s   { margin-right: var(--s); }

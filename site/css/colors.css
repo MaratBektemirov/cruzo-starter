@@ -1,0 +1,38 @@
+html {
+
+    --revolut-purple: #7F84F6;
+    --revolut-blue: #0b84f6;
+    --revolut-dark: #191C1F;
+    --revolut-black: #0b0c0f;
+
+    --primary: #33ceff;
+    --dark-red: #bb1422;
+    --light-red: #ffdcd7;
+    --dark: #00032b;
+    --very-light: #fbfbfb;
+    --anti-flash: #f1f1f1;
+    --desert-storm: #f7f7f8;
+    --ghost: #f9f9f9;
+    --light: #f5f7f8;
+    --light-dark: #e4e5e9;
+    --dark-gray: #a5a5a5;
+    --lavender: #d6e1ff;
+    --lavender-light: rgba(214,225,255,0.21);
+    --blue: #3653db;
+    --text-light: #73798c;
+    --green: #4b863a;
+    --green-rgba: rgba(76,175,80, 1);
+    --green-light: #dbf0dd;
+    --orange: #ffcb2f;
+    --yellow: #fde952;
+    --cultured: #F9F7F3;
+    --cultured-dark: #F6F4F0;
+    --lotion: #fdfbf7;
+    --linen: #F7F3E6;
+    --pistachios: #d0fe77;
+    --lavender-2: #e4e3f9;
+    --thistle: #f3dce2;
+    --scarlet: #ff2c00;
+    --dark-slate-gray: #2d4942;
+    --purple: #720e9e;
+}

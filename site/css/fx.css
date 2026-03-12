@@ -1,0 +1,12 @@
+.fx {
+    display: flex;
+}
+.fx-alc {
+    align-items: center;
+}
+.fx-jcsb {
+    justify-content: space-between;
+}
+.fx-wrap {
+    flex-wrap: wrap;
+}

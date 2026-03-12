@@ -1,0 +1,47 @@
+import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { InputComponent, InputConfig } from "cruzo/ui-components/input";
+
+export class DemoRxScopeIndexesComponent extends AbstractComponent {
+  static selector = "demo-rx-scope-indexes-component";
+  dependencies = new Set([InputComponent.selector]);
+
+  innerScope = new RxScope({
+    input: {
+      config: InputConfig({
+        placeholder: "Type value",
+      }),
+    },
+  });
+
+  valuesByIndex$ = this.newRxValueFromScopeByIndex(this.innerScope, "input");
+
+  fillRow(index: string) {
+    this.innerScope.setValue("input", `Input ${index} updated`, index);
+  }
+
+  clearRow(index: string) {
+    this.innerScope.setValue("input", "", index);
+  }
+
+  getHTML() {
+    return `<div>
+        <div repeat="{{2}}" class="mb_s">
+          <div><b>Index {{ this }}</b></div>
+          <input-component
+            component-id="input"
+            scope-id="${this.innerScope.id}"
+            component-index="{{ index }}">
+          </input-component>
+          <div class="mt_xs fx">
+            <button class="btn btn_s btn-primary" onclick="{{ root.fillRow(index) }}">Set by index</button>
+            <button class="btn btn_s btn-secondary ml_xs" onclick="{{ root.clearRow(index) }}">Clear</button>
+          </div>
+          <div class="mt_xs">
+            Current: <b>{{ root.valuesByIndex$::rx?.[index] ?? "-" }}</b>
+          </div>
+        </div>
+      </div>`;
+  }
+}
+
+componentsRegistryService.define(DemoRxScopeIndexesComponent);
