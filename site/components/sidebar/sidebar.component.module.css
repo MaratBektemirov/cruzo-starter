@@ -46,6 +46,38 @@
   margin-top: var(--m);
   gap: var(--xs);
 }
+
+.starter-actions {
+  margin-top: var(--m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+}
+
+.starter-action-link {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--s);
+  border: 1px solid var(--border-dark);
+  background: var(--surface);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.06s ease;
+}
+
+.starter-action-link:hover {
+  background: var(--surface-2);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.starter-action-link:active {
+  transform: translateY(1px);
+}
+
 .sidebar-footer {
   margin-top: auto;
   padding-top: var(--m);
@@ -114,6 +146,10 @@
   .nav {
     margin-top: var(--s);
     gap: 0;
+  }
+
+  .starter-actions {
+    margin-top: var(--s);
   }
 
   .sidebar-footer {

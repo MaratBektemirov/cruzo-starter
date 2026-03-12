@@ -171,6 +171,28 @@ export class SidebarComponent extends AbstractComponent {
           </nav>
         </div>
 
+        <div class="${styles["starter-actions"]}">
+          <a
+            class="${styles["starter-action-link"]}"
+            href="https://github.com/MaratBektemirov/cruzo"
+            target="_blank"
+            rel="noopener noreferrer">
+            Framework repo
+          </a>
+          <a
+            class="${styles["starter-action-link"]}"
+            href="https://github.com/MaratBektemirov/cruzo-starter"
+            target="_blank"
+            rel="noopener noreferrer">
+            Starter repo
+          </a>
+          <a
+            class="${styles["starter-action-link"]}"
+            href="vscode://vscode.git/clone?url=https://github.com/MaratBektemirov/cruzo-starter">
+            Open starter in VS Code
+          </a>
+        </div>
+
         <div class="sidebar-footer">
         </div>
       </aside>`;
