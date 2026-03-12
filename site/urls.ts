@@ -153,23 +153,25 @@ export const SectionsData = {
 
 export type SectionKey = keyof typeof SectionsData;
 
+const startPath = '/cruzo-starter';
+
 export const routerUrlBucket = new RouteUrlBucket({
   main: {
-    url: '/',
+    url: startPath,
     componentSelectorUnbox: () => HomeComponent.selector,
     routeSelectorUnbox: () => ".section"
   },
   tests: {
-    url: '/tests',
+    url: `${startPath}/tests`,
     componentSelectorUnbox: () => TestsComponent.selector,
     routeSelectorUnbox: () => ".section"
   },
   docsDefault: {
-    url: '/docs',
-    redirectTo: '/docs/template-engine',
+    url: `${startPath}/docs`,
+    redirectTo: `${startPath}/docs/template-engine`,
   },
   docs: {
-    url: '/docs/:section',
+    url: `${startPath}/docs/:section`,
     componentSelectorUnbox: () => DocsSectionComponent.selector,
     routeSelectorUnbox: () => ".section",
   },

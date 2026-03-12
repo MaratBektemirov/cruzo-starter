@@ -151,7 +151,7 @@ export class SidebarComponent extends AbstractComponent {
 
   getHTML() {
     return `<aside class="${styles.sidebar}">
-        <a router-link href="/" class="${styles.logo}" style="text-decoration: none; color: inherit; cursor: pointer;">
+        <a router-link href="${routerUrlBucket.buildUrl('main')}" class="${styles.logo}" style="text-decoration: none; color: inherit; cursor: pointer;">
           <div class="${styles["logo-mark"]}"></div>
           <div>
             <div>Cruzo</div>
