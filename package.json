@@ -8,7 +8,7 @@
     "build:site": "vite build --config site/vite.config.ts"
   },
   "dependencies": {
-    "cruzo": "github:MaratBektemirov/cruzo#40dab3539026c33ba3bea4d6027cd613da5a5305",
+    "cruzo": "github:MaratBektemirov/cruzo#d09031c45682d17804bfa27534856bcc820725af",
     "shiki": "3.21.0"
   },
   "devDependencies": {
