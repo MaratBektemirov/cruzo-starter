@@ -496,9 +496,10 @@ cross-spawn@^7.0.6:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-"cruzo@github:MaratBektemirov/cruzo#d09031c45682d17804bfa27534856bcc820725af":
+cruzo@0.9.0:
   version "0.9.0"
-  resolved "https://codeload.github.com/MaratBektemirov/cruzo/tar.gz/d09031c45682d17804bfa27534856bcc820725af"
+  resolved "https://registry.yarnpkg.com/cruzo/-/cruzo-0.9.0.tgz#d680c59925399e8a0045464af5a4902bf820bfe6"
+  integrity sha512-dHLUdlcVJe1nKNw+v+WUwEL4KqbrwBRrR2mv0iUQBr50MYdH3i1BJLnat71PKv9d0FkyULzF4wwnT94NpoUmyw==
 
 cssesc@^3.0.0:
   version "3.0.0"
