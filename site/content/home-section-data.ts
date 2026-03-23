@@ -11,8 +11,8 @@ import { DemoComponent } from "site/components/home-demos/demo-readme-1.componen
 import DemoComponentCode from "site/components/home-demos/demo-readme-1.component?raw";
 import { DemoExpressionsComponent } from "site/components/home-demos/demo-readme-2.component";
 import DemoExpressionsComponentCode from "site/components/home-demos/demo-readme-2.component?raw";
-import { DemoScopeComponent } from "site/components/home-demos/demo-readme-scope.component";
-import DemoScopeComponentCode from "site/components/home-demos/demo-readme-scope.component?raw";
+import { DemoBucketComponent } from "site/components/home-demos/demo-readme-bucket.component";
+import DemoBucketComponentCode from "site/components/home-demos/demo-readme-bucket.component?raw";
 
 export interface HomeSectionItem {
   id: SectionIds;
@@ -37,7 +37,7 @@ componentsRegistryService.initApp();`,
 
   example2: DemoExpressionsComponentCode,
 
-  example3: DemoScopeComponentCode,
+  example3: DemoBucketComponentCode,
 
   router: `import { RouteUrlBucket } from "cruzo";
 import { HomeComponent } from "./home.component";
@@ -117,7 +117,7 @@ export const homeItems: HomeSectionItem[] = [
   {
     id: SectionIds["home-scope"],
     code: CODE_README.example3,
-    component: DemoScopeComponent,
+    component: DemoBucketComponent,
   },
   {
     id: SectionIds["home-bootstrap"],

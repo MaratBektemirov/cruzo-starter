@@ -1,12 +1,13 @@
 import { TestsComponent } from "site/components/tests/tests.component"
-import { DemoRxScopeComponent } from "site/components/components-interaction-demos/demo-rx-scope.component"
-import DemoRxScopeIndexesComponentCode from "site/components/components-interaction-demos/demo-rx-scope-indexes.component?raw"
-import { DemoRxScopeIndexesComponent } from "site/components/components-interaction-demos/demo-rx-scope-indexes.component"
+import { DemoRxBucketComponent } from "site/components/components-interaction-demos/demo-rx-bucket.component"
+import DemoRxBucketComponentCode from "site/components/components-interaction-demos/demo-rx-bucket.component?raw"
+import DemoRxBucketIndexesComponentCode from "site/components/components-interaction-demos/demo-rx-bucket-indexes.component?raw"
+import { DemoRxBucketIndexesComponent } from "site/components/components-interaction-demos/demo-rx-bucket-indexes.component"
 import { DocsSectionComponent } from "site/components/docs-section/docs-section.component"
 import { HomeComponent } from "site/components/home/home.component"
 import { exampleHttpClient, exampleInterceptors, exampleCache } from "site/routes/data/http-examples";
 import { exampleRouteUrlBucket, exampleRouterLifecycle, exampleRouterNavigation } from "site/routes/data/router-examples"
-import { exampleRxScopeCreate, exampleRxScopeSubscribe } from "site/routes/data/rx-scope-examples";
+import { exampleRxBucketSubscribe } from "site/routes/data/rx-bucket-examples";
 import { exampleAbstractComponent, exampleAbstractService } from "site/routes/data/component-service-examples";
 
 import DemoBracesManualComponentCode from "site/components/template-engine-demos/demo-braces-manual.component?raw";
@@ -28,18 +29,18 @@ import { DemoInnerHtmlComponent } from "site/components/template-engine-demos/de
 import DemoOnceComponentCode from "site/components/template-engine-demos/demo-once.component?raw";
 import { DemoOnceComponent } from "site/components/template-engine-demos/demo-once.component";
 
-import DemoSelectComponentCode from "site/components/ui-components-demos/demo-select.component?raw";
-import { DemoSelectScopeComponent } from "site/components/ui-components-demos/demo-select.component";
-import DemoInputComponentCode from "site/components/ui-components-demos/demo-input.component?raw";
-import { DemoInputScopeComponent } from "site/components/ui-components-demos/demo-input.component";
-import DemoButtonGroupComponentCode from "site/components/ui-components-demos/demo-button-group.component?raw";
-import { DemoButtonGroupScopeComponent } from "site/components/ui-components-demos/demo-button-group.component";
-import DemoUploadComponentCode from "site/components/ui-components-demos/demo-upload.component?raw";
-import { DemoUploadScopeComponent } from "site/components/ui-components-demos/demo-upload.component";
-import DemoSpinnerComponentCode from "site/components/ui-components-demos/demo-spinner.component?raw";
-import { DemoSpinnerScopeComponent } from "site/components/ui-components-demos/demo-spinner.component";
-import DemoModalComponentCode from "site/components/ui-components-demos/demo-modal.component?raw";
-import { DemoModalScopeComponent } from "site/components/ui-components-demos/demo-modal.component";
+import DemoSelectComponentCode from "site/components/ui-components-demos/demo-select-bucket.component?raw";
+import { DemoSelectBucketComponent } from "site/components/ui-components-demos/demo-select-bucket.component";
+import DemoInputComponentCode from "site/components/ui-components-demos/demo-input-bucket.component?raw";
+import { DemoInputBucketComponent } from "site/components/ui-components-demos/demo-input-bucket.component";
+import DemoButtonGroupComponentCode from "site/components/ui-components-demos/demo-button-group-bucket.component?raw";
+import { DemoButtonGroupBucketComponent } from "site/components/ui-components-demos/demo-button-group-bucket.component";
+import DemoUploadComponentCode from "site/components/ui-components-demos/demo-upload-bucket.component?raw";
+import { DemoUploadBucketComponent } from "site/components/ui-components-demos/demo-upload-bucket.component";
+import DemoSpinnerComponentCode from "site/components/ui-components-demos/demo-spinner-bucket.component?raw";
+import { DemoSpinnerBucketComponent } from "site/components/ui-components-demos/demo-spinner-bucket.component";
+import DemoModalComponentCode from "site/components/ui-components-demos/demo-modal-bucket.component?raw";
+import { DemoModalBucketComponent } from "site/components/ui-components-demos/demo-modal-bucket.component";
 import { RouteUrlBucket } from "cruzo"
 import { SectionIds } from "site/sections"
 import type { AbstractComponentConstructor } from "cruzo"
@@ -60,13 +61,13 @@ export const SectionsData = {
   [SectionIds["cmp-interaction"]]: {
     sectionId: SectionIds["cmp-interaction"],
     items: [
-      { code: exampleRxScopeCreate, component: DemoRxScopeComponent, id: SectionIds["cmp-interaction"] },
-      { code: exampleRxScopeSubscribe, id: SectionIds["cmp-interaction-attributes"] },
-      { code: DemoRxScopeIndexesComponentCode, component: DemoRxScopeIndexesComponent, id: SectionIds["cmp-interaction-advantages"] },
+      { code: DemoRxBucketComponentCode, component: DemoRxBucketComponent, id: SectionIds["cmp-interaction"] },
+      { code: exampleRxBucketSubscribe, id: SectionIds["cmp-interaction-attributes"] },
+      { code: DemoRxBucketIndexesComponentCode, component: DemoRxBucketIndexesComponent, id: SectionIds["cmp-interaction-advantages"] },
     ],
     dependencies: [
-      DemoRxScopeComponent.selector,
-      DemoRxScopeIndexesComponent.selector,
+      DemoRxBucketComponent.selector,
+      DemoRxBucketIndexesComponent.selector,
       "input-component",
       "button-group-component",
     ],
@@ -127,20 +128,20 @@ export const SectionsData = {
   [SectionIds["ui-components"]]: {
     sectionId: SectionIds["ui-components"],
     items: [
-      { code: DemoInputComponentCode, component: DemoInputScopeComponent, id: SectionIds["ui-components-input"] },
-      { code: DemoButtonGroupComponentCode, component: DemoButtonGroupScopeComponent, id: SectionIds["ui-components-button-group"] },
-      { code: DemoUploadComponentCode, component: DemoUploadScopeComponent, id: SectionIds["ui-components-upload"] },
-      { code: DemoSelectComponentCode, component: DemoSelectScopeComponent, id: SectionIds["ui-components-select"] },
-      { code: DemoSpinnerComponentCode, component: DemoSpinnerScopeComponent, id: SectionIds["ui-components-spinner"] },
-      { code: DemoModalComponentCode, component: DemoModalScopeComponent, id: SectionIds["ui-components-modal"] },
+      { code: DemoInputComponentCode, component: DemoInputBucketComponent, id: SectionIds["ui-components-input"] },
+      { code: DemoButtonGroupComponentCode, component: DemoButtonGroupBucketComponent, id: SectionIds["ui-components-button-group"] },
+      { code: DemoUploadComponentCode, component: DemoUploadBucketComponent, id: SectionIds["ui-components-upload"] },
+      { code: DemoSelectComponentCode, component: DemoSelectBucketComponent, id: SectionIds["ui-components-select"] },
+      { code: DemoSpinnerComponentCode, component: DemoSpinnerBucketComponent, id: SectionIds["ui-components-spinner"] },
+      { code: DemoModalComponentCode, component: DemoModalBucketComponent, id: SectionIds["ui-components-modal"] },
     ],
     dependencies: [
-      DemoSelectScopeComponent.selector,
-      DemoInputScopeComponent.selector,
-      DemoButtonGroupScopeComponent.selector,
-      DemoUploadScopeComponent.selector,
-      DemoSpinnerScopeComponent.selector,
-      DemoModalScopeComponent.selector,
+      DemoSelectBucketComponent.selector,
+      DemoInputBucketComponent.selector,
+      DemoButtonGroupBucketComponent.selector,
+      DemoUploadBucketComponent.selector,
+      DemoSpinnerBucketComponent.selector,
+      DemoModalBucketComponent.selector,
       "select-component",
       "input-component",
       "button-group-component",

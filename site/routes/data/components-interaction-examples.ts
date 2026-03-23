@@ -1,5 +1,5 @@
-import DemoRxScopeComponentCode from "site/components/components-interaction-demos/demo-rx-scope.component?raw";
+import DemoRxBucketComponentCode from "site/components/components-interaction-demos/demo-rx-bucket.component?raw";
 
-export const exampleScopeAttributes = DemoRxScopeComponentCode;
+export const exampleBucketAttributes = DemoRxBucketComponentCode;
 
-export const exampleAdvantages = DemoRxScopeComponentCode;
+export const exampleBucketAdvantages = DemoRxBucketComponentCode;

@@ -3,7 +3,7 @@
  */
 import DemoComponentCode from "site/components/home-demos/demo-readme-1.component?raw";
 import DemoExpressionsComponentCode from "site/components/home-demos/demo-readme-2.component?raw";
-import DemoScopeComponentCode from "site/components/home-demos/demo-readme-scope.component?raw";
+import DemoBucketComponentCode from "site/components/home-demos/demo-readme-bucket.component?raw";
 
 export type ReadmeBlock =
   | { type: "html"; content: string }
@@ -17,7 +17,7 @@ export const readmeBlocks: ReadmeBlock[] = [
         <li class="description-list-item"><b>Без зависимостей</b></li>
         <li class="description-list-item"><b>VM выражений</b> — в шаблонах <code class="description-inline-code">{{ }}</code> компилируются в байткод и выполняются в стековой VM</li>
         <li class="description-list-item"><b>Rx / RxFunc</b> — реактивные значения</li>
-        <li class="description-list-item"><b>RxScope</b> — именованные «buckets» состояния для компонентов</li>
+        <li class="description-list-item"><b>RxBucket</b> — именованные «buckets» состояния для компонентов</li>
         <li class="description-list-item"><b>Роутер</b> — декларативные маршруты, параметры, редиректы</li>
         <li class="description-list-item"><b>HttpClient</b> — кэш, интерцепторы, AbortSignal</li>
         <li class="description-list-item"><b>UI-набор</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink в <code class="description-inline-code">cruzo/ui-components</code></li>
@@ -72,14 +72,14 @@ routerService.update();`,
   },
   {
     type: "html",
-    content: `<h3 class="mt_l mb_s">3. RxScope и дочерние компоненты</h3>
+    content: `<h3 class="mt_l mb_s">3. RxBucket и дочерние компоненты</h3>
       <p class="description-paragraph">
-        Один scope, несколько компонентов; родитель подписывается через <code class="description-inline-code">newRxValueFromScope</code>.
+        Один bucket, несколько компонентов; родитель подписывается через <code class="description-inline-code">newRxValueFromBucket</code>.
       </p>`,
   },
   {
     type: "code",
-    code: DemoScopeComponentCode,
+    code: DemoBucketComponentCode,
     lang: "typescript",
   },
   { type: "html", content: `<h3 class="mt_l mb_s">Роутер</h3>` },
@@ -136,7 +136,7 @@ await cached.clearCache("GET", "/users");`,
         <li class="description-list-item"><b>Шаблоны:</b> <code class="description-inline-code">{{ expression }}</code> — компиляция в байткод, выполнение в VM. Модификатор <code class="description-inline-code">::rx</code> подписывает узел на обновления.</li>
         <li class="description-list-item"><b>Атрибуты:</b> <code class="description-inline-code">repeat</code>, <code class="description-inline-code">attached</code>, <code class="description-inline-code">let-*</code>, <code class="description-inline-code">inner-html</code>, <code class="description-inline-code">onclick</code> и др.</li>
         <li class="description-list-item"><b>Rx / RxFunc:</b> <code class="description-inline-code">this.newRx(initial)</code>, <code class="description-inline-code">this.newRxFunc(fn, ...deps)</code>. В шаблоне: <code class="description-inline-code">root.foo$::rx</code>.</li>
-        <li class="description-list-item"><b>RxScope:</b> именованные ведёрки состояния; у компонентов <code class="description-inline-code">scope-id</code> и <code class="description-inline-code">component-id</code>.</li>
+        <li class="description-list-item"><b>RxBucket:</b> именованные ведёрки состояния; у компонентов <code class="description-inline-code">bucket-id</code> и <code class="description-inline-code">component-id</code>.</li>
         <li class="description-list-item"><b>Роутер:</b> <code class="description-inline-code">routerService</code>, <code class="description-inline-code">RouteUrlBucket</code>, <code class="description-inline-code">buildUrl(name, params)</code>.</li>
       </ul>`,
   },
@@ -145,7 +145,7 @@ await cached.clearCache("GET", "/users");`,
     content: `<h2 class="mt_xl">API</h2>
       <p class="description-paragraph">
         <code class="description-inline-code">Template</code>, <code class="description-inline-code">AbstractComponent</code>, <code class="description-inline-code">AbstractService</code>,
-        <code class="description-inline-code">RxScope</code>, <code class="description-inline-code">Rx</code> / <code class="description-inline-code">RxFunc</code>,
+        <code class="description-inline-code">RxBucket</code>, <code class="description-inline-code">Rx</code> / <code class="description-inline-code">RxFunc</code>,
         <code class="description-inline-code">componentsRegistryService</code>, <code class="description-inline-code">routerService</code>,
         <code class="description-inline-code">HttpClient</code>, <code class="description-inline-code">cruzo/ui-components</code>, <code class="description-inline-code">cruzo/utils</code>.
       </p>`,

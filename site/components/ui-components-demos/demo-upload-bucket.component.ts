@@ -1,11 +1,11 @@
-import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { UploadComponent, UploadConfig } from "cruzo/ui-components/upload";
 
-export class DemoUploadScopeComponent extends AbstractComponent {
-  static selector = "demo-upload-scope-component";
+export class DemoUploadBucketComponent extends AbstractComponent {
+  static selector = "demo-upload-bucket-component";
   dependencies = new Set([UploadComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     upload: {
       config: UploadConfig({
         accept: "image/*"
@@ -13,7 +13,7 @@ export class DemoUploadScopeComponent extends AbstractComponent {
     }
   });
 
-  uploadedFiles$ = this.newRxValueFromScope(this.innerScope, 'upload')
+  uploadedFiles$ = this.newRxValueFromBucket(this.innerBucket, "upload");
 
   constructor() {
     super();
@@ -23,7 +23,7 @@ export class DemoUploadScopeComponent extends AbstractComponent {
     return `<div>
         <upload-component
           component-id="upload"
-          scope-id="${this.innerScope.id}">
+          bucket-id="${this.innerBucket.id}">
         </upload-component>
 
         <div class="mt_s">
@@ -33,8 +33,8 @@ export class DemoUploadScopeComponent extends AbstractComponent {
   }
 
   getFilesInfo(files: File[]) {
-    if (!files || files.length === 0) return 'No files selected';
-    return `${files.length} file(s): ${Array.from(files).map(f => f.name).join(', ')}`;
+    if (!files || files.length === 0) return "No files selected";
+    return `${files.length} file(s): ${Array.from(files).map(f => f.name).join(", ")}`;
   }
 
   connectedCallback() {
@@ -42,4 +42,4 @@ export class DemoUploadScopeComponent extends AbstractComponent {
   }
 }
 
-componentsRegistryService.define(DemoUploadScopeComponent);
+componentsRegistryService.define(DemoUploadBucketComponent);

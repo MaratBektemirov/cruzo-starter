@@ -1,11 +1,11 @@
-import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { InputComponent, InputConfig } from "cruzo/ui-components/input";
 
-export class DemoRxScopeIndexesComponent extends AbstractComponent {
-  static selector = "demo-rx-scope-indexes-component";
+export class DemoRxBucketIndexesComponent extends AbstractComponent {
+  static selector = "demo-rx-bucket-indexes-component";
   dependencies = new Set([InputComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     input: {
       config: InputConfig({
         placeholder: "Type value",
@@ -13,14 +13,14 @@ export class DemoRxScopeIndexesComponent extends AbstractComponent {
     },
   });
 
-  valuesByIndex$ = this.newRxValueFromScopeByIndex(this.innerScope, "input");
+  valuesByIndex$ = this.newRxValueFromBucketByIndex(this.innerBucket, "input");
 
   fillRow(index: string) {
-    this.innerScope.setValue("input", `Input ${index} updated`, index);
+    this.innerBucket.setValue("input", `Input ${index} updated`, index);
   }
 
   clearRow(index: string) {
-    this.innerScope.setValue("input", "", index);
+    this.innerBucket.setValue("input", "", index);
   }
 
   getHTML() {
@@ -29,7 +29,7 @@ export class DemoRxScopeIndexesComponent extends AbstractComponent {
           <div><b>Index {{ this }}</b></div>
           <input-component
             component-id="input"
-            scope-id="${this.innerScope.id}"
+            bucket-id="${this.innerBucket.id}"
             component-index="{{ index }}">
           </input-component>
           <div class="mt_xs fx">
@@ -44,4 +44,4 @@ export class DemoRxScopeIndexesComponent extends AbstractComponent {
   }
 }
 
-componentsRegistryService.define(DemoRxScopeIndexesComponent);
+componentsRegistryService.define(DemoRxBucketIndexesComponent);

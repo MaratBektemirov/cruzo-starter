@@ -3,7 +3,7 @@ import styles from "./sidebar.component.module.css";
 import { AbstractComponent, componentsRegistryService, routerService } from "cruzo";
 
 import { routerUrlBucket } from "site/urls";
-import { RxScope } from "cruzo";
+import { RxBucket } from "cruzo";
 import { SidebarLinkComponent } from "site/components/sidebar-link/sidebar-link.component";
 import { SectionIds } from "site/sections";
 
@@ -72,7 +72,7 @@ export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
       },
       {
         id: SectionIds["cmp-interaction"],
-        title: "RxScope",
+        title: "RxBucket",
         path: routerUrlBucket.buildUrl('docs', { section: SectionIds["cmp-interaction"] }),
       },
       {
@@ -139,7 +139,7 @@ export class SidebarComponent extends AbstractComponent {
   static selector = "sidebar-component";
   public dependencies = new Set([SidebarLinkComponent.selector]);
 
-  public innerScope = new RxScope({ link: {} });
+  public innerBucket = new RxBucket({ link: {} });
 
   sections = this.newRx(SIDEBAR_SECTIONS);
 
@@ -167,7 +167,7 @@ export class SidebarComponent extends AbstractComponent {
               repeat="{{ root.sections::rx }}"
               component-id="link"
               component-index="{{ index }}"
-              scope-id="${this.innerScope.id}"></sidebar-link-component>
+              bucket-id="${this.innerBucket.id}"></sidebar-link-component>
           </nav>
         </div>
 
@@ -200,7 +200,7 @@ export class SidebarComponent extends AbstractComponent {
 
   async connectedCallback() {
     super.connectedCallback();
-    this.innerScope.setValues({
+    this.innerBucket.setValues({
       link: Object.fromEntries(SIDEBAR_SECTIONS.map((s, i) => [String(i), s])),
     });
 

@@ -1,11 +1,11 @@
-import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { ModalComponent, ModalConfig } from "cruzo/ui-components/modal";
 
-export class DemoModalScopeComponent extends AbstractComponent {
-  static selector = "demo-modal-scope-component";
+export class DemoModalBucketComponent extends AbstractComponent {
+  static selector = "demo-modal-bucket-component";
   dependencies = new Set([ModalComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     modal_demo: {
       config: ModalConfig({
         bodyContent: `<div>
@@ -23,8 +23,8 @@ export class DemoModalScopeComponent extends AbstractComponent {
   });
 
   modalResult$ = this.newRx<string>("No actions yet");
-  closeEvents$ = this.newRxEventFromScopeByIndex(
-    this.innerScope,
+  closeEvents$ = this.newRxEventFromBucketByIndex(
+    this.innerBucket,
     "modal_demo",
     "closeModal",
   );
@@ -55,8 +55,8 @@ export class DemoModalScopeComponent extends AbstractComponent {
   }
 
   openModal() {
-    ModalComponent.attach("modal_demo", this.innerScope.id);
+    ModalComponent.attach("modal_demo", this.innerBucket.id);
   }
 }
 
-componentsRegistryService.define(DemoModalScopeComponent);
+componentsRegistryService.define(DemoModalBucketComponent);

@@ -1,6 +1,6 @@
 import styles from "./sidebar-link.component.module.css";
 
-import { AbstractComponent, componentsRegistryService, routerService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, routerService, RxBucket } from "cruzo";
 import { SidebarSectionConfig, SidebarChild } from "site/components/sidebar/sidebar.component";
 import { RouterLinkComponent, RouterLinkConfig } from "cruzo/ui-components/router-link";
 
@@ -10,12 +10,12 @@ export class SidebarLinkComponent extends AbstractComponent<
 > {
   static selector = "sidebar-link-component";
   public dependencies = new Set([RouterLinkComponent.selector]);
-  public hasOuterScope = true;
+  public hasOuterBucket = true;
   public activeChildrenForScrollSpy: SidebarChild = null;
 
   routerService = routerService;
 
-  public innerScope = new RxScope({
+  public innerBucket = new RxBucket({
     'router-link-main': {
       config: RouterLinkConfig({
         startsWith: true,
@@ -36,8 +36,8 @@ export class SidebarLinkComponent extends AbstractComponent<
     },
   });
 
-  linkState$ = this.newRxEventFromScope(this.innerScope, 'router-link-main', 'routerLinkStateChanged');
-  activeChildrens$ = this.newRxEventFromScopeByIndex(this.innerScope, 'router-link-children', 'routerLinkStateChanged');
+  linkState$ = this.newRxEventFromBucket(this.innerBucket, "router-link-main", "routerLinkStateChanged");
+  activeChildrens$ = this.newRxEventFromBucketByIndex(this.innerBucket, "router-link-children", "routerLinkStateChanged");
 
   subMenuUpdateScheduled = false;
 
@@ -85,7 +85,7 @@ export class SidebarLinkComponent extends AbstractComponent<
         <a class="${styles["nav-button"]}"
           router-link
           component-id="router-link-main"
-          scope-id="${this.innerScope.id}"
+          bucket-id="${this.innerBucket.id}"
           href="{{ link?.path }}">
           {{ link?.title }}
         </a>
@@ -100,7 +100,7 @@ export class SidebarLinkComponent extends AbstractComponent<
             <a class="${styles["nav-child"]}"
               router-link
               component-id="router-link-children"
-              scope-id="${this.innerScope.id}"
+              bucket-id="${this.innerBucket.id}"
               component-index="{{ index }}"
               href="{{ children?.path }}">
               {{ children?.title }}
@@ -111,7 +111,7 @@ export class SidebarLinkComponent extends AbstractComponent<
                 repeat="{{ this.sub }}"
                 router-link
                 component-id="router-link-sub"
-                scope-id="${this.innerScope.id}"
+                bucket-id="${this.innerBucket.id}"
                 component-index="{{ this.id }}"
                 class="${styles["nav-subitem"]}"
                 href="{{ children?.path+'#'+this.id }}"

@@ -1,11 +1,11 @@
-import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { ButtonGroupComponent, ButtonGroupConfig } from "cruzo/ui-components/button-group";
 
-export class DemoButtonGroupScopeComponent extends AbstractComponent {
-  static selector = "demo-button-group-scope-component";
+export class DemoButtonGroupBucketComponent extends AbstractComponent {
+  static selector = "demo-button-group-bucket-component";
   dependencies = new Set([ButtonGroupComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     button_group: {
       config: ButtonGroupConfig({
         items: [
@@ -15,9 +15,9 @@ export class DemoButtonGroupScopeComponent extends AbstractComponent {
         ]
       })
     }
-  })
+  });
 
-  currentButtonGroupValue$ = this.newRxValueFromScope(this.innerScope, 'button_group');
+  currentButtonGroupValue$ = this.newRxValueFromBucket(this.innerBucket, "button_group");
 
   constructor() {
     super();
@@ -27,7 +27,7 @@ export class DemoButtonGroupScopeComponent extends AbstractComponent {
     return `<div>
         <button-group-component
           component-id="button_group"
-          scope-id="${this.innerScope.id}">
+          bucket-id="${this.innerBucket.id}">
         </button-group-component>
 
         <div class="mt_s">
@@ -41,4 +41,4 @@ export class DemoButtonGroupScopeComponent extends AbstractComponent {
   }
 }
 
-componentsRegistryService.define(DemoButtonGroupScopeComponent);
+componentsRegistryService.define(DemoButtonGroupBucketComponent);

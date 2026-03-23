@@ -84,7 +84,7 @@ const trsSections: Translate = {
       [SectionIds["ui-components"]]: {
         title: "UI-компоненты",
         description: `<p class="description-paragraph">
-            Все компоненты работают через <code class="description-inline-code">RxScope</code> для управления состоянием
+            Все компоненты работают через <code class="description-inline-code">RxBucket</code> для управления состоянием
             и поддерживают типизированную конфигурацию.
           </p>
           <p class="description-paragraph">
@@ -176,14 +176,14 @@ const trsSections: Translate = {
         },
       },
       [SectionIds["cmp-interaction"]]: {
-        title: "RxScope",
+        title: "RxBucket",
         description: `<p class="description-paragraph">
-            Сущность <code class="description-inline-code">RxScope</code> — контейнер именованного состояния для связанных компонентов. Компоненты подключаются через <code class="description-inline-code">scope-id</code> и <code class="description-inline-code">component-id</code>, читают/обновляют значения и события внутри одного scope.
+            Сущность <code class="description-inline-code">RxBucket</code> — контейнер именованного состояния для связанных компонентов. Компоненты подключаются через <code class="description-inline-code">bucket-id</code> и <code class="description-inline-code">component-id</code>, читают/обновляют значения и события внутри одного bucket.
           </p>`,
         demos: {
-          1: `<h2 class="mt_xl">RxScope API</h2>
+          1: `<h2 class="mt_xl">RxBucket API</h2>
             <p class="description-paragraph">
-              Базовый сценарий: создать <code class="description-inline-code">new RxScope(...)</code>, подключить компоненты и управлять значениями через <code class="description-inline-code">getValue/setValue</code>.
+              Базовый сценарий: создать <code class="description-inline-code">new RxBucket(...)</code>, подключить компоненты и управлять значениями через <code class="description-inline-code">getValue/setValue</code>.
             </p>
             <ul class="description-list">
               <li class="description-list-item"><b>constructor</b> <code class="description-inline-code">(descriptors)</code> — регистрация id и конфигов</li>
@@ -192,10 +192,10 @@ const trsSections: Translate = {
               <li class="description-list-item"><b>newRxValue / newRxEvent / newRxAllValues</b> — подписки на изменения и события</li>
             </ul>`,
           2: `<div class="description-note">
-              Рекомендуемый подход: объявляйте <code class="description-inline-code">RxScope</code> как контейнер, а в логике компонентов/сервисов используйте <code class="description-inline-code">newRx...</code> методы из <code class="description-inline-code">AbstractComponent</code> и <code class="description-inline-code">AbstractService</code>. Прямую работу с <code class="description-inline-code">scope.newRx...</code> оставляйте только для низкоуровневых случаев.
+              Рекомендуемый подход: объявляйте <code class="description-inline-code">RxBucket</code> как контейнер, а в логике компонентов/сервисов используйте <code class="description-inline-code">newRx...</code> методы из <code class="description-inline-code">AbstractComponent</code> и <code class="description-inline-code">AbstractService</code>. Прямую работу с <code class="description-inline-code">bucket.newRx...</code> оставляйте только для низкоуровневых случаев.
             </div>
             <div class="description-note mt_s">
-              Внутри scope данные адресуются парой <code class="description-inline-code">(id, index)</code>. Индекс по умолчанию — <code class="description-inline-code">'0'</code>, что удобно и для одиночных, и для повторяющихся компонентов.
+              Внутри bucket данные адресуются парой <code class="description-inline-code">(id, index)</code>. Индекс по умолчанию — <code class="description-inline-code">'0'</code>, что удобно и для одиночных, и для повторяющихся компонентов.
             </div>`,
         },
       },
@@ -472,7 +472,7 @@ const trsSections: Translate = {
             <ul class="description-list">
               <li class="description-list-item"><b>{{ }}</b> — в шаблонах компилируются в байткод и выполняются в стековой VM</li>
               <li class="description-list-item"><b>Rx / RxFunc</b> — реактивные значения</li>
-              <li class="description-list-item"><b>RxScope</b> — именованные «buckets» состояния для компонентов</li>
+              <li class="description-list-item"><b>RxBucket</b> — именованные «buckets» состояния для компонентов</li>
               <li class="description-list-item"><b>Роутер</b> — декларативные маршруты, параметры, редиректы</li>
               <li class="description-list-item"><b>HttpClient</b> — кэш, интерцепторы, AbortSignal</li>
               <li class="description-list-item"><b>UI-набор</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink в <code class="description-inline-code">cruzo/ui-components</code></li>
@@ -560,10 +560,10 @@ const trsSections: Translate = {
         demos: {
           1: `<h3 class="mt_xl">Связь без лишнего</h3>
             <p class="description-paragraph">
-              Компоненты не передают друг другу данные по цепочке — они подключаются к общему scope по <code class="description-inline-code">component-id</code> и <code class="description-inline-code">scope-id</code>.
+              Компоненты не передают друг другу данные по цепочке — они подключаются к общему bucket по <code class="description-inline-code">component-id</code> и <code class="description-inline-code">bucket-id</code>.
             </p>`,
           2: `<p class="description-paragraph">
-              В отличие от фреймворков, где данные прокидываются через множество уровней и любое изменение заставляет трогать десятки компонентов, здесь достаточно обновить scope — все подключённые компоненты реагируют сами. Меньше кода и меньше связей.
+              В отличие от фреймворков, где данные прокидываются через множество уровней и любое изменение заставляет трогать десятки компонентов, здесь достаточно обновить bucket — все подключённые компоненты реагируют сами. Меньше кода и меньше связей.
             </p>`,
         },
       },
@@ -744,7 +744,7 @@ const trsSections: Translate = {
               <li class="description-list-item"><b>newRxAllValues</b> callback: <code class="description-inline-code">(valuesById)</code></li>
             </ul>
             <div class="description-note">
-              Тот же принцип работает с конфигами: один descriptor в <code class="description-inline-code">RxScope</code> на конкретный <code class="description-inline-code">component-id</code> автоматически применяется ко всем компонентам этой группы (по разным <code class="description-inline-code">component-index</code>).
+              Тот же принцип работает с конфигами: один descriptor в <code class="description-inline-code">RxBucket</code> на конкретный <code class="description-inline-code">component-id</code> автоматически применяется ко всем компонентам этой группы (по разным <code class="description-inline-code">component-index</code>).
             </div>`,
           2: `<div class="description-note">
               В примере кода ниже сначала показаны все <code class="description-inline-code">this.newRx...</code> методы из <code class="description-inline-code">AbstractComponent</code>, а затем отдельный пример для <code class="description-inline-code">AbstractService</code> с <code class="description-inline-code">newRx</code> и <code class="description-inline-code">newRxFunc</code>.
@@ -754,7 +754,7 @@ const trsSections: Translate = {
       [SectionIds["cmp-interaction-advantages"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">Плюсы индексов в RxScope</h2>
+          1: `<h2 class="mt_xl">Плюсы индексов в RxBucket</h2>
             <p class="description-paragraph">
               Индекс в паре <code class="description-inline-code">(id, index)</code> даёт стабильную адресацию конкретного экземпляра поля или компонента внутри одного bucket.
             </p>
@@ -771,12 +771,12 @@ const trsSections: Translate = {
             <h3 class="mt_l mb_s">Почему лучше через newRx... из базовых классов</h3>
             <ul class="description-list">
               <li class="description-list-item"><b>Плюсы:</b> меньше boilerplate, единый стиль по проекту, автоматическое подключение к жизненному циклу компонента/сервиса, проще сопровождать код</li>
-              <li class="description-list-item"><b>Плюсы:</b> удобнее читать — видно намерение на уровне API компонента, а не низкоуровневого scope</li>
+              <li class="description-list-item"><b>Плюсы:</b> удобнее читать — видно намерение на уровне API компонента, а не низкоуровневого bucket</li>
               <li class="description-list-item"><b>Минусы:</b> меньше контроля над низкоуровневой подпиской в нестандартных сценариях</li>
-              <li class="description-list-item"><b>Минусы:</b> при отладке сложных edge-case иногда нужно опускаться до прямого API <code class="description-inline-code">RxScope</code></li>
+              <li class="description-list-item"><b>Минусы:</b> при отладке сложных edge-case иногда нужно опускаться до прямого API <code class="description-inline-code">RxBucket</code></li>
             </ul>
             <div class="description-note">
-              Практическое правило: <code class="description-inline-code">RxScope</code> — для объявления структуры и значений, <code class="description-inline-code">newRx...</code> из базовых классов — для подписок и реактивной логики.
+              Практическое правило: <code class="description-inline-code">RxBucket</code> — для объявления структуры и значений, <code class="description-inline-code">newRx...</code> из базовых классов — для подписок и реактивной логики.
             </div>`,
         },
       },

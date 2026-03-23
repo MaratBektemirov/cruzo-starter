@@ -1,15 +1,15 @@
-import { AbstractComponent, componentsRegistryService, delay, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, delay, RxBucket } from "cruzo";
 import {
   SpinnerComponent,
   SpinnerConfig,
   SpinnerValue,
 } from "cruzo/ui-components/spinner";
 
-export class DemoSpinnerScopeComponent extends AbstractComponent {
-  static selector = "demo-spinner-scope-component";
+export class DemoSpinnerBucketComponent extends AbstractComponent {
+  static selector = "demo-spinner-bucket-component";
   dependencies = new Set([SpinnerComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     spinner: {
       config: SpinnerConfig({
         color: "#fff",
@@ -18,11 +18,11 @@ export class DemoSpinnerScopeComponent extends AbstractComponent {
     },
   });
 
-  spinnerState$ = this.newRxValueFromScope(this.innerScope, "spinner");
+  spinnerState$ = this.newRxValueFromBucket(this.innerBucket, "spinner");
 
   constructor() {
     super();
-    this.innerScope.setValue("spinner", SpinnerValue.inactive);
+    this.innerBucket.setValue("spinner", SpinnerValue.inactive);
   }
 
   getHTML() {
@@ -30,7 +30,7 @@ export class DemoSpinnerScopeComponent extends AbstractComponent {
         <button
           is="spinner"
           component-id="spinner"
-          scope-id="${this.innerScope.id}"
+          bucket-id="${this.innerBucket.id}"
           class="btn btn_s btn-primary"
           onclick="{{ root.simulateLoading() }}">
           Simulate loading
@@ -45,12 +45,12 @@ export class DemoSpinnerScopeComponent extends AbstractComponent {
   async simulateLoading() {
     if (this.spinnerState$.actual === SpinnerValue.active) return;
 
-    this.innerScope.setValue("spinner", SpinnerValue.active);
+    this.innerBucket.setValue("spinner", SpinnerValue.active);
 
-    await delay(1200)
+    await delay(1200);
 
-    this.innerScope.setValue("spinner", SpinnerValue.inactive);
+    this.innerBucket.setValue("spinner", SpinnerValue.inactive);
   }
 }
 
-componentsRegistryService.define(DemoSpinnerScopeComponent);
+componentsRegistryService.define(DemoSpinnerBucketComponent);

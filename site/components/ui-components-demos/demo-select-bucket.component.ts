@@ -2,7 +2,7 @@ import {
   AbstractComponent,
   componentsRegistryService,
   Rx,
-  RxScope,
+  RxBucket,
 } from "cruzo";
 import { SelectComponent, SelectConfig } from "cruzo/ui-components/select";
 
@@ -14,8 +14,8 @@ const MODEL_ITEMS = [
   { label: "P0P0", value: 5 },
 ];
 
-export class DemoSelectScopeComponent extends AbstractComponent {
-  static selector = "demo-select-scope-component";
+export class DemoSelectBucketComponent extends AbstractComponent {
+  static selector = "demo-select-bucket-component";
   dependencies = new Set([SelectComponent.selector]);
 
   select$: Rx<any> = null;
@@ -23,7 +23,7 @@ export class DemoSelectScopeComponent extends AbstractComponent {
 
   constructor() {
     super();
-    this.innerScope = new RxScope({
+    this.innerBucket = new RxBucket({
       select: {
         config: SelectConfig({
           placeholder: "Select model",
@@ -43,30 +43,30 @@ export class DemoSelectScopeComponent extends AbstractComponent {
       },
     });
 
-    this.innerScope.setValuesAtIndex({ select: {1: true}, select_multi: {1: true} });
+    this.innerBucket.setValuesAtIndex({ select: { 1: true }, select_multi: { 1: true } });
 
-    this.select$ = this.newRxValueFromScope(this.innerScope, 'select');
-    this.selectMulti$ = this.newRxValueFromScope(this.innerScope, 'select_multi');
+    this.select$ = this.newRxValueFromBucket(this.innerBucket, "select");
+    this.selectMulti$ = this.newRxValueFromBucket(this.innerBucket, "select_multi");
   }
 
   getHTML() {
     return `<div>
         <select-component
           component-id="select"
-          scope-id="${this.innerScope.id}">
+          bucket-id="${this.innerBucket.id}">
         </select-component>
         <div class="mt_s">
-          Значение из scope (value$): <b>{{ root.stringify(root.select$::rx) }}</b>
+          Значение из bucket (value$): <b>{{ root.stringify(root.select$::rx) }}</b>
         </div>
 
         <select-component
           class="mt_l"
           component-id="select_multi"
-          scope-id="${this.innerScope.id}">
+          bucket-id="${this.innerBucket.id}">
         </select-component>
 
         <div class="mt_s">
-          Значение из scope (value$): <b>{{ root.stringify(root.selectMulti$::rx) }}</b>
+          Значение из bucket (value$): <b>{{ root.stringify(root.selectMulti$::rx) }}</b>
         </div>
       </div>`;
   }
@@ -80,4 +80,4 @@ export class DemoSelectScopeComponent extends AbstractComponent {
   }
 }
 
-componentsRegistryService.define(DemoSelectScopeComponent);
+componentsRegistryService.define(DemoSelectBucketComponent);

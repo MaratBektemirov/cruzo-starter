@@ -1,12 +1,12 @@
-import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { InputComponent, InputConfig } from "cruzo/ui-components/input";
 import { ButtonGroupComponent, ButtonGroupConfig } from "cruzo/ui-components/button-group";
 
-export class DemoRxScopeComponent extends AbstractComponent {
-  static selector = "demo-rx-scope-component";
+export class DemoRxBucketComponent extends AbstractComponent {
+  static selector = "demo-rx-bucket-component";
   dependencies = new Set([InputComponent.selector, ButtonGroupComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     input: { config: InputConfig({ placeholder: "Enter your name" }) },
     buttonGroup: {
       config: ButtonGroupConfig({
@@ -19,8 +19,8 @@ export class DemoRxScopeComponent extends AbstractComponent {
     }
   });
 
-  currentInputValue$ = this.newRxValueFromScope(this.innerScope, 'input')
-  currentButtonGroupValue$ = this.newRxValueFromScope(this.innerScope, 'buttonGroup');
+  currentInputValue$ = this.newRxValueFromBucket(this.innerBucket, "input");
+  currentButtonGroupValue$ = this.newRxValueFromBucket(this.innerBucket, "buttonGroup");
 
   constructor() {
     super();
@@ -31,14 +31,14 @@ export class DemoRxScopeComponent extends AbstractComponent {
         <div class="mb_m">
           <input-component
             component-id="input"
-            scope-id="${this.innerScope.id}">
+            bucket-id="${this.innerBucket.id}">
           </input-component>
         </div>
 
         <div class="mb_m">
           <button-group-component
             component-id="buttonGroup"
-            scope-id="${this.innerScope.id}">
+            bucket-id="${this.innerBucket.id}">
           </button-group-component>
         </div>
 
@@ -54,4 +54,4 @@ export class DemoRxScopeComponent extends AbstractComponent {
   }
 }
 
-componentsRegistryService.define(DemoRxScopeComponent);
+componentsRegistryService.define(DemoRxBucketComponent);

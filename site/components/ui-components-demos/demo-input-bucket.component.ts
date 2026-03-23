@@ -1,11 +1,11 @@
-import { AbstractComponent, componentsRegistryService, RxScope } from "cruzo";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { InputComponent, InputConfig } from "cruzo/ui-components/input";
 
-export class DemoInputScopeComponent extends AbstractComponent {
-  static selector = "demo-input-scope-component";
+export class DemoInputBucketComponent extends AbstractComponent {
+  static selector = "demo-input-bucket-component";
   dependencies = new Set([InputComponent.selector]);
 
-  innerScope = new RxScope({
+  innerBucket = new RxBucket({
     input: {
       config: InputConfig({
         placeholder: "Enter your name",
@@ -14,7 +14,7 @@ export class DemoInputScopeComponent extends AbstractComponent {
     }
   });
 
-  currentInputValue$ = this.newRxValueFromScope(this.innerScope, 'input')
+  currentInputValue$ = this.newRxValueFromBucket(this.innerBucket, "input");
 
   constructor() {
     super();
@@ -24,7 +24,7 @@ export class DemoInputScopeComponent extends AbstractComponent {
     return `<div>
         <input-component
           component-id="input"
-          scope-id="${this.innerScope.id}">
+          bucket-id="${this.innerBucket.id}">
         </input-component>
 
         <div class="mt_s">
@@ -38,4 +38,4 @@ export class DemoInputScopeComponent extends AbstractComponent {
   }
 }
 
-componentsRegistryService.define(DemoInputScopeComponent);
+componentsRegistryService.define(DemoInputBucketComponent);
