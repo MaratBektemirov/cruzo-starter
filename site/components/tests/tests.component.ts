@@ -73,7 +73,8 @@ export class TestsComponent extends AbstractComponent {
 
   getHTML() {
     const introId = SectionIds["tests-intro"];
-    return `<div let-intro="{{ once::root.sections$::rx['${introId}'].demos[1] }}" let-labels="{{ once::root.section$::rx.labels }}">
+    const testsPageId = SectionIds.tests;
+    return `<div let-intro="{{ once::root.sections$::rx['${introId}'].demos[1] }}" let-labels="{{ root.sections$::rx['${testsPageId}']?.labels }}">
         <div class="tests-intro mb_xl"
           attached="{{ intro }}"
           inner-html="{{ intro }}"></div>
@@ -90,11 +91,11 @@ export class TestsComponent extends AbstractComponent {
                 <button
                   attached="{{ !isConnected }}"
                   class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary tests-run mr_s"
-                  onclick="{{ root.mountDemo(sel) }}">{{ labels.run }}</button>
+                  onclick="{{ root.mountDemo(sel) }}">{{ labels?.run }}</button>
                 <button
                   attached="{{ isConnected }}"
                   class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary tests-destroy"
-                  onclick="{{ root.destroyDemo(sel) }}">{{ labels.destroy }}</button>
+                  onclick="{{ root.destroyDemo(sel) }}">{{ labels?.destroy }}</button>
               </div>
               <div class="tests-demo-host" data-demo-host="{{ sel }}"></div>
             </div>
