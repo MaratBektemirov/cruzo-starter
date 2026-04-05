@@ -155,7 +155,10 @@ export const SectionsData = {
 
 export type SectionKey = keyof typeof SectionsData;
 
-const startPath = import.meta.env.GITHUB_DOMAIN ? `${import.meta.env.VITE_REPO_NAME}` : '';
+const startPath =
+  import.meta.env.GITHUB_DOMAIN === "yes"
+    ? `${import.meta.env.VITE_REPO_NAME}`
+    : "";
 
 export const routerUrlBucket = new RouteUrlBucket({
   main: {
