@@ -10,7 +10,7 @@ export class DemoGridBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.updateRandom() }}" class="btn btn_s mb_s btn-primary">Update ~1K random nodes from 4K</button>
+        <button onclick="{{ root.updateRandom() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Update ~1K random nodes from 4K</button>
 
         <div
           class="${styles["grid-color-container"]}"

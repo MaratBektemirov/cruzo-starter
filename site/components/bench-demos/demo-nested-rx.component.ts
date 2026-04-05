@@ -10,8 +10,8 @@ export class DemoNestedRx extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.inc() }}" class="btn btn_s mb_s btn-primary">Increment count</button>
-        <button onclick="{{ root.rename() }}" class="btn btn_s mb_s btn-secondary">Change name</button>
+        <button onclick="{{ root.inc() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Increment count</button>
+        <button onclick="{{ root.rename() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-secondary">Change name</button>
         <p class="mb_s">User: {{ root.data$::rx.user.name }}, count: {{ root.data$::rx.user.count }}</p>
         <p>Tag: {{ root.data$::rx.tag }}</p>
       </div>`;

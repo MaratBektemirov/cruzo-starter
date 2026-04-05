@@ -31,7 +31,7 @@ export class DemoSpinnerBucketComponent extends AbstractComponent {
           is="spinner"
           component-id="spinner"
           bucket-id="${this.innerBucket.id}"
-          class="btn btn_s btn-primary"
+          class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary"
           onclick="{{ root.simulateLoading() }}">
           Simulate loading
         </button>

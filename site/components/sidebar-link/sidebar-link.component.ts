@@ -3,6 +3,11 @@ import styles from "./sidebar-link.component.module.css";
 import { AbstractComponent, componentsRegistryService, routerService, RxBucket } from "cruzo";
 import { SidebarSectionConfig, SidebarChild } from "site/components/sidebar/sidebar.component";
 import { RouterLinkComponent, RouterLinkConfig } from "cruzo/ui-components/router-link";
+import {
+  blockScrollToSectionElement,
+  getSectionSubIdFromSearch,
+  withSectionQuery,
+} from "site/section-scroll";
 
 export class SidebarLinkComponent extends AbstractComponent<
   any,
@@ -19,14 +24,14 @@ export class SidebarLinkComponent extends AbstractComponent<
     'router-link-main': {
       config: RouterLinkConfig({
         startsWith: true,
-        ignoreHash: true,
+        ignoreSearch: true,
         activeCls: styles["nav-button--active"],
       })
     },
     'router-link-children': {
       config: RouterLinkConfig({
         activeCls: styles["nav-child--active"],
-        ignoreHash: true,
+        ignoreSearch: true,
       })
     },
     'router-link-sub': {
@@ -40,6 +45,11 @@ export class SidebarLinkComponent extends AbstractComponent<
   activeChildrens$ = this.newRxEventFromBucketByIndex(this.innerBucket, "router-link-children", "routerLinkStateChanged");
 
   subMenuUpdateScheduled = false;
+
+  subNavHref(path: string | undefined, id: string) {
+    if (!path || !id) return path ?? "";
+    return withSectionQuery(path, id);
+  }
 
   public subMenu$ = this.newRxFunc(
     (activeChildrens, linkState, value) => {
@@ -114,7 +124,7 @@ export class SidebarLinkComponent extends AbstractComponent<
                 bucket-id="${this.innerBucket.id}"
                 component-index="{{ this.id }}"
                 class="${styles["nav-subitem"]}"
-                href="{{ children?.path+'#'+this.id }}"
+                href="{{ root.subNavHref(children?.path, this.id) }}"
                 >
                 <span class="${styles["nav-dot"]}"></span>
                 <span>{{ this.title }}</span>
@@ -164,16 +174,15 @@ export class SidebarLinkComponent extends AbstractComponent<
 
     const tick = () => {
       const id = getCurrentId();
-      const nextHash = `#${id}`;
+      if (!this.activeChildrenForScrollSpy?.path) return;
 
-      if (window.location.hash === nextHash) return;
+      if (getSectionSubIdFromSearch(this.routerService.search$.actual) === id) return;
 
-      // block auto-scroll briefly while hash is synced by scroll spy
-      this.routerService.blockScrollToHashElement()();
-
+      const unblock = blockScrollToSectionElement();
       this.routerService.pushHistory(
-        window.location.pathname + nextHash
+        withSectionQuery(this.activeChildrenForScrollSpy.path, id)
       );
+      unblock();
     };
 
     this._onScroll = () => {

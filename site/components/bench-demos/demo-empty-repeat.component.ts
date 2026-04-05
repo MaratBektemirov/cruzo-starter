@@ -8,8 +8,8 @@ export class DemoEmptyRepeat extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.add() }}" class="btn btn_s mb_s btn-primary">Add item</button>
-        <button onclick="{{ root.clear() }}" class="btn btn_s mb_s btn-secondary">Clear</button>
+        <button onclick="{{ root.add() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Add item</button>
+        <button onclick="{{ root.clear() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-secondary">Clear</button>
         <p class="mb_s">Count: {{ root.count$::rx }}</p>
         <div repeat="{{ root.items }}" class="mb_xs">
           <span>{{ this::rx.id }} — {{ this::rx.label }}</span>

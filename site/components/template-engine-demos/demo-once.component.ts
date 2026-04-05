@@ -10,7 +10,7 @@ export class DemoOnceComponent extends AbstractComponent {
         <p class="description-paragraph mb_s">
           <code class="description-inline-code">once::</code> — выражение выполняется и обновляется только один раз.
         </p>
-        <button class="btn btn_s mb_s btn-primary" onclick="{{ root.label.update('после клика') }}">
+        <button class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary" onclick="{{ root.label.update('после клика') }}">
           Обновить label
         </button>
         <div class="mb_s">

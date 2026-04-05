@@ -14,8 +14,8 @@ export class DemoModalBucketComponent extends AbstractComponent {
             Закройте окно кнопкой или кликом по фону.
           </p>
           <div class="mt_m">
-            <button class="btn btn-primary btn_s mr_s" onclick="{{ this.closeModal(true) }}">OK</button>
-            <button class="btn btn_s" onclick="{{ this.closeModal(false) }}">Cancel</button>
+            <button class="cruzo-ui-component_button cruzo-ui-component_button-primary cruzo-ui-component_button-s mr_s" onclick="{{ this.closeModal(true) }}">OK</button>
+            <button class="cruzo-ui-component_button cruzo-ui-component_button-s" onclick="{{ this.closeModal(false) }}">Cancel</button>
           </div>
         </div>`,
       }),
@@ -45,7 +45,7 @@ export class DemoModalBucketComponent extends AbstractComponent {
 
   getHTML() {
     return `<div>
-        <button class="btn btn_s btn-primary" onclick="{{ root.openModal() }}">
+        <button class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary" onclick="{{ root.openModal() }}">
           Open modal
         </button>
         <div class="mt_s">

@@ -1,36 +1,18 @@
 :root {
-
-  --xxs: 3.75px;
-  --xs: 6px;
-  --s: 10px;
-  --m: 16px;
-  --l: 26px;
-  --xl: 42px;
-  --xxl: 68px;
-
-  --sidebar-w: clamp(240px, 22vw, 320px);
-
+  /* Site-only tokens; shared scale/surface/text/accent: cruzo/ui-components/vars.css */
   --font: "Inter", sans-serif;
   --mono: "Jetbrains Mono", monospace;
 
+  --sidebar-w: clamp(240px, 22vw, 320px);
+
   --bg: #fafafa;
-  --surface: #ffffff;
-  --surface-2: #f5f5f5;
   --border: rgba(0, 0, 0, 0.04);
   --border-dark: rgba(0, 0, 0, 0.08);
 
-  --text-main: rgba(0, 0, 0, 0.85);
-  --text-muted-mid: rgba(0, 0, 0, 0.7);
-  --text-muted: rgba(0, 0, 0, 0.5);
-
-  --accent: #111827;
   --accent-soft: rgba(0, 0, 0, 0.05);
 
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
-
-  --focus: 0 0 0 3px rgba(17, 24, 39, 0.16);
 }
 
 html,
@@ -42,7 +24,7 @@ body {
   margin: 0;
   font-family: var(--font);
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.4;
   letter-spacing: -0.01em;
   background: var(--bg);
   color: var(--text-main);
@@ -59,17 +41,6 @@ a {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text-main);
-  line-height: 1.4;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 .layout {
@@ -89,145 +60,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--xl);
-}
-.btn {
-  appearance: none;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-main);
-
-  border-radius: var(--m);
-  padding: var(--s) var(--m);
-
-  font-size: 14px;
-  font-weight: 500;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--xs);
-
-  cursor: pointer;
-  user-select: none;
-
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.05s ease,
-    box-shadow 0.15s ease;
-}
-
-.btn:hover {
-  background: var(--surface-2);
-  border-color: var(--border-dark);
-}
-
-.btn-primary {
-  background: var(--accent);
-  border-color: transparent;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background: rgba(17, 24, 39, 0.9);
-}
-.btn_s {
-  font-size: 12px;
-  padding: var(--xs) var(--s);
-  gap: var(--xs);
-}
-.label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-.input,
-.select {
-  width: 100%;
-  border: 1px solid var(--border);
-  background: var(--surface);
-
-  border-radius: var(--m);
-  padding: var(--s) var(--m);
-
-  font-size: 14px;
-  color: var(--text-main);
-
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
-}
-.input:hover,
-.select:hover {
-  border-color: var(--border-dark);
-}
-
-.checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--xs);
-
-  cursor: pointer;
-  user-select: none;
-
-  font-size: 14px;
-  color: var(--text-main);
-}
-
-.checkbox input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-
-  width: 16px;
-  height: 16px;
-
-  border: 1px solid var(--border-dark);
-  border-radius: 4px;
-
-  background: var(--surface);
-
-  display: inline-grid;
-  place-content: center;
-
-  transition:
-    background 0.12s ease,
-    border-color 0.12s ease,
-    box-shadow 0.12s ease;
-}
-
-.checkbox input[type="checkbox"]::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-
-  background: var(--accent);
-  border-radius: 2px;
-
-  transform: scale(0);
-  transition: transform 0.1s ease;
-}
-
-.checkbox input[type="checkbox"]:checked::before {
-  transform: scale(1);
-}
-
-.checkbox input[type="checkbox"]:focus-visible {
-  outline: none;
-  box-shadow: var(--focus);
-  border-color: rgba(17, 24, 39, 0.22);
-}
-
-.checkbox input[type="checkbox"]:hover {
-  border-color: rgba(10, 10, 10, 0.2);
-}
-.input:focus,
-.select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.15);
-  background: #fff;
 }
 
 .block {

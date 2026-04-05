@@ -15,7 +15,7 @@ export class DemoHtmlEventsComponent extends AbstractComponent {
             value="{{ root.text::rx }}"
             oninput="{{ root.text.update(event.target.value) }}"
             onkeydown="{{ root.lastKey.update(event.key) }}"
-            class="input"
+            class="cruzo-ui-component_input"
             />
           <div class="ml_xs mt_s">
             <div>text: <b>{{ root.text::rx }}</b></div>
@@ -23,16 +23,17 @@ export class DemoHtmlEventsComponent extends AbstractComponent {
           </div>
         </div>
 
-        <label class="mt_m checkbox">
+        <label class="cruzo-ui-component_checkbox mt_m">
           <input
             type="checkbox"
+            class="cruzo-ui-component_checkbox-input"
             onchange="{{ root.checked.update(event.target.checked) }}"
             />
           <span>checked: <b>{{ root.checked::rx }}</b></span>
         </label>
 
         <div class="mt_s">
-          <button onclick="{{ root.reset() }}" class="btn btn_s mb_s btn-primary">
+          <button onclick="{{ root.reset() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">
             Reset
           </button>
         </div>

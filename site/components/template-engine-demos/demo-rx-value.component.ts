@@ -6,7 +6,7 @@ export class DemoRxValueComponent extends AbstractComponent {
   count = this.newRx(0);
 
   getHTML() {
-    return `<div><button onclick="{{ root.count.update(root.count::rx + 1) }}" class="btn btn_s mb_s btn-primary">
+    return `<div><button onclick="{{ root.count.update(root.count::rx + 1) }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">
           Clicks: <b>{{ root.count::rx }}</b>
       </button></div>`;
   }

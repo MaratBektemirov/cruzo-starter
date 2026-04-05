@@ -6,7 +6,7 @@ export class DemoBracesManualComponent extends AbstractComponent {
   counter = 0;
 
   getHTML() {
-    return `<div><button onclick="{{ root.inc() }}" class="btn btn_s mb_s btn-primary">
+    return `<div><button onclick="{{ root.inc() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">
           Clicks: <b>{{ root.counter }}</b>
       </button></div>`;
   }

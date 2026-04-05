@@ -12,7 +12,7 @@ class CounterComponent extends AbstractComponent {
 
   getHTML() {
     return \`<div>
-      <button class="btn btn_s btn-primary" onclick="{{ root.inc() }}">+1</button>
+      <button class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary" onclick="{{ root.inc() }}">+1</button>
       <div class="mt_s">count: <b>{{ root.count$::rx }}</b></div>
       <div>doubled: <b>{{ root.doubled$::rx }}</b></div>
     </div>\`;

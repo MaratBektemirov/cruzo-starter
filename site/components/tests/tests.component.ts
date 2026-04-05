@@ -1,4 +1,4 @@
-import { AbstractComponent, componentsRegistryService, routerService } from "cruzo";
+import { AbstractComponent, componentsRegistryService, routerService, type Rx } from "cruzo";
 import { createHighlighter, HighlighterGeneric } from "shiki";
 
 import { appService } from "site/services/app.service";
@@ -23,6 +23,7 @@ import { DemoNestedRx } from "site/components/bench-demos/demo-nested-rx.compone
 import DemoNestedRxCode from "site/components/bench-demos/demo-nested-rx.component?raw";
 import { SectionIds } from "site/sections";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
+import { scrollToSectionFromSearch } from "site/section-scroll";
 
 export class TestsComponent extends AbstractComponent {
   routerService = routerService;
@@ -88,11 +89,11 @@ export class TestsComponent extends AbstractComponent {
               <div class="fx fx-gap mb_s" let-is-connected="{{ root.demoInstancesBySelector$::rx[sel]?.length }}">
                 <button
                   attached="{{ !isConnected }}"
-                  class="btn btn_s btn-primary tests-run mr_s"
+                  class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary tests-run mr_s"
                   onclick="{{ root.mountDemo(sel) }}">{{ labels.run }}</button>
                 <button
                   attached="{{ isConnected }}"
-                  class="btn btn_s btn-secondary tests-destroy"
+                  class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary tests-destroy"
                   onclick="{{ root.destroyDemo(sel) }}">{{ labels.destroy }}</button>
               </div>
               <div class="tests-demo-host" data-demo-host="{{ sel }}"></div>
@@ -156,7 +157,9 @@ export class TestsComponent extends AbstractComponent {
 
     super.connectedCallback();
 
-    this.routerService.scrollToHashElement();
+    this.newRxFunc((search) => {
+      scrollToSectionFromSearch(search);
+    }, this.routerService.search$);
   }
 }
 

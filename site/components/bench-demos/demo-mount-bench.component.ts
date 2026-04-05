@@ -9,8 +9,8 @@ export class DemoMountBench extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx fx-alc mb_s">
-          <button onclick="{{ root.mount() }}" class="btn btn_s btn-primary mr_s">Mount</button>
-          <button onclick="{{ root.unmount() }}" class="btn btn_s btn-secondary mr_s">Unmount</button>
+          <button onclick="{{ root.mount() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary mr_s">Mount</button>
+          <button onclick="{{ root.unmount() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary mr_s">Unmount</button>
           <span>mounted: <b>{{ root.mounted::rx }}</b></span>
         </div>
 

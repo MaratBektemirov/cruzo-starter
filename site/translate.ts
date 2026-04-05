@@ -686,7 +686,26 @@ const trsSections: Translate = {
               <li class="description-list-item"><b>pushHistory</b> <code class="description-inline-code">(href)</code> — перейти на новый URL</li>
               <li class="description-list-item"><b>hrefIsActive</b> <code class="description-inline-code">(href, options?)</code> — проверить активность ссылки</li>
               <li class="description-list-item"><b>update</b> <code class="description-inline-code">(ignoreRedirectRules?)</code> — пересчитать роутинг</li>
-              <li class="description-list-item"><b>scrollToHashElement</b> <code class="description-inline-code">()</code> — скролл к элементу по hash</li>
+              <li class="description-list-item"><b>pathname$</b> / <b>search$</b> — реактивные path и query маршрута (в hash mode — из фрагмента <code class="description-inline-code">#/path?…</code>)</li>
+            </ul>`,
+          2: ``,
+        },
+      },
+      [SectionIds["router-hash-mode"]]: {
+        title: "",
+        demos: {
+          1: `<h2 class="mt_xl">Hash mode</h2>
+            <p class="description-paragraph">
+              Для статического хостинга без fallback на <code class="description-inline-code">index.html</code> можно включить маршрутизацию во фрагменте: реальный путь документа остаётся фиксированным (например <code class="description-inline-code">/</code>), а SPA-живёт в <code class="description-inline-code">#/path?query</code>.
+            </p>
+            <ul class="description-list">
+              <li class="description-list-item"><b>setHashMode(true)</b> — включить режим; вызывайте до первого осмысленного <code class="description-inline-code">update()</code> (обычно при старте приложения).</li>
+              <li class="description-list-item"><b>isHashMode()</b> — текущий режим.</li>
+              <li class="description-list-item"><b>Сопоставление</b> — шаблоны вроде <code class="description-inline-code">/docs/:section</code> матчятся по пути из <code class="description-inline-code">location.hash</code>, ожидаемый вид: <code class="description-inline-code">#/docs/intro</code> или <code class="description-inline-code">#/docs/intro?tab=api</code>.</li>
+              <li class="description-list-item"><b>pathname$</b> / <b>search$</b> — отражают виртуальный path и query <em>внутри hash</em>, а не <code class="description-inline-code">location.pathname</code> / <code class="description-inline-code">location.search</code> документа.</li>
+              <li class="description-list-item"><b>pushHistory</b> — можно передать обычный путь (<code class="description-inline-code">/docs/http</code>) или уже hash-URL (<code class="description-inline-code">#/docs/http</code>); оба приводятся к одному <code class="description-inline-code">location.hash</code>.</li>
+              <li class="description-list-item"><b>buildUrl</b> у <code class="description-inline-code">RouteUrlBucket</code> — в hash mode возвращает строку вида <code class="description-inline-code">#/path?query</code> (без префикса pathname страницы).</li>
+              <li class="description-list-item"><b>redirectTo</b> — по-прежнему задаётся как path (например <code class="description-inline-code">/docs/intro</code>); роутер превратит его в соответствующий <code class="description-inline-code">#/…</code> на текущем URL документа.</li>
             </ul>`,
           2: ``,
         },

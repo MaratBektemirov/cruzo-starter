@@ -1,5 +1,4 @@
 declare const styles: {
-  readonly "description": string;
   readonly "description-inline-code": string;
   readonly "description-list": string;
   readonly "description-list-item": string;

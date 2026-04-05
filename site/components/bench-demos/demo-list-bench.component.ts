@@ -12,8 +12,8 @@ export class DemoListBench extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx fx-gap mb_s">
-          <button onclick="{{ root.updateMany() }}" class="btn btn_s btn-primary">Update many</button>
-          <button onclick="{{ root.toggleActive() }}" class="btn btn_s btn-secondary">Toggle active</button>
+          <button onclick="{{ root.updateMany() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary">Update many</button>
+          <button onclick="{{ root.toggleActive() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary">Toggle active</button>
         </div>
         <div repeat="{{ root.items }}" class="mb_xs fx fx-alc fx-wrap" let-active="{{ this::rx.active }}">
           <span class="mr_s">#{{ this::rx.id }}</span>

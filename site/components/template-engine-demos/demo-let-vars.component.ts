@@ -24,7 +24,7 @@ export class DemoLetVarsComponent extends AbstractComponent {
           </div>
         </div>
 
-        <button class="mt_s btn btn_s mb_s btn-primary" onclick="{{ root.shuffle() }}">
+        <button class="mt_s cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary" onclick="{{ root.shuffle() }}">
           Randomize
         </button>
       </div>`;

@@ -5,6 +5,7 @@ import { appService } from "site/services/app.service";
 import type { ComponentConnectedParams } from "cruzo";
 import { DocsSectionItem, DocsSectionRouteData, SectionKey, SectionsData } from "site/urls";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
+import { scrollToSectionFromSearch } from "site/section-scroll";
 
 export class DocsSectionComponent extends AbstractComponent<any, any> {
   static selector = "docs-section-component";
@@ -22,6 +23,7 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
 
     if (this.highlighter) {
       this.highlighter.dispose();
+      this.highlighter = null;
     }
   }
 
@@ -50,6 +52,8 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
   }
 
   updateCodeHighlights(items: DocsSectionItem[]) {
+    if (!this.highlighter) return;
+
     this.codeHighlights = {};
 
     for (let index = 0; index < items.length; index++) {
@@ -62,22 +66,6 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
     }
   }
 
-  highlightApiExamples() {
-    if (!this.highlighter || !this.template?.node) return;
-    const root = this.template.node as HTMLElement;
-    root.querySelectorAll(".api-example").forEach((el) => {
-      const div = el as HTMLElement;
-      const script = div.querySelector("script.api-example-code");
-      const code = script
-        ? (script as HTMLScriptElement).textContent?.trim()
-        : (div.getAttribute("data-code") ?? "").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&amp;/g, "&");
-      if (!code) return;
-      const lang = (div.getAttribute("data-lang") || "typescript") as "typescript" | "bash";
-      const html = this.highlighter.codeToHtml(code, { lang, theme: "github-light" });
-      div.innerHTML = `<div class="block"><div class="code-wrap">${html}</div></div>`;
-    });
-  }
-
   async connectedCallback(params: ComponentConnectedParams) {
     this.highlighter = await createHighlighter({
       themes: ["github-light"],
@@ -85,7 +73,7 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
     });
 
     this.newRxFunc(
-      (routeParams: Record<string, string>) => {
+      (routeParams: Record<string, string>, search: string) => {
         const sectionData: DocsSectionRouteData = SectionsData[routeParams.section as SectionKey];
 
         if (!sectionData) return;
@@ -100,14 +88,13 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
 
         this.updateDependencies();
 
-        setTimeout(() => this.highlightApiExamples(), 0);
+        scrollToSectionFromSearch(search);
       },
-      params.routeParams$ as unknown as Rx<Record<string, string>>
+      params.routeParams$,
+      routerService.search$,
     );
 
     super.connectedCallback(params);
-
-    routerService.scrollToHashElement();
   }
 }
 

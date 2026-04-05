@@ -7,12 +7,12 @@ export class DemoEventsBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.reset() }}" class="btn btn_s mb_s btn-primary">
+        <button onclick="{{ root.reset() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">
           Reset 1K counters
         </button>
 
         <div repeat="{{ root.counters }}" class="mb_xs fx fx-jcsb">
-          <button onclick="{{ root.inc(this) }}" class="btn btn_xs btn-secondary">
+          <button onclick="{{ root.inc(this) }}" class="cruzo-ui-component_button cruzo-ui-component_button-xs cruzo-ui-component_button-secondary">
             +1
           </button>
           <span>#{{ index }} — value: <b>{{ this::rx.value }}</b></span>

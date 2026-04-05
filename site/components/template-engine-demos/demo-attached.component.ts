@@ -7,7 +7,7 @@ export class DemoAttachedComponent extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button class="btn btn_s mb_s btn-primary" onclick="{{ root.open.update(!root.open::rx) }}">
+        <button class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary" onclick="{{ root.open.update(!root.open::rx) }}">
           Toggle
         </button>
 

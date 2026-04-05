@@ -6,7 +6,7 @@ import { DemoRxBucketIndexesComponent } from "site/components/components-interac
 import { DocsSectionComponent } from "site/components/docs-section/docs-section.component"
 import { HomeComponent } from "site/components/home/home.component"
 import { exampleHttpClient, exampleInterceptors, exampleCache } from "site/routes/data/http-examples";
-import { exampleRouteUrlBucket, exampleRouterLifecycle, exampleRouterNavigation } from "site/routes/data/router-examples"
+import { exampleRouteUrlBucket, exampleRouterHashMode, exampleRouterLifecycle, exampleRouterNavigation } from "site/routes/data/router-examples"
 import { exampleRxBucketSubscribe } from "site/routes/data/rx-bucket-examples";
 import { exampleAbstractComponent, exampleAbstractService } from "site/routes/data/component-service-examples";
 
@@ -85,6 +85,7 @@ export const SectionsData = {
     items: [
       { code: exampleRouteUrlBucket, id: SectionIds["router-bucket"] },
       { code: exampleRouterNavigation, id: SectionIds["router-navigation"] },
+      { code: exampleRouterHashMode, id: SectionIds["router-hash-mode"] },
       { code: exampleRouterLifecycle, id: SectionIds["router-routes"] },
     ],
   },
@@ -154,11 +155,11 @@ export const SectionsData = {
 
 export type SectionKey = keyof typeof SectionsData;
 
-const startPath = '/cruzo-starter';
+const startPath = import.meta.env.GITHUB_DOMAIN ? `${import.meta.env.VITE_REPO_NAME}` : '';
 
 export const routerUrlBucket = new RouteUrlBucket({
   main: {
-    url: startPath,
+    url: startPath + '/',
     componentSelectorUnbox: () => HomeComponent.selector,
     routeSelectorUnbox: () => ".section"
   },

@@ -6,11 +6,6 @@
   color: var(--text-main);
 }
 
-.description {
-  margin: 0 0 1em 1.25em;
-  padding: 0;
-}
-
 .description-list {
   margin-top: var(--m);
   padding-left: var(--m);

@@ -15,12 +15,12 @@ export class DemoComponent extends AbstractComponent {
   getHTML() {
     return `<div>
         <div>
-          <input value="{{ root.text$::rx }}" oninput="{{ root.text$.update(event.target.value) }}" class="input" />
+          <input value="{{ root.text$::rx }}" oninput="{{ root.text$.update(event.target.value) }}" class="cruzo-ui-component_input" />
           <div class="mt_s">text: <b>{{ root.text$::rx }}</b></div>
         </div>
 
         <div class="block_inner">
-          <button onclick="{{ root.label$.update('updated') }}" class="btn btn_s btn-primary">Update</button>
+          <button onclick="{{ root.label$.update('updated') }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary">Update</button>
           <div class="mt_s">
             <code class="description-inline-code">once::</code> <span>{{ once::root.label$::rx }}</span>
           </div>
@@ -30,7 +30,7 @@ export class DemoComponent extends AbstractComponent {
         </div>
 
         <div class="block_inner">
-          <button onclick="{{ root.open$.update(!root.open$::rx) }}" class="btn btn_s btn-primary">Toggle</button>
+          <button onclick="{{ root.open$.update(!root.open$::rx) }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary">Toggle</button>
           <div attached="{{ root.open$::rx }}" class="description-note">In DOM only when open</div>
           <div class="mt_s">open: <b>{{ root.open$::rx }}</b></div>
         </div>

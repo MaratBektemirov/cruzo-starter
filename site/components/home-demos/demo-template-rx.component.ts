@@ -7,7 +7,7 @@ export class DemoTemplateRxComponent extends AbstractComponent {
 
   getHTML() {
     return `<div class="mt_s">
-        <button onclick="{{ root.count$.update(root.count$::rx + 1) }}" class="btn btn_s mb_s btn-primary">
+        <button onclick="{{ root.count$.update(root.count$::rx + 1) }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">
           Clicks: <b>{{ root.count$::rx }}</b>
         </button>
       </div>`;

@@ -33,8 +33,8 @@ export class DemoRxBucketIndexesComponent extends AbstractComponent {
             component-index="{{ index }}">
           </input-component>
           <div class="mt_xs fx">
-            <button class="btn btn_s btn-primary" onclick="{{ root.fillRow(index) }}">Set by index</button>
-            <button class="btn btn_s btn-secondary ml_xs" onclick="{{ root.clearRow(index) }}">Clear</button>
+            <button class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary" onclick="{{ root.fillRow(index) }}">Set by index</button>
+            <button class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary ml_xs" onclick="{{ root.clearRow(index) }}">Clear</button>
           </div>
           <div class="mt_xs">
             Current: <b>{{ root.valuesByIndex$::rx?.[index] ?? "-" }}</b>

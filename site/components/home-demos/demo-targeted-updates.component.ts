@@ -11,12 +11,12 @@ export class DemoTargetedUpdatesComponent extends AbstractComponent {
         <div class="mt_s">
           <button
             onclick="{{ root.first$.update(root.first$::rx + 1) }}"
-            class="btn btn_s btn-secondary">
+            class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary">
             Первое: {{ root.first$::rx }}
           </button>
           <button
             onclick="{{ root.second$.update(root.second$::rx + 1) }}"
-            class="btn btn_s btn-secondary">
+            class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary">
             Второе: {{ root.second$::rx }}
           </button>
         </div>
