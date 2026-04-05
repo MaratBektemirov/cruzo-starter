@@ -135,7 +135,7 @@ export default defineConfig({
     },
   },
 
-  base: process.env.BASE_PATH || "/",
+  base: process.env.GITHUB_DOMAIN ? process.env.BASE_PATH : "/",
 
   build: {
     outDir: path.resolve(__dirname, "../dist-site"),
