@@ -86,6 +86,7 @@ export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
           { id: SectionIds["ui-components-select"], title: "select" },
           { id: SectionIds["ui-components-spinner"], title: "spinner" },
           { id: SectionIds["ui-components-modal"], title: "modal" },
+          { id: SectionIds["ui-components-css-classes"], title: "CSS классы" },
         ],
       },
     ],

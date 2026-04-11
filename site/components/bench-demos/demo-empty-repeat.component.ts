@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoEmptyRepeat extends AbstractComponent {
   static selector = "demo-empty-repeat";
@@ -8,8 +9,10 @@ export class DemoEmptyRepeat extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.add() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Add item</button>
-        <button onclick="{{ root.clear() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-secondary">Clear</button>
+        <div class="fx mb_s">
+          <button onclick="{{ root.add() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Add item</button>
+          <button onclick="{{ root.clear() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Clear</button>
+        </div>
         <p class="mb_s">Count: {{ root.count$::rx }}</p>
         <div repeat="{{ root.items }}" class="mb_xs">
           <span>{{ this::rx.id }} — {{ this::rx.label }}</span>

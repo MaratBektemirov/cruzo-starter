@@ -41,6 +41,8 @@ import DemoSpinnerComponentCode from "site/components/ui-components-demos/demo-s
 import { DemoSpinnerBucketComponent } from "site/components/ui-components-demos/demo-spinner-bucket.component";
 import DemoModalComponentCode from "site/components/ui-components-demos/demo-modal-bucket.component?raw";
 import { DemoModalBucketComponent } from "site/components/ui-components-demos/demo-modal-bucket.component";
+import DemoUiCssClassesComponentCode from "site/components/ui-components-demos/demo-ui-css-classes.component?raw";
+import { DemoUiCssClassesComponent } from "site/components/ui-components-demos/demo-ui-css-classes.component";
 import { RouteUrlBucket } from "cruzo"
 import { SectionIds } from "site/sections"
 import type { AbstractComponentConstructor } from "cruzo"
@@ -135,6 +137,7 @@ export const SectionsData = {
       { code: DemoSelectComponentCode, component: DemoSelectBucketComponent, id: SectionIds["ui-components-select"] },
       { code: DemoSpinnerComponentCode, component: DemoSpinnerBucketComponent, id: SectionIds["ui-components-spinner"] },
       { code: DemoModalComponentCode, component: DemoModalBucketComponent, id: SectionIds["ui-components-modal"] },
+      { code: DemoUiCssClassesComponentCode, component: DemoUiCssClassesComponent, id: SectionIds["ui-components-css-classes"] },
     ],
     dependencies: [
       DemoSelectBucketComponent.selector,
@@ -143,6 +146,7 @@ export const SectionsData = {
       DemoUploadBucketComponent.selector,
       DemoSpinnerBucketComponent.selector,
       DemoModalBucketComponent.selector,
+      DemoUiCssClassesComponent.selector,
       "select-component",
       "input-component",
       "button-group-component",

@@ -4,6 +4,8 @@ declare const styles: {
   readonly "block_example-right": string;
   readonly "block_example-scroll": string;
   readonly "block_inner": string;
+  readonly "demo-ui-css-classes_sizes": string;
+  readonly "demo-ui-css-classes_slot": string;
   readonly "fx-mobile-wrap": string;
   readonly "layout": string;
   readonly "screen": string;

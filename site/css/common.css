@@ -1,5 +1,4 @@
 :root {
-  /* Site-only tokens; shared scale/surface/text/accent: cruzo/ui-components/vars.css */
   --font: "Inter", sans-serif;
   --mono: "Jetbrains Mono", monospace;
 
@@ -138,4 +137,21 @@ a {
     font-size: clamp(26px, 8vw, 34px);
     line-height: 1.2;
   }
+}
+
+.demo-ui-css-classes_sizes {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--m);
+  width: 100%;
+}
+
+.demo-ui-css-classes_slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--s) var(--m);
+  box-sizing: border-box;
+  width: 100%;
 }

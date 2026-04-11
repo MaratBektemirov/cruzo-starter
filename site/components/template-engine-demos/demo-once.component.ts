@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoOnceComponent extends AbstractComponent {
   static selector = "demo-once-component";
@@ -10,7 +11,7 @@ export class DemoOnceComponent extends AbstractComponent {
         <p class="description-paragraph mb_s">
           <code class="description-inline-code">once::</code> — выражение выполняется и обновляется только один раз.
         </p>
-        <button class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary" onclick="{{ root.label.update('после клика') }}">
+        <button class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary" onclick="{{ root.label.update('после клика') }}">
           Обновить label
         </button>
         <div class="mb_s">

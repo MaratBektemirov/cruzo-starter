@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoAttachedComponent extends AbstractComponent {
   static selector = "demo-attached-component";
@@ -7,7 +8,7 @@ export class DemoAttachedComponent extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary" onclick="{{ root.open.update(!root.open::rx) }}">
+        <button class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary" onclick="{{ root.open.update(!root.open::rx) }}">
           Toggle
         </button>
 

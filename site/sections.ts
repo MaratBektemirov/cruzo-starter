@@ -58,4 +58,5 @@ export enum SectionIds {
   "ui-components-select" = "ui-components-select",
   "ui-components-spinner" = "ui-components-spinner",
   "ui-components-modal" = "ui-components-modal",
+  "ui-components-css-classes" = "ui-components-css-classes",
 }

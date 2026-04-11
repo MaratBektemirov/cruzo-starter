@@ -155,6 +155,7 @@ await cached.clearCache("GET", "/users");`,
     content: `<h2 class="mt_xl">UI-компоненты и CSS-модули</h2>
       <p class="description-paragraph">
         Подключение стилей: у каждого компонента свой CSS, например <code class="description-inline-code">import "cruzo/ui-components/select.css"</code> для Select.
+        Примитивы <code class="description-inline-code">button.css</code>, <code class="description-inline-code">checkbox.css</code> и <code class="description-inline-code">UI_KIT</code> — в Docs → UI Components → раздел <b>CSS классы</b>.
         В своих компонентах можно использовать <code class="description-inline-code">*.module.css</code>: импорт по умолчанию даёт объект с классами для <code class="description-inline-code">class="\${styles.wrapper}"</code>.
       </p>`,
   },

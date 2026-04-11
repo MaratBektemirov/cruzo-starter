@@ -4,6 +4,7 @@ import {
   SpinnerConfig,
   SpinnerValue,
 } from "cruzo/ui-components/spinner";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoSpinnerBucketComponent extends AbstractComponent {
   static selector = "demo-spinner-bucket-component";
@@ -31,7 +32,7 @@ export class DemoSpinnerBucketComponent extends AbstractComponent {
           is="spinner"
           component-id="spinner"
           bucket-id="${this.innerBucket.id}"
-          class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary"
+          class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary"
           onclick="{{ root.simulateLoading() }}">
           Simulate loading
         </button>

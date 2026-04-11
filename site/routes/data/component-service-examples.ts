@@ -1,4 +1,5 @@
 export const exampleAbstractComponent = `import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 class CounterComponent extends AbstractComponent {
   static selector = "counter-component";
@@ -12,7 +13,7 @@ class CounterComponent extends AbstractComponent {
 
   getHTML() {
     return \`<div>
-      <button class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary" onclick="{{ root.inc() }}">+1</button>
+      <button class="\${UI_KIT}_button \${UI_KIT}_button-s \${UI_KIT}_button-primary" onclick="{{ root.inc() }}">+1</button>
       <div class="mt_s">count: <b>{{ root.count$::rx }}</b></div>
       <div>doubled: <b>{{ root.doubled$::rx }}</b></div>
     </div>\`;

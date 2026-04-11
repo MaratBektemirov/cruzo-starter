@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 type ListItem = { id: string; value: number; name: string; tag: string; active: boolean };
 
@@ -11,9 +12,9 @@ export class DemoListBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <div class="fx fx-gap mb_s">
-          <button onclick="{{ root.updateMany() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary">Update many</button>
-          <button onclick="{{ root.toggleActive() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary">Toggle active</button>
+        <div class="fx mb_s">
+          <button onclick="{{ root.updateMany() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Update many</button>
+          <button onclick="{{ root.toggleActive() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Toggle active</button>
         </div>
         <div repeat="{{ root.items }}" class="mb_xs fx fx-alc fx-wrap" let-active="{{ this::rx.active }}">
           <span class="mr_s">#{{ this::rx.id }}</span>

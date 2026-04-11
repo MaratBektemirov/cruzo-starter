@@ -89,6 +89,9 @@ const trsSections: Translate = {
           </p>
           <p class="description-paragraph">
             Компоненты следуют принципам чистого дизайна и используют единую систему стилей.
+          </p>
+          <p class="description-paragraph">
+            Примитивы вёрстки и префикс классов — в подразделе <b>CSS классы</b> внизу списка.
           </p>`,
       },
       [SectionIds.http]: {
@@ -188,8 +191,9 @@ const trsSections: Translate = {
             <ul class="description-list">
               <li class="description-list-item"><b>constructor</b> <code class="description-inline-code">(descriptors)</code> — регистрация id и конфигов</li>
               <li class="description-list-item"><b>getValue / setValue</b> <code class="description-inline-code">(id, ...)</code> — чтение и запись значения</li>
-              <li class="description-list-item"><b>setValues / setValuesAtIndex</b> <code class="description-inline-code">(...)</code> — пакетное обновление</li>
-              <li class="description-list-item"><b>newRxValue / newRxEvent / newRxAllValues</b> — подписки на изменения и события</li>
+              <li class="description-list-item"><b>setValues / setValuesAtIndex</b>, <b>setStates / setStatesAtIndex</b> <code class="description-inline-code">(...)</code> — пакетное обновление значений и состояний</li>
+              <li class="description-list-item"><b>addDescriptor / removeDescriptor</b> — динамически менять набор id в bucket</li>
+              <li class="description-list-item"><b>newRxValue / newRxState / newRxEvent</b> <code class="description-inline-code">(на bucket, с rxList)</code> — низкоуровневые подписки на пару <code class="description-inline-code">(id, index)</code></li>
             </ul>`,
           2: `<div class="description-note">
               Рекомендуемый подход: объявляйте <code class="description-inline-code">RxBucket</code> как контейнер, а в логике компонентов/сервисов используйте <code class="description-inline-code">newRx...</code> методы из <code class="description-inline-code">AbstractComponent</code> и <code class="description-inline-code">AbstractService</code>. Прямую работу с <code class="description-inline-code">bucket.newRx...</code> оставляйте только для низкоуровневых случаев.
@@ -755,12 +759,11 @@ const trsSections: Translate = {
         demos: {
           1: `<h2 class="mt_xl">Подписки и события</h2>
             <p class="description-paragraph">
-              Через <code class="description-inline-code">newRxValue</code>, <code class="description-inline-code">newRxEvent</code> и <code class="description-inline-code">newRxAllValues</code> можно получать реактивные обновления и связывать их с UI-логикой компонента.
+              В компонентах удобнее <code class="description-inline-code">AbstractComponent</code>: <code class="description-inline-code">newRxValueFromBucket</code>, <code class="description-inline-code">newRxStateFromBucket</code>, <code class="description-inline-code">newRxEventFromBucket</code> — одна пара <code class="description-inline-code">(id, index)</code>; для событий по всем индексам сразу — <code class="description-inline-code">newRxEventFromBucketByIndex</code> (объект <code class="description-inline-code">{ [index]: event }</code>).
             </p>
             <ul class="description-list">
-              <li class="description-list-item"><b>newRxValue</b> callback: <code class="description-inline-code">(value, index, byUser)</code></li>
-              <li class="description-list-item"><b>newRxEvent</b> callback: <code class="description-inline-code">(event, index)</code></li>
-              <li class="description-list-item"><b>newRxAllValues</b> callback: <code class="description-inline-code">(valuesById)</code></li>
+              <li class="description-list-item"><b>На bucket напрямую:</b> <code class="description-inline-code">newRxValue</code> / <code class="description-inline-code">newRxState</code> — callback <code class="description-inline-code">(value, index?, byUser?)</code>; <code class="description-inline-code">newRxEvent</code> — <code class="description-inline-code">(event, index?)</code></li>
+              <li class="description-list-item"><b>Несколько индексов одного id:</b> несколько вызовов <code class="description-inline-code">newRxValueFromBucket(..., index)</code> и объединение через <code class="description-inline-code">newRxFunc</code>, либо своя агрегация на <code class="description-inline-code">bucket.newRxValue</code></li>
             </ul>
             <div class="description-note">
               Тот же принцип работает с конфигами: один descriptor в <code class="description-inline-code">RxBucket</code> на конкретный <code class="description-inline-code">component-id</code> автоматически применяется ко всем компонентам этой группы (по разным <code class="description-inline-code">component-index</code>).
@@ -833,6 +836,17 @@ const trsSections: Translate = {
         title: "",
         demos: {
           1: `<h2 class="mt_xl">Modal</h2>`,
+        },
+      },
+      [SectionIds["ui-components-css-classes"]]: {
+        title: "",
+        demos: {
+          1: `<h2 class="mt_xl">CSS классы</h2>
+            <p class="description-paragraph">
+              Подключение стилей: <code class="description-inline-code">import "cruzo/ui-components/vars.css";</code> — токены;
+              <code class="description-inline-code">import "cruzo/ui-components/button.css";</code> и
+              <code class="description-inline-code">import "cruzo/ui-components/checkbox.css";</code> — при использовании соответствующих примитивов в своей вёрстке.
+            </p>`,
         },
       },
     },

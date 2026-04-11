@@ -4,7 +4,7 @@ import { ButtonGroupConfig } from "cruzo/ui-components/button-group";
 
 const formBucket = new RxBucket({
   name: {
-    config: InputConfig({ label: "Name" }),
+    config: InputConfig({ placeholder: "Name" }),
   },
   role: {
     config: ButtonGroupConfig({
@@ -62,11 +62,22 @@ class OrderFormComponent extends AbstractComponent {
     this.discountPercent$
   );
 
-  // Subscribes to bucket values grouped by index: { [index]: value }.
-  quantitiesByIndex$ = this.newRxValueFromBucketByIndex(this.innerBucket, "quantity");
-  // Subscribes to bucket states grouped by index: { [index]: state }.
-  quantityStatesByIndex$ = this.newRxStateFromBucketByIndex(this.innerBucket, "quantity");
-  // Subscribes to bucket events grouped by index: { [index]: event }.
+  // Несколько индексов одного id: отдельные потоки per-index и объединение (ByIndex для value/state в AbstractComponent нет).
+  quantityAt0$ = this.newRxValueFromBucket(this.innerBucket, "quantity", "0");
+  quantityAt1$ = this.newRxValueFromBucket(this.innerBucket, "quantity", "1");
+  quantitiesByIndex$ = this.newRxFunc(
+    (q0, q1) => ({ "0": q0, "1": q1 }),
+    this.quantityAt0$,
+    this.quantityAt1$
+  );
+  quantityStateAt0$ = this.newRxStateFromBucket(this.innerBucket, "quantity", "0");
+  quantityStateAt1$ = this.newRxStateFromBucket(this.innerBucket, "quantity", "1");
+  quantityStatesByIndex$ = this.newRxFunc(
+    (s0, s1) => ({ "0": s0, "1": s1 }),
+    this.quantityStateAt0$,
+    this.quantityStateAt1$
+  );
+  // События по всем индексам: { [index]: event } (есть в AbstractComponent).
   statusEventsByIndex$ = this.newRxEventFromBucketByIndex(this.innerBucket, "status", "change");
 
   // Direct RxBucket usage (low-level, usually not needed in components):
@@ -139,5 +150,6 @@ bucket.setValuesAtIndex(
   true
 );
 
-const allValues$ = bucket.newRxAllValues((values) => values);
+// Подписки: bucket.newRxValue / newRxState / newRxEvent(id, name, fn, rxList) — per (id, index).
+// Снимок нескольких полей собирайте через newRxFunc(...) из потоков newRxValue(...) или из this.newRxValueFromBucket(...).
 `;

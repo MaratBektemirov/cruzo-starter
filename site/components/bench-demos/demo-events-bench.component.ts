@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoEventsBench extends AbstractComponent {
   static selector = "demo-events-bench";
@@ -7,12 +8,12 @@ export class DemoEventsBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.reset() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">
+        <button onclick="{{ root.reset() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">
           Reset 1K counters
         </button>
 
         <div repeat="{{ root.counters }}" class="mb_xs fx fx-jcsb">
-          <button onclick="{{ root.inc(this) }}" class="cruzo-ui-component_button cruzo-ui-component_button-xs cruzo-ui-component_button-secondary">
+          <button onclick="{{ root.inc(this) }}" class="${UI_KIT}_button ${UI_KIT}_button-xs ${UI_KIT}_button-secondary">
             +1
           </button>
           <span>#{{ index }} — value: <b>{{ this::rx.value }}</b></span>

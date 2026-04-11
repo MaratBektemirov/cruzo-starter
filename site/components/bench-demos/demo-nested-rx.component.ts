@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoNestedRx extends AbstractComponent {
   static selector = "demo-nested-rx";
@@ -10,8 +11,10 @@ export class DemoNestedRx extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.inc() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Increment count</button>
-        <button onclick="{{ root.rename() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-secondary">Change name</button>
+        <div class="fx mb_s">
+          <button onclick="{{ root.inc() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Increment count</button>
+          <button onclick="{{ root.rename() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Change name</button>
+        </div>
         <p class="mb_s">User: {{ root.data$::rx.user.name }}, count: {{ root.data$::rx.user.count }}</p>
         <p>Tag: {{ root.data$::rx.tag }}</p>
       </div>`;

@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoConditional extends AbstractComponent {
   static selector = "demo-conditional";
@@ -8,9 +9,9 @@ export class DemoConditional extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <div class="fx fx-gap mb_s">
-          <button onclick="{{ root.toggleA() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary">Toggle A</button>
-          <button onclick="{{ root.toggleB() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary">Toggle B</button>
+        <div class="fx mb_s">
+          <button onclick="{{ root.toggleA() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Toggle A</button>
+          <button onclick="{{ root.toggleB() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Toggle B</button>
         </div>
         <div attached="{{ root.showA$::rx }}" class="mb_s">Block A is visible</div>
         <div attached="{{ root.showB$::rx }}" class="mb_s">Block B is visible</div>

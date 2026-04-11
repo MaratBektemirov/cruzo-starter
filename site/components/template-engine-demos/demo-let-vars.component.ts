@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoLetVarsComponent extends AbstractComponent {
   static selector = "demo-let-vars-component";
@@ -24,7 +25,7 @@ export class DemoLetVarsComponent extends AbstractComponent {
           </div>
         </div>
 
-        <button class="mt_s cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary" onclick="{{ root.shuffle() }}">
+        <button class="mt_s ${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary" onclick="{{ root.shuffle() }}">
           Randomize
         </button>
       </div>`;

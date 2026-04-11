@@ -1,5 +1,6 @@
 import { AbstractComponent, componentsRegistryService, routerService, type Rx } from "cruzo";
 import { createHighlighter, HighlighterGeneric } from "shiki";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 import { appService } from "site/services/app.service";
 
@@ -87,14 +88,14 @@ export class TestsComponent extends AbstractComponent {
             inner-html="{{ descOne }}"></div>
           <div class="fx fx-mobile-wrap mb_m">
             <div class="block block_example-left block_example-scroll">
-              <div class="fx fx-gap mb_s" let-is-connected="{{ root.demoInstancesBySelector$::rx[sel]?.length }}">
+              <div class="fx mb_s" let-is-connected="{{ root.demoInstancesBySelector$::rx[sel]?.length }}">
                 <button
                   attached="{{ !isConnected }}"
-                  class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary tests-run mr_s"
+                  class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary tests-run mr_s"
                   onclick="{{ root.mountDemo(sel) }}">{{ labels?.run }}</button>
                 <button
                   attached="{{ isConnected }}"
-                  class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary tests-destroy"
+                  class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary tests-destroy"
                   onclick="{{ root.destroyDemo(sel) }}">{{ labels?.destroy }}</button>
               </div>
               <div class="tests-demo-host" data-demo-host="{{ sel }}"></div>

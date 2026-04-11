@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 type TextItem = { id: string; value: number; label: string; status: "ok" | "pending" | "done" };
 
@@ -11,9 +12,9 @@ export class DemoTextBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <div class="fx fx-gap mb_s">
-          <button onclick="{{ root.updateMany() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-primary">Update many</button>
-          <button onclick="{{ root.rotateStatus() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s cruzo-ui-component_button-secondary">Rotate status</button>
+        <div class="fx mb_s">
+          <button onclick="{{ root.updateMany() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Update many</button>
+          <button onclick="{{ root.rotateStatus() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Rotate status</button>
         </div>
         <div repeat="{{ root.items }}" class="mb_xs fx fx-alc">
           <span class="mr_s">#{{ this::rx.id }}</span>

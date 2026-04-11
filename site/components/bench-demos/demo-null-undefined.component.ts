@@ -1,4 +1,5 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoNullUndefined extends AbstractComponent {
   static selector = "demo-null-undefined";
@@ -7,9 +8,11 @@ export class DemoNullUndefined extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.set('text') }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Set string</button>
-        <button onclick="{{ root.set(null) }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-secondary">Set null</button>
-        <button onclick="{{ root.set(undefined) }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-secondary">Set undefined</button>
+        <div class="fx fx-wrap mb_s">
+          <button onclick="{{ root.set('text') }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Set string</button>
+          <button onclick="{{ root.set(null) }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary mr_s">Set null</button>
+          <button onclick="{{ root.set(undefined) }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Set undefined</button>
+        </div>
         <p class="mb_s">Value: [{{ root.displayValue$::rx }}]</p>
         <p>Type: {{ root.typeof(root.displayValue$::rx) }}</p>
       </div>`;

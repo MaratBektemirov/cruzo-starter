@@ -8,8 +8,7 @@ export class DemoInputBucketComponent extends AbstractComponent {
   innerBucket = new RxBucket({
     input: {
       config: InputConfig({
-        placeholder: "Enter your name",
-        enableContentWidth: false
+        placeholder: "Enter your name"
       })
     }
   });

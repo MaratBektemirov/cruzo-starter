@@ -10,3 +10,6 @@
 .fx-wrap {
     flex-wrap: wrap;
 }
+.fx-dir-col {
+    flex-direction: column;
+}

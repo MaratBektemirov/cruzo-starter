@@ -41,6 +41,8 @@ import DemoSpinnerComponentCode from "site/components/ui-components-demos/demo-s
 import { DemoSpinnerBucketComponent } from "site/components/ui-components-demos/demo-spinner-bucket.component";
 import DemoModalComponentCode from "site/components/ui-components-demos/demo-modal-bucket.component?raw";
 import { DemoModalBucketComponent } from "site/components/ui-components-demos/demo-modal-bucket.component";
+import DemoUiCssClassesComponentCode from "site/components/ui-components-demos/demo-ui-css-classes.component?raw";
+import { DemoUiCssClassesComponent } from "site/components/ui-components-demos/demo-ui-css-classes.component";
 
 const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
   "template-engine": {
@@ -120,6 +122,7 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
       { code: DemoSelectComponentCode, component: DemoSelectBucketComponent, id: SectionIds["ui-components-select"] },
       { code: DemoSpinnerComponentCode, component: DemoSpinnerBucketComponent, id: SectionIds["ui-components-spinner"] },
       { code: DemoModalComponentCode, component: DemoModalBucketComponent, id: SectionIds["ui-components-modal"] },
+      { code: DemoUiCssClassesComponentCode, component: DemoUiCssClassesComponent, id: SectionIds["ui-components-css-classes"] },
     ],
     dependencies: [
       DemoSelectBucketComponent.selector,
@@ -128,6 +131,7 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
       DemoUploadBucketComponent.selector,
       DemoSpinnerBucketComponent.selector,
       DemoModalBucketComponent.selector,
+      DemoUiCssClassesComponent.selector,
       "select-component",
       "input-component",
       "button-group-component",

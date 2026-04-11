@@ -1,5 +1,6 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
 import styles from "./demo-grid-bench.component.module.css";
+import { UI_KIT } from "cruzo/ui-components/const";
 
 export class DemoGridBench extends AbstractComponent {
   static selector = "demo-grid-bench";
@@ -10,7 +11,7 @@ export class DemoGridBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.updateRandom() }}" class="cruzo-ui-component_button cruzo-ui-component_button-s mb_s cruzo-ui-component_button-primary">Update ~1K random nodes from 4K</button>
+        <button onclick="{{ root.updateRandom() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">Update ~1K random nodes from 4K</button>
 
         <div
           class="${styles["grid-color-container"]}"
