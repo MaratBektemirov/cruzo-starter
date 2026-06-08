@@ -4,6 +4,7 @@ import { AbstractComponent, componentsRegistryService, routerService } from "cru
 
 import { routerUrlBucket } from "site/urls";
 import { RxBucket } from "cruzo";
+import { SpinnerComponent, SpinnerConfig, SpinnerValue } from "cruzo/ui-components/spinner";
 import { SidebarLinkComponent } from "site/components/sidebar-link/sidebar-link.component";
 import { SectionIds } from "site/sections";
 
@@ -27,6 +28,8 @@ export interface SidebarSectionConfig {
   children?: SidebarChild[];
   sub?: SidebarSubSection[];
 }
+
+const CRUZO_GITHUB_REPO = "https://github.com/MaratBektemirov/cruzo";
 
 export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
   {
@@ -138,11 +141,16 @@ export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
 
 export class SidebarComponent extends AbstractComponent {
   static selector = "sidebar-component";
-  public dependencies = new Set([SidebarLinkComponent.selector]);
+  public dependencies = new Set([SidebarLinkComponent.selector, SpinnerComponent.selector]);
 
-  public innerBucket = new RxBucket({ link: {} });
+  public innerBucket = new RxBucket({
+    link: {},
+    githubStars: { config: SpinnerConfig({ size: "4px" }) },
+  });
 
   sections = this.newRx(SIDEBAR_SECTIONS);
+  githubStars$ = this.newRx("");
+  githubStarsLoading$ = this.newRx(true);
 
   routerService = routerService;
 
@@ -152,15 +160,38 @@ export class SidebarComponent extends AbstractComponent {
 
   getHTML() {
     return `<aside class="${styles.sidebar}">
-        <a router-link href="${routerUrlBucket.buildUrl('main')}" class="${styles.logo}" style="text-decoration: none; color: inherit; cursor: pointer;">
-          <div class="${styles["logo-mark"]}"></div>
-          <div>
-            <div>Cruzo</div>
-            <div style="font-size:11px; text-transform:none; letter-spacing:0; color:var(--text-muted);">
-              tech minimalistic and intuitive framework with an expression VM.
+        <div class="${styles["logo-row"]}">
+          <a router-link href="${routerUrlBucket.buildUrl('main')}" class="${styles.logo}" style="text-decoration: none; color: inherit; cursor: pointer;">
+            <div class="${styles["logo-mark"]}"></div>
+            <div>
+              <div>Cruzo</div>
+              <div style="font-size:11px; text-transform:none; letter-spacing:0; color:var(--text-muted);">
+                tech minimalistic and intuitive framework with an expression VM.
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <a
+            class="${styles["github-star"]}"
+            href="${CRUZO_GITHUB_REPO}"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Star cruzo on GitHub"
+            aria-label="Star cruzo on GitHub">
+            <svg class="${styles["github-star-icon"]}" viewBox="0 0 16 16" aria-hidden="true">
+              <path fill="currentColor" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+            </svg>
+            <span class="${styles["github-star-label"]}">Star</span>
+            <span
+              class="${styles["github-star-spinner"]}"
+              is="spinner"
+              component-id="githubStars"
+              bucket-id="${this.innerBucket.id}"
+              attached="{{ root.githubStarsLoading$::rx }}"></span>
+            <span
+              class="${styles["github-star-count"]}"
+              attached="{{ !root.githubStarsLoading$::rx }}">{{ root.githubStars$::rx }}</span>
+          </a>
+        </div>
 
         <div style="overflow-x: auto;">
           <nav class="${styles.nav}">
@@ -173,13 +204,6 @@ export class SidebarComponent extends AbstractComponent {
         </div>
 
         <div class="${styles["starter-actions"]}">
-          <a
-            class="${styles["starter-action-link"]}"
-            href="https://github.com/MaratBektemirov/cruzo"
-            target="_blank"
-            rel="noopener noreferrer">
-            Framework repo
-          </a>
           <a
             class="${styles["starter-action-link"]}"
             href="https://github.com/MaratBektemirov/cruzo-starter"
@@ -204,6 +228,8 @@ export class SidebarComponent extends AbstractComponent {
     this.innerBucket.setValues({
       link: Object.fromEntries(SIDEBAR_SECTIONS.map((s, i) => [String(i), s])),
     });
+
+    this.loadGithubStars();
 
     const logoMark = this.template.node.querySelector('.' + styles["logo-mark"]);
 
@@ -248,6 +274,24 @@ export class SidebarComponent extends AbstractComponent {
     const svg = this.template.node.querySelector('.' + styles["logo-mark"]).querySelector('svg');
     svg.classList.remove(styles["sparkle-run"]);
     svg.classList.add(styles["sparkle-run"]);
+  }
+
+  private loadGithubStars() {
+    this.githubStarsLoading$.update(true);
+    this.innerBucket.setValue("githubStars", SpinnerValue.active);
+
+    fetch("https://api.github.com/repos/MaratBektemirov/cruzo")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (typeof data?.stargazers_count === "number") {
+          this.githubStars$.update(String(data.stargazers_count));
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        this.githubStarsLoading$.update(false);
+        this.innerBucket.setValue("githubStars", SpinnerValue.inactive);
+      });
   }
 }
 
