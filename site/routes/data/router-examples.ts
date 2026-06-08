@@ -13,6 +13,7 @@ const routerUrlBucket = new RouteUrlBucket({
     url: "/docs/:section",
     componentSelectorUnbox: () => DocsSectionComponent.selector,
     routeSelectorUnbox: () => ".section",
+    // loadResources: () => import("./docs-section.component"),
   },
   docsDefault: {
     url: "/docs",
@@ -75,11 +76,56 @@ const bucket = new RouteUrlBucket({
     onUnloadRoute: () => {
       console.log("profile unloaded");
     },
+    // loadResources: () => import("./profile.component"),
   },
 });
 
 const profileUrl = bucket.buildUrl("profile", { id: "42" });
 // "/profile/42"
+`;
 
-bucket.destroy();
+export const exampleRouterLoadResources = `import { RouteUrlBucket, delay, routerService, RxBucket } from "cruzo";
+import {
+  SpinnerComponent,
+  SpinnerConfig,
+  SpinnerValue,
+} from "cruzo/ui-components/spinner";
+
+export const routerUrlBucket = new RouteUrlBucket({
+  lazyDemo: {
+    url: "/lazy-demo",
+    componentSelectorUnbox: () => "demo-lazy-page-component",
+    routeSelectorUnbox: () => ".section",
+    loadResources: async () => {
+      await delay(2000);
+      await import("./demo-lazy-page.component");
+    },
+  },
+});
+
+class RouteLoadingOverlay extends AbstractComponent {
+  innerBucket = new RxBucket({
+    routeLoading: { config: SpinnerConfig({ size: "12px" }) },
+  });
+
+  constructor() {
+    super();
+    this.innerBucket.setValue("routeLoading", SpinnerValue.inactive);
+    this.newRxFunc((loading) => {
+      this.innerBucket.setValue(
+        "routeLoading",
+        loading ? SpinnerValue.active : SpinnerValue.inactive,
+      );
+    }, routerService.resourcesLoading$);
+  }
+
+  getHTML() {
+    return \`<div class="route-loading-overlay"
+        is="spinner"
+        component-id="routeLoading"
+        bucket-id="\${this.innerBucket.id}"></div>\`;
+  }
+}
+
+routerService.pushHistory(routerUrlBucket.buildUrl("lazyDemo"));
 `;

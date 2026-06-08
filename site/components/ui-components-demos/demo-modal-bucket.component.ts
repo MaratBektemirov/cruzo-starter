@@ -1,24 +1,19 @@
+// Modal body: demo-modal-body.component.ts (onclick/emitEvent — inner-html does not compile nested templates)
 import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { ModalComponent, ModalConfig } from "cruzo/ui-components/modal";
 import { UI_KIT } from "cruzo/ui-components/const";
+import { DemoModalBodyComponent } from "./demo-modal-body.component";
+import { DEMO_MODAL_ID, demoModalScope } from "./demo-modal-scope";
 
 export class DemoModalBucketComponent extends AbstractComponent {
   static selector = "demo-modal-bucket-component";
   dependencies = new Set([ModalComponent.selector]);
 
   innerBucket = new RxBucket({
-    modal_demo: {
+    [DEMO_MODAL_ID]: {
       config: ModalConfig({
-        bodyContent: `<div>
-          <h3 class="mb_s">Demo modal</h3>
-          <p class="description-paragraph">
-            Закройте окно кнопкой или кликом по фону.
-          </p>
-          <div class="mt_m">
-            <button class="${UI_KIT}_button ${UI_KIT}_button-primary ${UI_KIT}_button-s mr_s" onclick="{{ this.closeModal(true) }}">OK</button>
-            <button class="${UI_KIT}_button ${UI_KIT}_button-s" onclick="{{ this.closeModal(false) }}">Cancel</button>
-          </div>
-        </div>`,
+        bodyContent: `<demo-modal-body-component></demo-modal-body-component>`,
+        dependencies: new Set([DemoModalBodyComponent.selector]),
       }),
     },
   });
@@ -26,12 +21,13 @@ export class DemoModalBucketComponent extends AbstractComponent {
   modalResult$ = this.newRx<string>("No actions yet");
   closeEvents$ = this.newRxEventFromBucketByIndex(
     this.innerBucket,
-    "modal_demo",
+    DEMO_MODAL_ID,
     "closeModal",
   );
 
   constructor() {
     super();
+    demoModalScope.bucket = this.innerBucket;
 
     this.newRxFunc((events) => {
       if (!events) return;
@@ -56,7 +52,7 @@ export class DemoModalBucketComponent extends AbstractComponent {
   }
 
   openModal() {
-    ModalComponent.attach("modal_demo", this.innerBucket.id);
+    ModalComponent.attach(DEMO_MODAL_ID, this.innerBucket.id);
   }
 }
 

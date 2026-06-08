@@ -6,7 +6,8 @@ import { DemoRxBucketIndexesComponent } from "site/components/components-interac
 import { DocsSectionComponent } from "site/components/docs-section/docs-section.component"
 import { HomeComponent } from "site/components/home/home.component"
 import { exampleHttpClient, exampleInterceptors, exampleCache } from "site/routes/data/http-examples";
-import { exampleRouteUrlBucket, exampleRouterHashMode, exampleRouterLifecycle, exampleRouterNavigation } from "site/routes/data/router-examples"
+import { exampleRouteUrlBucket, exampleRouterHashMode, exampleRouterLifecycle, exampleRouterLoadResources, exampleRouterNavigation } from "site/routes/data/router-examples"
+import { DemoRouterLazyComponent } from "site/components/router-demos/demo-router-lazy.component"
 import { exampleRxBucketSubscribe } from "site/routes/data/rx-bucket-examples";
 import { exampleAbstractComponent, exampleAbstractService } from "site/routes/data/component-service-examples";
 
@@ -43,7 +44,7 @@ import DemoModalComponentCode from "site/components/ui-components-demos/demo-mod
 import { DemoModalBucketComponent } from "site/components/ui-components-demos/demo-modal-bucket.component";
 import DemoUiCssClassesComponentCode from "site/components/ui-components-demos/demo-ui-css-classes.component?raw";
 import { DemoUiCssClassesComponent } from "site/components/ui-components-demos/demo-ui-css-classes.component";
-import { RouteUrlBucket } from "cruzo"
+import { RouteUrlBucket, delay } from "cruzo"
 import { SectionIds } from "site/sections"
 import type { AbstractComponentConstructor } from "cruzo"
 
@@ -89,6 +90,11 @@ export const SectionsData = {
       { code: exampleRouterNavigation, id: SectionIds["router-navigation"] },
       { code: exampleRouterHashMode, id: SectionIds["router-hash-mode"] },
       { code: exampleRouterLifecycle, id: SectionIds["router-routes"] },
+      { code: exampleRouterLoadResources, component: DemoRouterLazyComponent, id: SectionIds["router-load-resources"] },
+    ],
+    dependencies: [
+      DemoRouterLazyComponent.selector,
+      '[is="spinner"]',
     ],
   },
   [SectionIds.component]: {
@@ -183,5 +189,14 @@ export const routerUrlBucket = new RouteUrlBucket({
     url: `${startPath}/docs/:section`,
     componentSelectorUnbox: () => DocsSectionComponent.selector,
     routeSelectorUnbox: () => ".section",
+  },
+  lazyDemo: {
+    url: `${startPath}/lazy-demo`,
+    componentSelectorUnbox: () => "demo-lazy-page-component",
+    routeSelectorUnbox: () => ".section",
+    loadResources: async () => {
+      await delay(2000);
+      await import("site/components/router-demos/demo-lazy-page.component");
+    },
   },
 })

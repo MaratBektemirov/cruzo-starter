@@ -20,7 +20,8 @@ import { DemoInnerHtmlComponent } from "site/components/template-engine-demos/de
 import DemoOnceComponentCode from "site/components/template-engine-demos/demo-once.component?raw";
 import { DemoOnceComponent } from "site/components/template-engine-demos/demo-once.component";
 
-import { exampleRouteUrlBucket, exampleRouterHashMode, exampleRouterLifecycle, exampleRouterNavigation } from "site/routes/data/router-examples";
+import { exampleRouteUrlBucket, exampleRouterHashMode, exampleRouterLifecycle, exampleRouterLoadResources, exampleRouterNavigation } from "site/routes/data/router-examples";
+import { DemoRouterLazyComponent } from "site/components/router-demos/demo-router-lazy.component";
 import { exampleHttpClient, exampleInterceptors, exampleCache } from "site/routes/data/http-examples";
 import { exampleRxBucketSubscribe } from "site/routes/data/rx-bucket-examples";
 import { exampleAbstractComponent, exampleAbstractService } from "site/routes/data/component-service-examples";
@@ -77,6 +78,11 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
       { code: exampleRouterNavigation, id: SectionIds["router-navigation"] },
       { code: exampleRouterHashMode, id: SectionIds["router-hash-mode"] },
       { code: exampleRouterLifecycle, id: SectionIds["router-routes"] },
+      { code: exampleRouterLoadResources, component: DemoRouterLazyComponent, id: SectionIds["router-load-resources"] },
+    ],
+    dependencies: [
+      DemoRouterLazyComponent.selector,
+      '[is="spinner"]',
     ],
   },
   http: {

@@ -43,6 +43,7 @@ export enum SectionIds {
   "router-navigation" = "router-navigation",
   "router-bucket" = "router-bucket",
   "router-hash-mode" = "router-hash-mode",
+  "router-load-resources" = "router-load-resources",
   "http" = "http",
   "http-interceptors" = "http-interceptors",
   "http-cache" = "http-cache",

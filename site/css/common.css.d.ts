@@ -8,7 +8,9 @@ declare const styles: {
   readonly "demo-ui-css-classes_slot": string;
   readonly "fx-mobile-wrap": string;
   readonly "layout": string;
+  readonly "route-loading-overlay": string;
   readonly "screen": string;
+  readonly "section-wrap": string;
 };
 export = styles;
 

@@ -5,8 +5,12 @@ Starter project for the `cruzo` framework.
 This repository contains a demo/docs site with examples of:
 - `AbstractComponent`, `AbstractService`
 - `Rx`, `RxFunc`, `RxScope`
+- `RxBucket` — reactive **value** / **state** per `(id, index)` and shared **config** via `config$` / `setConfig`
 - template engine features (`{{ }}`, `::rx`, `repeat`, `attached`, `inner-html`)
-- built-in UI components (`input`, `select`, `button-group`, `upload`, `spinner`, `modal`)
+- router — `loadResources` lazy chunks, `resourcesLoading$`
+- built-in UI components (`input`, `select`, `button-group`, `upload`, `spinner`, `modal` — body via child component + `emitEvent`)
+
+Requires `cruzo` **0.9.869+**. Locally linked via `"cruzo": "file:../cruzo"`; after publishing to npm, switch to `"cruzo": "0.9.869"` (or newer).
 
 ## Framework
 

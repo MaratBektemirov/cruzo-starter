@@ -17,7 +17,7 @@ export const readmeBlocks: ReadmeBlock[] = [
         <li class="description-list-item"><b>Без зависимостей</b></li>
         <li class="description-list-item"><b>VM выражений</b> — в шаблонах <code class="description-inline-code">{{ }}</code> компилируются в байткод и выполняются в стековой VM</li>
         <li class="description-list-item"><b>Rx / RxFunc</b> — реактивные значения</li>
-        <li class="description-list-item"><b>RxBucket</b> — именованные «buckets» состояния для компонентов</li>
+        <li class="description-list-item"><b>RxBucket</b> — value/state per <code class="description-inline-code">(id, index)</code>, общий <code class="description-inline-code">config$</code> на id</li>
         <li class="description-list-item"><b>Роутер</b> — декларативные маршруты, параметры, редиректы</li>
         <li class="description-list-item"><b>HttpClient</b> — кэш, интерцепторы, AbortSignal</li>
         <li class="description-list-item"><b>UI-набор</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink в <code class="description-inline-code">cruzo/ui-components</code></li>

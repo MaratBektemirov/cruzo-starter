@@ -10,8 +10,16 @@ export class DemoConditional extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx mb_s">
-          <button onclick="{{ root.toggleA() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Toggle A</button>
-          <button onclick="{{ root.toggleB() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Toggle B</button>
+          <button
+            onclick="{{ root.toggleA() }}"
+            class="${UI_KIT}_button ${UI_KIT}_button-s mr_s {{ root.showA$::rx ? '${UI_KIT}_button-primary' : '${UI_KIT}_button-secondary' }}">
+            Toggle A
+          </button>
+          <button
+            onclick="{{ root.toggleB() }}"
+            class="${UI_KIT}_button ${UI_KIT}_button-s {{ root.showB$::rx ? '${UI_KIT}_button-primary' : '${UI_KIT}_button-secondary' }}">
+            Toggle B
+          </button>
         </div>
         <div attached="{{ root.showA$::rx }}" class="mb_s">Block A is visible</div>
         <div attached="{{ root.showB$::rx }}" class="mb_s">Block B is visible</div>

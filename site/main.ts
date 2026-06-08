@@ -22,6 +22,8 @@ import "site/urls";
 import "site/components/header/header.component";
 import "site/components/sidebar/sidebar.component";
 import "site/components/tests/tests.component";
+import "site/components/router-demos/route-loading-overlay.component";
+import "site/components/router-demos/demo-router-lazy.component";
 
 function initApp() {
   Template.setAppVariables({});

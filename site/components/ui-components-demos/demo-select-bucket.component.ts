@@ -27,18 +27,14 @@ export class DemoSelectBucketComponent extends AbstractComponent {
       select: {
         config: SelectConfig({
           placeholder: "Select model",
-          getItems: async () => {
-            return MODEL_ITEMS.slice(0);
-          }
+          getItems: async (_value, _isOpen) => MODEL_ITEMS.slice(0),
         }),
       },
       select_multi: {
         config: SelectConfig({
           multi: true,
           placeholder: "Select model",
-          getItems: async () => {
-            return MODEL_ITEMS.slice(0);
-          }
+          getItems: async (_value, _isOpen) => MODEL_ITEMS.slice(0),
         }),
       },
     });

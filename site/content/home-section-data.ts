@@ -13,6 +13,8 @@ import { DemoExpressionsComponent } from "site/components/home-demos/demo-readme
 import DemoExpressionsComponentCode from "site/components/home-demos/demo-readme-2.component?raw";
 import { DemoBucketComponent } from "site/components/home-demos/demo-readme-bucket.component";
 import DemoBucketComponentCode from "site/components/home-demos/demo-readme-bucket.component?raw";
+import { DemoRouterLazyComponent } from "site/components/router-demos/demo-router-lazy.component";
+import { exampleRouterLoadResources } from "site/routes/data/router-examples";
 
 export interface HomeSectionItem {
   id: SectionIds;
@@ -38,26 +40,6 @@ componentsRegistryService.initApp();`,
   example2: DemoExpressionsComponentCode,
 
   example3: DemoBucketComponentCode,
-
-  router: `import { RouteUrlBucket } from "cruzo";
-import { HomeComponent } from "./home.component";
-import { DocsSectionComponent } from "./docs-section.component";
-
-const routerUrlBucket = new RouteUrlBucket({
-  main: {
-    url: "/",
-    componentSelectorUnbox: () => HomeComponent.selector,
-    routeSelectorUnbox: () => ".section",
-  },
-  docs: {
-    url: "/docs/:section",
-    componentSelectorUnbox: () => DocsSectionComponent.selector,
-    routeSelectorUnbox: () => ".section",
-  },
-});
-
-routerUrlBucket.buildUrl("main");
-routerUrlBucket.buildUrl("docs", { section: "template-engine" });`,
 
   http: `import { HttpClient } from "cruzo";
 
@@ -125,7 +107,8 @@ export const homeItems: HomeSectionItem[] = [
   },
   {
     id: SectionIds["home-router-code"],
-    code: CODE_README.router,
+    code: exampleRouterLoadResources,
+    component: DemoRouterLazyComponent,
   },
   {
     id: SectionIds["home-http-code"],

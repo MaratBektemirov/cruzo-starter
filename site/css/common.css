@@ -61,6 +61,19 @@ a {
   gap: var(--xl);
 }
 
+.section-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 240px;
+}
+
+.route-loading-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
 .block {
   background: var(--surface);
   border-radius: var(--m);

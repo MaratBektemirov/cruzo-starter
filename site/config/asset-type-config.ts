@@ -9,7 +9,7 @@ const assetTypeDict = [
 export const assetTypeConfig: SelectConfigParams = {
   placeholder: "Выбрать...",
   multi: false,
-  getItems: async (): Promise<SelectItem[]> => {
+  getItems: async (_value, _isOpen): Promise<SelectItem[]> => {
     return assetTypeDict.map((item) => ({
       label: item.title,
       value: item.id,

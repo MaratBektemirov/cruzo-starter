@@ -7,7 +7,7 @@ const assetModeDict = [
 export const assetModeConfig: SelectConfigParams = {
   placeholder: "Выбрать...",
   multi: false,
-  getItems: async (): Promise<SelectItem[]> => {
+  getItems: async (_value, _isOpen): Promise<SelectItem[]> => {
     return assetModeDict.map((item) => ({
       label: item.title,
       value: item.id,
