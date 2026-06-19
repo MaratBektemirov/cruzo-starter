@@ -11,9 +11,9 @@
     "@tonconnect/sdk": "^3.4.1",
     "@tonconnect/ui": "^3.0.0",
     "@walletconnect/ethereum-provider": "^2.23.9",
-    "cruzo": "^0.9.888",
-    "cruzo-web3": "^0.1.0",
-    "effect-tricks": "^0.1.0",
+    "cruzo": "0.9.889",
+    "cruzo-web3": "0.1.1",
+    "effect-tricks": "0.1.0",
     "shiki": "3.21.0"
   },
   "devDependencies": {
