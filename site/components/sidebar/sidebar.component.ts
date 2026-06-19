@@ -33,7 +33,7 @@ export interface SidebarSectionConfig {
 }
 
 const CRUZO_GITHUB_REPO = "https://github.com/MaratBektemirov/cruzo";
-const LOGO_SRC = "/assets/logo.svg";
+const LOGO_SRC = new URL("../../assets/logo.svg", import.meta.url).href;
 
 const pixelRevealPreset = {
   colorFlash: true,
