@@ -1,6 +1,7 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo";
 import { UI_KIT } from "cruzo/ui-components/const";
-import { toastService, type ToastAlignX, type ToastAlignY } from "cruzo";
+import { toastService } from "cruzo";
+import type { ToastAlignX, ToastAlignY } from "cruzo/ui-components/toast";
 
 export class DemoToastComponent extends AbstractComponent {
   static selector = "demo-toast-component";
