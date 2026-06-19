@@ -6,4 +6,6 @@ if (walletConnectProjectId) {
   web3Service.setWalletConnectProjectId(walletConnectProjectId);
 }
 
-web3Service.setTonManifestUrl(new URL("/tonconnect-manifest.json", window.location.href).href);
+web3Service.setTonManifestUrl(
+  new URL(`${import.meta.env.BASE_URL}tonconnect-manifest.json`, window.location.href).href,
+);
