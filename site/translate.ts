@@ -25,7 +25,7 @@ const trsSections: Translate = {
       [SectionIds.home]: {
         title: "Cruzo",
         description: `<p class="description-paragraph">
-            Реактивный UI-фреймворк без зависимостей, основные принципы которого техно-минимализм, гибкость и интуитивность.
+            Создание простых и сложных веб-приложений, без ущерба производительности и размеру бандла.
           </p>`,
       },
       [SectionIds["template-engine"]]: {
@@ -64,9 +64,7 @@ const trsSections: Translate = {
       },
       [SectionIds["router"]]: {
         title: "Router",
-        description: `<p class="description-paragraph">
-            Сущность <code class="description-inline-code">Router</code> в Cruzo состоит из <code class="description-inline-code">routerService</code> и <code class="description-inline-code">RouteUrlBucket</code>. Она синхронизирует UI с URL, монтирует/размонтирует компоненты и поддерживает параметры маршрута.
-          </p>`,
+        description: ``,
       },
       [SectionIds.docs]: {
         title: "Docs",
@@ -80,6 +78,44 @@ const trsSections: Translate = {
         description: `<p class="description-paragraph">
             Демо запускаются по кнопке "Run" и останавливаются по кнопке "Destroy".
           </p>`,
+      },
+      [SectionIds.web3]: {
+        title: "Web3",
+      },
+      [SectionIds["web3-intro"]]: {
+        title: "Overview",
+        description: `<p class="description-paragraph">
+            Дополнительные компоненты и <code class="description-inline-code">web3Service</code> для Cruzo: подключение кошельков, подпись и верификация. 
+            Есть возможность подключения новых приложений, посредством реализации интерфейса через <code class="description-inline-code">Web3Provider</code>. 
+          </p>`,
+        demos: {
+          1: `<h2 class="mt_xl mb_s">Установка</h2>
+            <div class="block mb_xl"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">npm install cruzo cruzo-web3
+npm install @tonconnect/ui @walletconnect/ethereum-provider</pre></div>
+
+            <h2 class="mb_s">Быстрый старт</h2>
+            <div class="block mb_m"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import { web3Service } from "cruzo-web3";
+import { Web3SigningComponent } from "cruzo-web3/components/web3-signing";
+
+web3Service.setWalletConnectProjectId(projectId);
+web3Service.setTonManifestUrl("/tonconnect-manifest.json");</pre></div>
+
+            <h2 class="mb_s">Настройка mobile-кошельков</h2>
+            <ul class="description-list">
+              <li class="description-list-item"><b>Ethereum (WalletConnect)</b> — Project ID с <a href="https://cloud.walletconnect.com" target="_blank" rel="noopener">cloud.walletconnect.com</a>, переменная <code class="description-inline-code">VITE_WALLETCONNECT_PROJECT_ID</code></li>
+              <li class="description-list-item"><b>TON</b> — публичный <code class="description-inline-code">tonconnect-manifest.json</code> (url, name, iconUrl) и <code class="description-inline-code">setTonManifestUrl</code></li>
+            </ul>`,
+        },
+      },
+      [SectionIds["web3-sign"]]: {
+        title: "Sign",
+        description: `<p class="description-paragraph">
+            Демо подписи контента через популярные кошельки.
+          </p>`,
+        demos: {
+          1: `<p class="description-paragraph">
+            </p>`,
+        },
       },
       [SectionIds["ui-components"]]: {
         title: "UI-компоненты",
@@ -97,7 +133,7 @@ const trsSections: Translate = {
       [SectionIds.http]: {
         title: "HTTP",
         description: `<p class="description-paragraph">
-            Сущность <code class="description-inline-code">HttpClient</code> — это клиент для HTTP-запросов с единым API (<code class="description-inline-code">request/get/post/put/patch/delete</code>), интерцепторами, кешированием и поддержкой <code class="description-inline-code">AbortSignal</code>.
+            <code class="description-inline-code">HttpClient</code> — это клиент для HTTP-запросов с единым API (<code class="description-inline-code">request/get/post/put/patch/delete</code>), интерцепторами, кешированием и поддержкой <code class="description-inline-code">AbortSignal</code>.
           </p>`,
         demos: {
           1: `<h2 class="mt_xl">HttpClient API</h2>
@@ -108,7 +144,7 @@ const trsSections: Translate = {
               <li class="description-list-item"><b>constructor</b> <code class="description-inline-code">(rootUrl, interceptors?, withCredentials?, cacheTime?)</code></li>
               <li class="description-list-item"><b>request/get/post/put/patch/delete</b> <code class="description-inline-code">(...)</code> — методы запросов</li>
               <li class="description-list-item"><b>clearCache</b> <code class="description-inline-code">(method, path, options?)</code> — очищает конкретную запись кеша</li>
-              <li class="description-list-item"><b>factory</b> <code class="description-inline-code">(signal)</code> — создаёт клиент с авто-отменой запросов</li>
+              <li class="description-list-item"><b>factory</b> <code class="description-inline-code">(signal)</code> — создаёт клиент с авто-отменой запросов, для работы в компонентах. Может быть полезно, когда компонент уничтожается, тогда запросы отменятся</li>
             </ul>`,
           2: `<div class="description-note">
               Для объекта в <code class="description-inline-code">body</code> клиент автоматически сериализует JSON. Интерцепторы применяются ко всем запросам экземпляра и удобны для токена, логирования и общей обработки ошибок.
@@ -118,7 +154,7 @@ const trsSections: Translate = {
       [SectionIds.component]: {
         title: "Component",
         description: `<p class="description-paragraph">
-            <code class="description-inline-code">AbstractComponent</code> — базовый класс UI-компонента в Cruzo: шаблон, реактивные значения, жизненный цикл и подключение зависимостей.
+            <code class="description-inline-code">AbstractComponent</code> — базовый класс UI-компонента в Cruzo.
           </p>`,
         demos: {
           1: `<h2 class="mt_xl">AbstractComponent</h2>
@@ -126,7 +162,7 @@ const trsSections: Translate = {
               В примере ниже показан типичный компонент: локальный <code class="description-inline-code">newRx</code>, вычисляемый <code class="description-inline-code">newRxFunc</code>, обработчик события и шаблон через <code class="description-inline-code">getHTML()</code>.
             </p>`,
           2: `<div class="description-note">
-              Используйте <code class="description-inline-code">AbstractComponent</code>, когда нужен UI и работа с DOM. Для общей бизнес-логики без разметки используйте <code class="description-inline-code">AbstractService</code>.
+              Используйте <code class="description-inline-code">AbstractComponent</code>, когда нужен UI и работа с DOM.
             </div>
             <h3 class="mt_m">Lifecycle</h3>
             <div class="lifecycle-grid mt_s">
@@ -181,7 +217,7 @@ const trsSections: Translate = {
       [SectionIds["cmp-interaction"]]: {
         title: "RxBucket",
         description: `<p class="description-paragraph">
-            Сущность <code class="description-inline-code">RxBucket</code> — контейнер именованного состояния для связанных компонентов. Компоненты подключаются через <code class="description-inline-code">bucket-id</code> и <code class="description-inline-code">component-id</code>, читают/обновляют значения и события внутри одного bucket.
+            <code class="description-inline-code">RxBucket</code> — контейнер именованного состояния для связанных компонентов. Компоненты подключаются через <code class="description-inline-code">bucket-id</code> и <code class="description-inline-code">component-id</code>, читают/обновляют значения, конфигурацию и события внутри одного bucket.
           </p>`,
         demos: {
           1: `<h2 class="mt_xl">RxBucket API</h2>
@@ -189,12 +225,12 @@ const trsSections: Translate = {
               Базовый сценарий: создать <code class="description-inline-code">new RxBucket(...)</code>, подключить компоненты и управлять значениями через <code class="description-inline-code">getValue/setValue</code>.
             </p>
             <ul class="description-list">
-              <li class="description-list-item"><b>constructor</b> <code class="description-inline-code">(descriptors)</code> — регистрация id и конфигов</li>
-              <li class="description-list-item"><b>config</b> — один объект на <code class="description-inline-code">id</code>; UI-компоненты читают его через <code class="description-inline-code">config$</code>, обновление — <code class="description-inline-code">setConfig(id, value)</code></li>
-              <li class="description-list-item"><b>getValue / setValue</b> <code class="description-inline-code">(id, index?)</code> — value по паре <code class="description-inline-code">(id, index)</code></li>
+              <li class="description-list-item"><b>constructor</b> <code class="description-inline-code">(descriptors)</code></li>
+              <li class="description-list-item"><b>config</b> — конфигурация для компонентов с одним id, обновление — <code class="description-inline-code">setConfig(id, value)</code></li>
+              <li class="description-list-item"><b>getValue / setValue</b> <code class="description-inline-code">(id, index?)</code></li>
               <li class="description-list-item"><b>setValues / setValuesAtIndex</b>, <b>setStates / setStatesAtIndex</b> — пакетное обновление value/state</li>
               <li class="description-list-item"><b>emitEvent</b> <code class="description-inline-code">(id, name, payload)</code> — события bucket; подписка — <code class="description-inline-code">newRxEventFromBucket</code> / <code class="description-inline-code">newRxEventFromBucketByIndex</code></li>
-              <li class="description-list-item"><b>newRxValue / newRxState / newRxEvent</b> <code class="description-inline-code">(на bucket, с rxList)</code> — низкоуровневые подписки на пару <code class="description-inline-code">(id, index)</code></li>
+              <li class="description-list-item"><b>newRxValue / newRxState / newRxEvent</b> <code class="description-inline-code">(на bucket, с rxList)</code> — низкоуровневые подписки</li>
             </ul>`,
           2: `<div class="description-note">
               Рекомендуемый подход: объявляйте <code class="description-inline-code">RxBucket</code> как контейнер, а в логике компонентов/сервисов используйте <code class="description-inline-code">newRx...</code> методы из <code class="description-inline-code">AbstractComponent</code> и <code class="description-inline-code">AbstractService</code>. Прямую работу с <code class="description-inline-code">bucket.newRx...</code> оставляйте только для низкоуровневых случаев.
@@ -202,25 +238,6 @@ const trsSections: Translate = {
             <div class="description-note mt_s">
               Внутри bucket данные адресуются парой <code class="description-inline-code">(id, index)</code>. Индекс по умолчанию — <code class="description-inline-code">'0'</code>, что удобно и для одиночных, и для повторяющихся компонентов.
             </div>`,
-        },
-      },
-      [SectionIds["template-engine-interpolation"]]: {
-        title: "",
-        demos: {
-          1: `<h2 class="mt_xl">Свобода выбора</h2><p class="description-paragraph">
-              Шаблонизатор можно использовать и без реактивных значений. В этом случае
-              пересчёт шаблона выполняется вручную — через вызов
-              <code class="description-inline-code">this.template.detectChanges()</code>.
-            </p>
-
-            <p class="description-paragraph">
-              В некоторых сценариях такой подход может ускорить разработку и снизить потребление памяти, однако увеличивает нагрузку на CPU, так как пересчитываются все данные шаблона.
-            </p>
-
-            <p class="description-paragraph">
-              Несмотря на это, работа с DOM-деревом точечная — обновятся
-              только те узлы, для которых данные изменились.
-            </p>`,
         },
       },
       [SectionIds["template-engine-rx"]]: {
@@ -530,9 +547,9 @@ const trsSections: Translate = {
       [SectionIds["home-example-1"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">Примеры</h2>
+          1: `<h2 class="mt_xl">Примеры различных конструкций в шаблоне</h2>
             <p class="description-paragraph">
-              Ниже — примеры с живым компонентом и кодом. Списки, условный DOM, <code class="description-inline-code">once::</code>, <code class="description-inline-code">let-*</code>, события, <code class="description-inline-code">::rx</code>.
+              Списки, условия для показа блока, <code class="description-inline-code">once::</code>, <code class="description-inline-code">let-*</code>, события, <code class="description-inline-code">::rx</code>.
             </p>`,
           2: ``,
         },
@@ -568,7 +585,7 @@ const trsSections: Translate = {
       [SectionIds["home-scope"]]: {
         title: "",
         demos: {
-          1: `<h3 class="mt_xl">Связь без лишнего</h3>
+          1: `<h3 class="mt_xl">RxBucket</h3>
             <p class="description-paragraph">
               Компоненты не передают друг другу данные по цепочке — они подключаются к общему bucket по <code class="description-inline-code">component-id</code> и <code class="description-inline-code">bucket-id</code>.
             </p>`,
@@ -671,19 +688,9 @@ const trsSections: Translate = {
       [SectionIds["router-bucket"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">RouteUrlBucket</h2>
-            <p class="description-paragraph">
-              Декларативный список маршрутов приложения: URL-шаблон, контейнер, компонент и опциональные lifecycle-хуки.
-            </p>
-            <ul class="description-list">
-              <li class="description-list-item"><b>url</b> — путь с параметрами, например <code class="description-inline-code">/docs/:section</code></li>
-              <li class="description-list-item"><b>componentSelectorUnbox</b> — какой компонент монтировать</li>
-              <li class="description-list-item"><b>routeSelectorUnbox</b> — куда монтировать компонент</li>
-              <li class="description-list-item"><b>redirectTo / onLoadRoute / onUnloadRoute</b> — опциональные правила</li>
-              <li class="description-list-item"><b>loadResources</b> <code class="description-inline-code">() =&gt; import("...")</code> — lazy-chunk перед монтированием страницы</li>
-            </ul>`,
+          1: `<h2 class="mt_xl">RouteUrlBucket</h2>`,
           2: `<div class="description-note">
-              Используйте <code class="description-inline-code">buildUrl(name, params)</code>, чтобы собирать ссылки из имени маршрута и не дублировать строки пути в коде.
+              Используйте <code class="description-inline-code">buildUrl(name, params)</code>, чтобы получить ссылки на роут.
             </div>`
         },
       },
@@ -708,16 +715,10 @@ const trsSections: Translate = {
         demos: {
           1: `<h2 class="mt_xl">Hash mode</h2>
             <p class="description-paragraph">
-              Для статического хостинга без fallback на <code class="description-inline-code">index.html</code> можно включить маршрутизацию во фрагменте: реальный путь документа остаётся фиксированным (например <code class="description-inline-code">/</code>), а SPA-живёт в <code class="description-inline-code">#/path?query</code>.
+              Также можно включать hash mode (чаще всего для статического хостинга).
             </p>
             <ul class="description-list">
               <li class="description-list-item"><b>setHashMode(true)</b> — включить режим; вызывайте до первого осмысленного <code class="description-inline-code">update()</code> (обычно при старте приложения).</li>
-              <li class="description-list-item"><b>isHashMode()</b> — текущий режим.</li>
-              <li class="description-list-item"><b>Сопоставление</b> — шаблоны вроде <code class="description-inline-code">/docs/:section</code> матчятся по пути из <code class="description-inline-code">location.hash</code>, ожидаемый вид: <code class="description-inline-code">#/docs/intro</code> или <code class="description-inline-code">#/docs/intro?tab=api</code>.</li>
-              <li class="description-list-item"><b>pathname$</b> / <b>search$</b> — отражают виртуальный path и query <em>внутри hash</em>, а не <code class="description-inline-code">location.pathname</code> / <code class="description-inline-code">location.search</code> документа.</li>
-              <li class="description-list-item"><b>pushHistory</b> — можно передать обычный путь (<code class="description-inline-code">/docs/http</code>) или уже hash-URL (<code class="description-inline-code">#/docs/http</code>); оба приводятся к одному <code class="description-inline-code">location.hash</code>.</li>
-              <li class="description-list-item"><b>buildUrl</b> у <code class="description-inline-code">RouteUrlBucket</code> — в hash mode возвращает строку вида <code class="description-inline-code">#/path?query</code> (без префикса pathname страницы).</li>
-              <li class="description-list-item"><b>redirectTo</b> — по-прежнему задаётся как path (например <code class="description-inline-code">/docs/intro</code>); роутер превратит его в соответствующий <code class="description-inline-code">#/…</code> на текущем URL документа.</li>
             </ul>`,
           2: ``,
         },
@@ -725,22 +726,17 @@ const trsSections: Translate = {
       [SectionIds["router-load-resources"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">loadResources + resourcesLoading$</h2>
+          1: `<h2 class="mt_xl">Подгрузка ресурсов перед переходом на роут</h2>
             <p class="description-paragraph">
-              Перед монтированием страницы роутер ждёт <code class="description-inline-code">loadResources</code> (обычно dynamic <code class="description-inline-code">import()</code>)
-            </p>
-            <ul class="description-list">
-              <li class="description-list-item">Маршрут <code class="description-inline-code">lazyDemo</code> в <code class="description-inline-code">site/urls.ts</code></li>
-              <li class="description-list-item">Оверлей <code class="description-inline-code">route-loading-overlay</code> в <code class="description-inline-code">index.html</code></li>
-              <li class="description-list-item">Lazy-страница: <code class="description-inline-code">demo-lazy-page.component.ts</code></li>
-            </ul>`,
+              Перед монтированием страницы роутер ждёт <code class="description-inline-code">loadResources</code> (для компонентов можно вставить dynamic <code class="description-inline-code">import()</code>)
+            </p>`,
           2: ``,
         },
       },
       [SectionIds["router-routes"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">Lifecycle маршрута</h2>
+          1: `<h2 class="mt_xl">Хуки</h2>
             <p class="description-paragraph">
               Для каждого маршрута можно описать <code class="description-inline-code">onLoadRoute</code> и <code class="description-inline-code">onUnloadRoute</code> — это удобно для аналитики, загрузки данных и очистки ресурсов.
             </p>`,
@@ -784,15 +780,8 @@ const trsSections: Translate = {
             <p class="description-paragraph">
               В компонентах удобнее <code class="description-inline-code">AbstractComponent</code>: <code class="description-inline-code">newRxValueFromBucket</code>, <code class="description-inline-code">newRxStateFromBucket</code>, <code class="description-inline-code">newRxEventFromBucket</code> — одна пара <code class="description-inline-code">(id, index)</code>; для событий по всем индексам сразу — <code class="description-inline-code">newRxEventFromBucketByIndex</code> (объект <code class="description-inline-code">{ [index]: event }</code>).
             </p>
-            <ul class="description-list">
-              <li class="description-list-item"><b>На bucket напрямую:</b> <code class="description-inline-code">newRxValue</code> / <code class="description-inline-code">newRxState</code> — callback <code class="description-inline-code">(value, index?, byUser?)</code>; <code class="description-inline-code">newRxEvent</code> — <code class="description-inline-code">(event, index?)</code></li>
-              <li class="description-list-item"><b>Несколько индексов одного id:</b> несколько вызовов <code class="description-inline-code">newRxValueFromBucket(..., index)</code> и объединение через <code class="description-inline-code">newRxFunc</code>, либо своя агрегация на <code class="description-inline-code">bucket.newRxValue</code></li>
-            </ul>
             <div class="description-note">
-              <b>config</b> общий на <code class="description-inline-code">component-id</code> (не на index); <b>value</b> и <b>state</b> — per <code class="description-inline-code">(id, index)</code>. UI-kit подписан на <code class="description-inline-code">config$</code>.
-            </div>`,
-          2: `<div class="description-note">
-              В примере кода ниже сначала показаны все <code class="description-inline-code">this.newRx...</code> методы из <code class="description-inline-code">AbstractComponent</code>, а затем отдельный пример для <code class="description-inline-code">AbstractService</code> с <code class="description-inline-code">newRx</code> и <code class="description-inline-code">newRxFunc</code>.
+              <b>config</b> общий на <code class="description-inline-code">component-id</code> (не на index); <b>value</b> и <b>state</b> — на <code class="description-inline-code">(id, index)</code>.
             </div>`,
         },
       },
@@ -812,27 +801,13 @@ const trsSections: Translate = {
             </ul>`,
           2: `<div class="description-note">
               Этот блок в демо ниже показывает работу индексов на практике: несколько компонентов с одинаковым <code class="description-inline-code">component-id</code> независимы за счёт разных <code class="description-inline-code">component-index</code>.
-            </div>
-            <h3 class="mt_l mb_s">Почему лучше через newRx... из базовых классов</h3>
-            <ul class="description-list">
-              <li class="description-list-item"><b>Плюсы:</b> меньше boilerplate, единый стиль по проекту, автоматическое подключение к жизненному циклу компонента/сервиса, проще сопровождать код</li>
-              <li class="description-list-item"><b>Плюсы:</b> удобнее читать — видно намерение на уровне API компонента, а не низкоуровневого bucket</li>
-              <li class="description-list-item"><b>Минусы:</b> меньше контроля над низкоуровневой подпиской в нестандартных сценариях</li>
-              <li class="description-list-item"><b>Минусы:</b> при отладке сложных edge-case иногда нужно опускаться до прямого API <code class="description-inline-code">RxBucket</code></li>
-            </ul>
-            <div class="description-note">
-              Практическое правило: <code class="description-inline-code">RxBucket</code> — для объявления структуры и значений, <code class="description-inline-code">newRx...</code> из базовых классов — для подписок и реактивной логики.
             </div>`,
         },
       },
       [SectionIds["ui-components-input"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">Input</h2>
-            <p class="description-paragraph">
-              Атрибуты (<code class="description-inline-code">placeholder</code>, <code class="description-inline-code">type</code>, …) — из <code class="description-inline-code">config$</code> в descriptor.
-              Доп. CSS-класс — через bucket <code class="description-inline-code">state.cls</code> (<code class="description-inline-code">setState</code>).
-            </p>`,
+          1: `<h2 class="mt_xl">Input</h2>`,
         },
       },
       [SectionIds["ui-components-button-group"]]: {
@@ -850,12 +825,7 @@ const trsSections: Translate = {
       [SectionIds["ui-components-select"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">Select</h2>
-            <p class="description-paragraph">
-              Список опций загружается через <code class="description-inline-code">getItems(value, isOpen)</code> в <code class="description-inline-code">SelectConfig</code>
-              при изменении bucket <b>value</b> или <b>config</b>. Статичный список может игнорировать аргументы.
-              Параллельные ответы отбрасываются по внутреннему load-token.
-            </p>`,
+          1: `<h2 class="mt_xl">Select</h2>`,
         },
       },
       [SectionIds["ui-components-spinner"]]: {
@@ -867,24 +837,13 @@ const trsSections: Translate = {
       [SectionIds["ui-components-modal"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">Modal</h2>
-            <p class="description-paragraph">
-              Открытие: <code class="description-inline-code">ModalComponent.attach(id, bucketId)</code>.
-              Тело — компонент <code class="description-inline-code">demo-modal-body-component</code> в <code class="description-inline-code">bodyContent</code>
-              (код тела — отдельный файл рядом с демо bucket); закрытие через <code class="description-inline-code">emitEvent(..., "closeModal", { data: { isOK } })</code>.
-              Клик по фону тоже шлёт <code class="description-inline-code">closeModal</code> с <code class="description-inline-code">isOK: false</code>.
-            </p>`,
+          1: `<h2 class="mt_xl">Modal</h2>`,
         },
       },
       [SectionIds["ui-components-css-classes"]]: {
         title: "",
         demos: {
-          1: `<h2 class="mt_xl">CSS классы</h2>
-            <p class="description-paragraph">
-              Подключение стилей: <code class="description-inline-code">import "cruzo/ui-components/vars.css";</code> — токены;
-              <code class="description-inline-code">import "cruzo/ui-components/button.css";</code> и
-              <code class="description-inline-code">import "cruzo/ui-components/checkbox.css";</code> — при использовании соответствующих примитивов в своей вёрстке.
-            </p>`,
+          1: `<h2 class="mt_xl">CSS классы</h2>`,
         },
       },
     },

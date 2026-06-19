@@ -35,7 +35,7 @@ export const readmeBlocks: ReadmeBlock[] = [
     code: `import { Template, componentsRegistryService, routerService } from "cruzo";
 import "cruzo/ui-components/input";
 import "cruzo/ui-components/button-group";
-import "cruzo/ui-components/router-link"; // и др. по необходимости
+import "cruzo/ui-components/router-link"; // and other UI imports as needed
 
 Template.setAppVariables({});
 componentsRegistryService.initApp();

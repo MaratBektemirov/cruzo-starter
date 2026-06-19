@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly GITHUB_DOMAIN?: string;
   readonly VITE_REPO_NAME?: string;
+  readonly VITE_WALLETCONNECT_PROJECT_ID?: string;
 }
 
 declare module "*.module.css" {

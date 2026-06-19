@@ -17,7 +17,7 @@ export class DemoRxBucketIndexesComponent extends AbstractComponent {
   private inputAt0$ = this.newRxValueFromBucket(this.innerBucket, "input", "0");
   private inputAt1$ = this.newRxValueFromBucket(this.innerBucket, "input", "1");
 
-  /** Снимок значений по индексам: комбинация потоков per-index (см. newRxValueFromBucket в AbstractComponent). */
+  /** Per-index value snapshot: combine per-index streams (see newRxValueFromBucket on AbstractComponent). */
   valuesByIndex$ = this.newRxFunc(
     (v0, v1) => ({ "0": v0, "1": v1 }),
     this.inputAt0$,

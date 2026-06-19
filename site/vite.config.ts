@@ -133,6 +133,7 @@ export default defineConfig({
     alias: {
       site: __dirname,
     },
+    dedupe: ["cruzo"],
   },
 
   base:

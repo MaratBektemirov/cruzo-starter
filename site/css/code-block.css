@@ -1,0 +1,47 @@
+.code-panel {
+  position: relative;
+}
+
+.code-panel code-copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.code-panel:hover code-copy-button,
+.code-panel code-copy-button:focus-within {
+  opacity: 1;
+}
+
+.code-panel .code-wrap {
+  min-height: 100%;
+}
+
+.code-panel .code-wrap pre {
+  margin: 0;
+}
+
+@media (hover: none), (max-width: 900px) {
+  .code-panel code-copy-button {
+    opacity: 1;
+  }
+
+  .code-panel .code-wrap {
+    padding-top: 44px;
+  }
+}
+
+@media (max-width: 900px) {
+  .docs-breadcrumbs__link,
+  .docs-breadcrumbs__current {
+    font-size: 12px;
+  }
+
+  .docs-breadcrumbs__current {
+    overflow-wrap: anywhere;
+  }
+}

@@ -5,13 +5,14 @@ import { appService } from "site/services/app.service";
 import { SectionIds } from "site/sections";
 import { homeItems, type HomeSectionItem } from "site/content/home-section-data";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
+import { encodeCode } from "site/utils/code-block";
 
 export class HomeComponent extends AbstractComponent {
   static selector = "home-component";
   highlighter: HighlighterGeneric<any, any> = null;
 
   items$ = this.newRx<HomeSectionItem[]>([]);
-  dependencies = new Set<string>();
+  dependencies = new Set(["code-copy-button"]);
 
   codeHighlights: Record<number, string> = {};
   sections$ = appService.sections$;
@@ -37,7 +38,12 @@ export class HomeComponent extends AbstractComponent {
               attached="{{ this.component || hasCode }}">
               <div class="block block_example-left" attached="{{ this.component }}" inner-html="{{ root.getLeftBlockHTML(this.component) }}">
               </div>
-              <div class="block block_example-right code-block_{{ this.id }}" attached="{{ hasCode }}" inner-html="{{ hasCode }}"></div>
+              <div class="block block_example-right code-block_{{ this.id }}" attached="{{ hasCode }}">
+                <div class="code-panel">
+                  <code-copy-button code="{{ root.encodeCode(this.code) }}"></code-copy-button>
+                  <div class="code-wrap" inner-html="{{ hasCode }}"></div>
+                </div>
+              </div>
             </div>
             <div class="description-1 mt_m"
               attached="{{ descTwo }}"
@@ -64,8 +70,12 @@ export class HomeComponent extends AbstractComponent {
         theme: "github-light",
       });
 
-      this.codeHighlights[index] = `<div class="code-wrap">${html}</div>`;
+      this.codeHighlights[index] = html;
     }
+  }
+
+  encodeCode(code: string) {
+    return encodeCode(code);
   }
 
   async connectedCallback() {

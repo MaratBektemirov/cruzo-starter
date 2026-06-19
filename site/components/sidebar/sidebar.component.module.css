@@ -2,7 +2,7 @@
   background: var(--surface-2);
   border-right: 1px solid var(--border);
 
-  padding: var(--xl) var(--m);
+  padding: 0 var(--m) var(--xl) 0;
   display: flex;
   flex-direction: column;
 
@@ -15,11 +15,29 @@
 }
 
 .logo-row {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--s);
   width: 100%;
+  overflow: visible;
+  padding: var(--xl) var(--m) 0;
+}
+
+.logo-stars-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+  overflow: visible;
+}
+
+.logo-stars {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .github-star {
@@ -28,6 +46,9 @@
   gap: 6px;
   flex-shrink: 0;
   align-self: center;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
   padding: 6px 10px;
   border: 1px solid var(--border-dark);
   border-radius: var(--s);
@@ -85,6 +106,9 @@
   gap: var(--s);
   min-width: 0;
   width: 100%;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
 
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -104,6 +128,13 @@
 .logo-mark {
   width: 88px;
   height: 87.12px;
+  pointer-events: auto;
+}
+
+.logo-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .nav {
@@ -111,6 +142,7 @@
   flex-direction: column;
   margin-top: var(--m);
   gap: var(--xs);
+  padding: 0 var(--m);
 }
 
 .starter-actions {
@@ -118,6 +150,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--xs);
+  padding: 0 var(--m);
 }
 
 .starter-action-link {
@@ -146,7 +179,7 @@
 
 .sidebar-footer {
   margin-top: auto;
-  padding-top: var(--m);
+  padding: var(--m) var(--m) 0;
   border-top: 1px solid var(--border);
 
   font-size: 11px;
@@ -198,6 +231,15 @@
 
   .logo-row {
     align-items: flex-start;
+    padding: 0;
+  }
+
+  .nav {
+    padding: 0;
+  }
+
+  .starter-actions {
+    padding: 0;
   }
 
   .logo {

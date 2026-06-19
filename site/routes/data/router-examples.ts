@@ -13,7 +13,6 @@ const routerUrlBucket = new RouteUrlBucket({
     url: "/docs/:section",
     componentSelectorUnbox: () => DocsSectionComponent.selector,
     routeSelectorUnbox: () => ".section",
-    // loadResources: () => import("./docs-section.component"),
   },
   docsDefault: {
     url: "/docs",
@@ -49,18 +48,6 @@ import { routerUrlBucket } from "./urls";
 
 routerService.setHashMode(true);
 routerService.update();
-
-const inHash = routerService.isHashMode();
-
-// buildUrl даёт "#/path?query" — тот же вид, что ожидает pushHistory
-const docsHref = routerUrlBucket.buildUrl("docs", { section: "http" });
-// "#/docs/http" при включённом hash mode
-
-routerService.pushHistory("/docs/http");
-// или pushHistory("#/docs/http?tab=api") — попадёт в location.hash
-
-routerService.pathname$; // виртуальный путь из фрагмента, не document.pathname
-routerService.search$;   // query внутри hash: "#/docs/x?section=…" → "?section=…"
 `;
 
 export const exampleRouterLifecycle = `import { RouteUrlBucket } from "cruzo";
@@ -76,7 +63,6 @@ const bucket = new RouteUrlBucket({
     onUnloadRoute: () => {
       console.log("profile unloaded");
     },
-    // loadResources: () => import("./profile.component"),
   },
 });
 

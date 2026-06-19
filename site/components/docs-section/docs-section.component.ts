@@ -5,6 +5,7 @@ import { appService } from "site/services/app.service";
 import type { ComponentConnectedParams } from "cruzo";
 import { DocsSectionItem, DocsSectionRouteData, SectionKey, SectionsData } from "site/urls";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
+import { encodeCode } from "site/utils/code-block";
 import { scrollToSectionFromSearch } from "site/section-scroll";
 
 export class DocsSectionComponent extends AbstractComponent<any, any> {
@@ -12,7 +13,7 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
   highlighter: HighlighterGeneric<any, any> = null;
 
   items$ = this.newRx<DocsSectionItem[]>([]);
-  dependencies = new Set<string>();
+  dependencies = new Set(["code-copy-button"]);
 
   codeHighlights: Record<string, string> = {};
 
@@ -38,7 +39,12 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
           <div class="fx fx-mobile-wrap mb_m">
             <div class="block block_example-left" attached="{{ this.component }}" inner-html="{{ root.getLeftBlockHTML(this.component) }}">
             </div>
-            <div class="block block_example-right code-block_{{ this.id }}" inner-html="{{ root.codeHighlights[index] }}"></div>
+            <div class="block block_example-right code-block_{{ this.id }}" attached="{{ root.codeHighlights[index] }}">
+              <div class="code-panel">
+                <code-copy-button code="{{ root.encodeCode(this.code) }}"></code-copy-button>
+                <div class="code-wrap" inner-html="{{ root.codeHighlights[index] }}"></div>
+              </div>
+            </div>
           </div>
           <div class="description-1 mt_m"
             attached="{{ descTwo }}"
@@ -62,8 +68,12 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
         theme: "github-light",
       });
 
-      this.codeHighlights[index] = `<div class="code-wrap">${html}</div>`;
+      this.codeHighlights[index] = html;
     }
+  }
+
+  encodeCode(code: string) {
+    return encodeCode(code);
   }
 
   async connectedCallback(params: ComponentConnectedParams) {

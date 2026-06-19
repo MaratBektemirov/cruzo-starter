@@ -1,8 +1,6 @@
 import { SectionIds } from "site/sections";
 import type { DocsSectionRouteData } from "site/urls";
 
-import DemoBracesManualComponentCode from "site/components/template-engine-demos/demo-braces-manual.component?raw";
-import { DemoBracesManualComponent } from "site/components/template-engine-demos/demo-braces-manual.component";
 import DemoAttachedComponentCode from "site/components/template-engine-demos/demo-attached.component?raw";
 import { DemoAttachedComponent } from "site/components/template-engine-demos/demo-attached.component";
 import DemoHtmlEventsComponentCode from "site/components/template-engine-demos/demo-html-events.component?raw";
@@ -34,6 +32,10 @@ import DemoSelectComponentCode from "site/components/ui-components-demos/demo-se
 import { DemoSelectBucketComponent } from "site/components/ui-components-demos/demo-select-bucket.component";
 import DemoInputComponentCode from "site/components/ui-components-demos/demo-input-bucket.component?raw";
 import { DemoInputBucketComponent } from "site/components/ui-components-demos/demo-input-bucket.component";
+import DemoTextareaComponentCode from "site/components/ui-components-demos/demo-textarea-bucket.component?raw";
+import { DemoTextareaBucketComponent } from "site/components/ui-components-demos/demo-textarea-bucket.component";
+import DemoToastComponentCode from "site/components/ui-components-demos/demo-toast.component?raw";
+import { DemoToastComponent } from "site/components/ui-components-demos/demo-toast.component";
 import DemoButtonGroupComponentCode from "site/components/ui-components-demos/demo-button-group-bucket.component?raw";
 import { DemoButtonGroupBucketComponent } from "site/components/ui-components-demos/demo-button-group-bucket.component";
 import DemoUploadComponentCode from "site/components/ui-components-demos/demo-upload-bucket.component?raw";
@@ -49,7 +51,6 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
   "template-engine": {
     sectionId: SectionIds["template-engine"],
     items: [
-      { code: DemoBracesManualComponentCode, component: DemoBracesManualComponent, id: SectionIds["template-engine-interpolation"] },
       { code: DemoRxValueComponentCode, component: DemoRxValueComponent, id: SectionIds["template-engine-rx"] },
       { code: DemoJsSubsetComponentCode, component: DemoJsSubsetComponent, id: SectionIds["template-engine-js-subset"] },
       { code: DemoAttachedComponentCode, component: DemoAttachedComponent, id: SectionIds["template-engine-attached"] },
@@ -60,7 +61,6 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
       { code: DemoRepeatComponentCode, component: DemoRepeatComponent, id: SectionIds["template-engine-repeat"] },
     ],
     dependencies: [
-      DemoBracesManualComponent.selector,
       DemoAttachedComponent.selector,
       DemoHtmlEventsComponent.selector,
       DemoLetVarsComponent.selector,
@@ -123,23 +123,28 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
     sectionId: SectionIds["ui-components"],
     items: [
       { code: DemoInputComponentCode, component: DemoInputBucketComponent, id: SectionIds["ui-components-input"] },
+      { code: DemoTextareaComponentCode, component: DemoTextareaBucketComponent, id: SectionIds["ui-components-textarea"] },
       { code: DemoButtonGroupComponentCode, component: DemoButtonGroupBucketComponent, id: SectionIds["ui-components-button-group"] },
       { code: DemoUploadComponentCode, component: DemoUploadBucketComponent, id: SectionIds["ui-components-upload"] },
       { code: DemoSelectComponentCode, component: DemoSelectBucketComponent, id: SectionIds["ui-components-select"] },
       { code: DemoSpinnerComponentCode, component: DemoSpinnerBucketComponent, id: SectionIds["ui-components-spinner"] },
       { code: DemoModalComponentCode, component: DemoModalBucketComponent, id: SectionIds["ui-components-modal"] },
+      { code: DemoToastComponentCode, component: DemoToastComponent, id: SectionIds["ui-components-toast"] },
       { code: DemoUiCssClassesComponentCode, component: DemoUiCssClassesComponent, id: SectionIds["ui-components-css-classes"] },
     ],
     dependencies: [
       DemoSelectBucketComponent.selector,
       DemoInputBucketComponent.selector,
+      DemoTextareaBucketComponent.selector,
       DemoButtonGroupBucketComponent.selector,
       DemoUploadBucketComponent.selector,
       DemoSpinnerBucketComponent.selector,
       DemoModalBucketComponent.selector,
+      DemoToastComponent.selector,
       DemoUiCssClassesComponent.selector,
       "select-component",
       "input-component",
+      "textarea-component",
       "button-group-component",
       "upload-component",
       '[is="spinner"]',

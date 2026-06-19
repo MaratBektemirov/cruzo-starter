@@ -24,6 +24,7 @@ import { DemoNestedRx } from "site/components/bench-demos/demo-nested-rx.compone
 import DemoNestedRxCode from "site/components/bench-demos/demo-nested-rx.component?raw";
 import { SectionIds } from "site/sections";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
+import { encodeCode } from "site/utils/code-block";
 import { scrollToSectionFromSearch } from "site/section-scroll";
 
 export class TestsComponent extends AbstractComponent {
@@ -45,6 +46,7 @@ export class TestsComponent extends AbstractComponent {
     DemoNullUndefined.selector,
     DemoConditional.selector,
     DemoNestedRx.selector,
+    "code-copy-button",
   ]);
 
   demoComponents = [
@@ -100,7 +102,12 @@ export class TestsComponent extends AbstractComponent {
               </div>
               <div class="tests-demo-host" data-demo-host="{{ sel }}"></div>
             </div>
-            <div class="block block_example-right code-block_{{ sel }}" inner-html="{{ once::root.codeHighlights[index] }}"></div>
+            <div class="block block_example-right code-block_{{ sel }}">
+              <div class="code-panel">
+                <code-copy-button code="{{ root.encodeCode(this.code) }}"></code-copy-button>
+                <div class="code-wrap" inner-html="{{ once::root.codeHighlights[index] }}"></div>
+              </div>
+            </div>
           </div>
           <div class="description-1 mt_m"
             attached="{{ descTwo }}"
@@ -140,6 +147,10 @@ export class TestsComponent extends AbstractComponent {
     this.demoInstancesBySelector$.update(this.demoInstancesBySelector);
   }
 
+  encodeCode(code: string) {
+    return encodeCode(code);
+  }
+
   async connectedCallback() {
     appService.currentSectionId$.update(SectionIds.tests);
 
@@ -154,7 +165,7 @@ export class TestsComponent extends AbstractComponent {
         theme: "github-light",
       });
 
-      this.codeHighlights[index] = `<div class="code-wrap">${html}</div>`;
+      this.codeHighlights[index] = html;
     }
 
     super.connectedCallback();

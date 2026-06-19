@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xl);
+}
+
+.signSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--l);
+}
+
+.signIntro {
+  font-size: 15px;
+  line-height: 1.55;
+}

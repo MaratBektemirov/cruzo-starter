@@ -62,7 +62,7 @@ class OrderFormComponent extends AbstractComponent {
     this.discountPercent$
   );
 
-  // Несколько индексов одного id: отдельные потоки per-index и объединение (ByIndex для value/state в AbstractComponent нет).
+  // Multiple indexes for one id: separate per-index streams merged via newRxFunc (no ByIndex helpers for value/state in AbstractComponent).
   quantityAt0$ = this.newRxValueFromBucket(this.innerBucket, "quantity", "0");
   quantityAt1$ = this.newRxValueFromBucket(this.innerBucket, "quantity", "1");
   quantitiesByIndex$ = this.newRxFunc(
@@ -77,7 +77,7 @@ class OrderFormComponent extends AbstractComponent {
     this.quantityStateAt0$,
     this.quantityStateAt1$
   );
-  // События по всем индексам: { [index]: event } (есть в AbstractComponent).
+  // Events for all indexes: { [index]: event } (available in AbstractComponent).
   statusEventsByIndex$ = this.newRxEventFromBucketByIndex(this.innerBucket, "status", "change");
 
   // Direct RxBucket usage (low-level, usually not needed in components):
@@ -150,6 +150,6 @@ bucket.setValuesAtIndex(
   true
 );
 
-// Подписки: bucket.newRxValue / newRxState / newRxEvent(id, name, fn, rxList) — per (id, index).
-// Снимок нескольких полей собирайте через newRxFunc(...) из потоков newRxValue(...) или из this.newRxValueFromBucket(...).
+// Subscriptions: bucket.newRxValue / newRxState / newRxEvent(id, name, fn, rxList) — per (id, index).
+// Combine multiple fields via newRxFunc(...) from newRxValue(...) streams or this.newRxValueFromBucket(...).
 `;

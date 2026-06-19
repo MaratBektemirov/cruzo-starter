@@ -1,5 +1,7 @@
-import { AbstractComponent, componentsRegistryService, routerService } from "cruzo";
+import { AbstractComponent, ComponentConnectedParams, componentsRegistryService, routerService } from "cruzo";
 import { UI_KIT } from "cruzo/ui-components/const";
+import { SectionIds } from "site/sections";
+import { appService } from "site/services/app.service";
 import { routerUrlBucket } from "site/urls";
 
 export class DemoLazyPageComponent extends AbstractComponent {
@@ -20,6 +22,11 @@ export class DemoLazyPageComponent extends AbstractComponent {
 
   goHome() {
     routerService.pushHistory(routerUrlBucket.buildUrl("main"));
+  }
+
+  connectedCallback(params?: ComponentConnectedParams): void {
+    appService.currentSectionId$.update(SectionIds["demo-lazy-page"]);
+    super.connectedCallback(params);
   }
 }
 
