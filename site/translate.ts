@@ -90,15 +90,14 @@ const trsSections: Translate = {
           </p>`,
         demos: {
           1: `<h2 class="mt_xl mb_s">Установка</h2>
-            <div class="block mb_xl"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">npm install cruzo cruzo-web3
-npm install @tonconnect/ui @walletconnect/ethereum-provider</pre></div>
+            <div class="block mb_xl"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">npm install cruzo cruzo-web3</pre></div>
 
             <h2 class="mb_s">Быстрый старт</h2>
             <div class="block mb_m"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import { web3Service } from "cruzo-web3";
-import { Web3SigningComponent } from "cruzo-web3/components/web3-signing";
 
+const tonManifestUrl = new URL("/tonconnect-manifest.json", window.location.href).href;
 web3Service.setWalletConnectProjectId(projectId);
-web3Service.setTonManifestUrl("/tonconnect-manifest.json");</pre></div>
+web3Service.setTonManifestUrl(tonManifestUrl);</pre></div>
 
             <h2 class="mb_s">Настройка mobile-кошельков</h2>
             <ul class="description-list">
