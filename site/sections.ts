@@ -66,3 +66,15 @@ export enum SectionIds {
   "ui-components-css-classes" = "ui-components-css-classes",
   "demo-lazy-page" = "demo-lazy-page",
 }
+
+type SectionsMap = Partial<
+  Record<SectionIds, { demos?: Partial<Record<number, string>> }>
+> | null | undefined;
+
+export function getDemoDesc(
+  sections: SectionsMap,
+  id: SectionIds | string,
+  index: number,
+): string {
+  return sections?.[id as SectionIds]?.demos?.[index] ?? "";
+}

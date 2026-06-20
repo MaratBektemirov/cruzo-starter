@@ -22,9 +22,8 @@ import { DemoConditional } from "site/components/bench-demos/demo-conditional.co
 import DemoConditionalCode from "site/components/bench-demos/demo-conditional.component?raw";
 import { DemoNestedRx } from "site/components/bench-demos/demo-nested-rx.component";
 import DemoNestedRxCode from "site/components/bench-demos/demo-nested-rx.component?raw";
-import { SectionIds } from "site/sections";
+import { SectionIds, getDemoDesc } from "site/sections";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
-import { encodeCode } from "site/utils/code-block";
 import { scrollToSectionFromSearch } from "site/section-scroll";
 
 export class TestsComponent extends AbstractComponent {
@@ -66,6 +65,8 @@ export class TestsComponent extends AbstractComponent {
   sections$ = appService.sections$;
   section$ = appService.section$;
 
+  getDemoDesc = getDemoDesc;
+
   disconnectedCallback(): void {
     super.disconnectedCallback();
 
@@ -77,14 +78,14 @@ export class TestsComponent extends AbstractComponent {
   getHTML() {
     const introId = SectionIds["tests-intro"];
     const testsPageId = SectionIds.tests;
-    return `<div let-intro="{{ once::root.sections$::rx['${introId}'].demos[1] }}" let-labels="{{ root.sections$::rx['${testsPageId}']?.labels }}">
+    return `<div let-intro="{{ once::root.getDemoDesc('${introId}', 1) }}" let-labels="{{ root.sections$::rx['${testsPageId}']?.labels }}">
         <div class="tests-intro mb_xl"
           attached="{{ intro }}"
           inner-html="{{ intro }}"></div>
         <div repeat="{{ root.demoComponents }}" id="{{ once::this.id }}"
           let-sel="{{ once::this.component.selector }}"
-          let-desc-one="{{ once::root.sections$::rx[this.id].demos[1] }}"
-          let-desc-two="{{ once::root.sections$::rx[this.id].demos[2] }}">
+          let-desc-one="{{ once::root.getDemoDesc(this.id, 1) }}"
+          let-desc-two="{{ once::root.getDemoDesc(this.id, 2) }}">
           <div class="description-0 mb_m"
             attached="{{ descOne }}"
             inner-html="{{ descOne }}"></div>
@@ -148,7 +149,7 @@ export class TestsComponent extends AbstractComponent {
   }
 
   encodeCode(code: string) {
-    return encodeCode(code);
+    return encodeURIComponent(code ?? "")
   }
 
   async connectedCallback() {

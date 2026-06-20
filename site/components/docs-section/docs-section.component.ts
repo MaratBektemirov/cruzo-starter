@@ -5,8 +5,8 @@ import { appService } from "site/services/app.service";
 import type { ComponentConnectedParams } from "cruzo";
 import { DocsSectionItem, DocsSectionRouteData, SectionKey, SectionsData } from "site/urls";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
-import { encodeCode } from "site/utils/code-block";
 import { scrollToSectionFromSearch } from "site/section-scroll";
+import { getDemoDesc } from "site/sections";
 
 export class DocsSectionComponent extends AbstractComponent<any, any> {
   static selector = "docs-section-component";
@@ -18,6 +18,7 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
   codeHighlights: Record<string, string> = {};
 
   sections$ = appService.sections$;
+  getDemoDesc = getDemoDesc;
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
@@ -31,8 +32,8 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
   getHTML() {
     return `<div>
         <div repeat="{{ root.items$::rx }}" id="{{ this.id }}"
-          let-desc-one="{{ root.sections$::rx[this.id].demos[1] }}"
-          let-desc-two="{{ root.sections$::rx[this.id].demos[2] }}">
+          let-desc-one="{{ root.getDemoDesc(this.id, 1) }}"
+          let-desc-two="{{ root.getDemoDesc(this.id, 2) }}">
           <div class="description-0 mb_m"
             attached="{{ descOne }}"
             inner-html="{{ descOne }}"></div>
@@ -73,7 +74,7 @@ export class DocsSectionComponent extends AbstractComponent<any, any> {
   }
 
   encodeCode(code: string) {
-    return encodeCode(code);
+    return encodeURIComponent(code ?? "")
   }
 
   async connectedCallback(params: ComponentConnectedParams) {

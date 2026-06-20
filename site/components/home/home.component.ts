@@ -2,10 +2,9 @@ import { AbstractComponent, AbstractComponentConstructor, componentsRegistryServ
 import { createHighlighter, HighlighterGeneric } from "shiki";
 
 import { appService } from "site/services/app.service";
-import { SectionIds } from "site/sections";
+import { SectionIds, getDemoDesc } from "site/sections";
 import { homeItems, type HomeSectionItem } from "site/content/home-section-data";
 import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
-import { encodeCode } from "site/utils/code-block";
 
 export class HomeComponent extends AbstractComponent {
   static selector = "home-component";
@@ -16,6 +15,7 @@ export class HomeComponent extends AbstractComponent {
 
   codeHighlights: Record<number, string> = {};
   sections$ = appService.sections$;
+  getDemoDesc = getDemoDesc;
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
@@ -28,8 +28,8 @@ export class HomeComponent extends AbstractComponent {
     return `<div class="home-content">
         <div class="home-intro">
           <div repeat="{{ root.items$::rx }}" id="{{ this.id }}"
-            let-desc-one="{{ root.sections$::rx[this.id].demos[1] }}"
-            let-desc-two="{{ root.sections$::rx[this.id].demos[2] }}"
+            let-desc-one="{{ root.getDemoDesc(this.id, 1) }}"
+            let-desc-two="{{ root.getDemoDesc(this.id, 2) }}"
             let-has-code="{{ root.codeHighlights[index] }}">
             <div class="description-0 mb_m"
               attached="{{ descOne }}"
@@ -75,7 +75,7 @@ export class HomeComponent extends AbstractComponent {
   }
 
   encodeCode(code: string) {
-    return encodeCode(code);
+    return encodeURIComponent(code ?? "")
   }
 
   async connectedCallback() {
