@@ -34,9 +34,10 @@ import "site/components/code-copy-button/code-copy-button.component";
 
 // UI components with side-effects (registration)
 import "cruzo/ui-components/textarea";
-import "cruzo/ui-components/toast";
+import { ToastComponent } from "cruzo/ui-components/toast";
 
 function initApp() {
+  componentsRegistryService.define(ToastComponent);
   Template.setAppVariables({});
   componentsRegistryService.initApp();
   routerService.update();
