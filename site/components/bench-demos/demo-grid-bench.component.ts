@@ -11,7 +11,7 @@ export class DemoGridBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.updateRandom() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">Update ~1K random nodes from 4K</button>
+        <button onclick="{{ root.updateRandom() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">Update 25% random nodes from 1K</button>
 
         <div
           class="${styles["grid-color-container"]}"
@@ -33,16 +33,16 @@ export class DemoGridBench extends AbstractComponent {
   }
 
   connectedCallback() {
+    this.createGrid();
     super.connectedCallback();
-    this.build();
   }
 
-  build() {
+  createGrid() {
     const rows: Rx<any>[][] = [];
 
-    for (let r = 0; r < 65; r++) {
+    for (let r = 0; r < 33; r++) {
       const row: Rx<any>[] = [];
-      for (let c = 0; c < 65; c++) {
+      for (let c = 0; c < 33; c++) {
         const id = this.uuid();
         row.push(this.newRx({ id, color: this.colorFrom(id) }));
       }
@@ -50,7 +50,6 @@ export class DemoGridBench extends AbstractComponent {
     }
 
     this.rows = rows;
-    this.template.detectChanges();
   }
 
   uuid(): string {
@@ -67,8 +66,8 @@ export class DemoGridBench extends AbstractComponent {
   }
 
   updateRandom() {
-    for (let r = 0; r < 65; r++) {
-      for (let c = 0; c < 65; c++) {
+    for (let r = 0; r < 33; r++) {
+      for (let c = 0; c < 33; c++) {
         if (Math.random() < 0.25) {
           const id = this.uuid();
           this.rows[r][c].update({ id, color: this.colorFrom(id) });
