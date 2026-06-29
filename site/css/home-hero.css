@@ -5,6 +5,7 @@
 
 .home-hero__content {
   max-width: 44rem;
+  width: 100%;
 }
 
 .home-hero__title,
@@ -98,4 +99,17 @@
   .home-hero__tags {
     animation: none;
   }
+}
+
+main > header-component {
+  width: 100%;
+  display: block;
+}
+
+.home-hero__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }

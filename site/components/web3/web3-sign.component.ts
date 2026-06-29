@@ -1,12 +1,12 @@
-import styles from "./web3.component.module.css";
+import styles from "./web3.component.module.css"
 
-import { AbstractComponent, componentsRegistryService } from "cruzo";
-import { Web3SigningComponent } from "cruzo-web3/components/web3-signing";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { Web3SigningComponent } from "cruzo-web3/components/web3-signing"
 
-import { appService } from "site/services/app.service";
-import { SectionIds } from "site/sections";
+import { SectionIds } from "site/sections"
+import { appService } from "site/services/app.service"
 
-import "site/web3-setup";
+import "site/web3-setup"
 
 export class Web3SignComponent extends AbstractComponent {
   static selector = "web3-sign-component";
@@ -21,7 +21,7 @@ export class Web3SignComponent extends AbstractComponent {
     return `<div class="${styles.page}">
         <div class="${styles.signSection}">
           <div class="${styles.signIntro}"
-            inner-html="{{ once::root.sections$::rx['${signId}'].demos[1] }}"></div>
+            inner-html="{{ root.sections$::rx?.['${signId}']?.demos?.[1] }}"></div>
           <web3-signing-component></web3-signing-component>
         </div>
       </div>`;
