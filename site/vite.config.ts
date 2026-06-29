@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
-import path from "node:path";
-import { spawn } from "node:child_process";
-import * as ts from "typescript";
+import { spawn } from "node:child_process"
+import path from "node:path"
+import * as ts from "typescript"
+import { defineConfig } from "vite"
 
 function typedCssModulesPlugin(rootDir: string) {
   let proc: ReturnType<typeof spawn> | undefined;
@@ -13,7 +13,10 @@ function typedCssModulesPlugin(rootDir: string) {
       proc = spawn(
         process.platform === "win32" ? "npx.cmd" : "npx",
         ["tcm", rootDir, "-w"],
-        { stdio: "inherit" }
+        {
+          stdio: "inherit",
+          shell: process.platform === "win32",
+        }
       );
     },
     closeBundle() {

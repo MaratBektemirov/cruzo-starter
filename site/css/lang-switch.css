@@ -1,0 +1,26 @@
+.lang-switch {
+  background: transparent;
+  border: 1.5px solid currentColor;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  color: var(--text-muted-mid);
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  line-height: 1;
+}
+
+.lang-switch:hover {
+  background: var(--text-main);
+  color: var(--bg);
+  border-color: var(--text-main);
+}
+
+@media (max-width: 600px) {
+  .lang-switch {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+}

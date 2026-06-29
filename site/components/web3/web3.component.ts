@@ -1,9 +1,9 @@
-import styles from "./web3.component.module.css";
+import styles from "./web3.component.module.css"
 
-import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
 
-import { appService } from "site/services/app.service";
-import { SectionIds } from "site/sections";
+import { SectionIds } from "site/sections"
+import { appService } from "site/services/app.service"
 
 export class Web3Component extends AbstractComponent {
   static selector = "web3-component";
@@ -14,7 +14,7 @@ export class Web3Component extends AbstractComponent {
     const introId = SectionIds["web3-intro"];
 
     return `<div class="${styles.page}">
-        <div inner-html="{{ once::root.sections$::rx['${introId}'].demos[1] }}"></div>
+        <div inner-html="{{ root.sections$::rx?.['${introId}']?.demos?.[1] }}"></div>
       </div>`;
   }
 
