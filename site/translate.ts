@@ -1,4 +1,5 @@
-import { SectionIds } from "site/sections";
+import { SectionIds } from "site/sections"
+import { secretAuthProofDemo } from "site/content/secret-auth-proof-type"
 
 export enum Lang {
   'ru' = 'ru',
@@ -114,6 +115,120 @@ web3Service.setTonManifestUrl(tonManifestUrl);</pre></div>
         demos: {
           1: `<p class="description-paragraph">
             </p>`,
+        },
+      },
+      [SectionIds["web3-secret-auth"]]: {
+        title: "SecretAuth",
+        description: `<p class="description-paragraph">
+            SecretAuth — это UX-решение для авторизации через криптографический ключ. Вместо пароля пользователь
+            подтверждает владение ключом, который у него уже есть: в кошельке, passkey или локально. Для сервера это
+            обычная проверка подписи, а для пользователя — вход без отдельного пароля и без передачи чувствительных
+            данных.
+          </p>
+          <p class="description-paragraph">
+            Результат — подписанные данные, которые клиент отправляет на сервер. Сервер проверяет подпись,
+            убеждается, что публичный ключ разрешён для этого пользователя, а затем выдаёт привычную для приложения
+            сессию: JWT, cookie или любой другой session token.
+          </p>`,
+        demos: {
+          1: `<h2 class="mt_xl">Что это</h2>
+<p class="description-paragraph">С точки зрения криптографии SecretAuth — та же проверка подписи, что и в разделе <b>Sign</b>: сервер получает сообщение, подпись и публичный ключ, и убеждается, что подпись верна. Новизны в verify нет.</p>
+<p class="description-paragraph">SecretAuth нужен потому, что сейчас у пользователей уже есть криптокошельки — MetaMask, Tonkeeper, Phantom и другие. Протокол опирается на эту реальность: challenge подписывается через привычный кошелёк, без пароля и без копирования ключей. Для сценариев вне кошелька — режим с сырым ключом или passkey (WebAuthn).</p>
+<p class="description-paragraph">Поверх обычной подписи SecretAuth добавляет стандартизированный challenge (<code class="description-inline-code">domain</code>, <code class="description-inline-code">nonce</code>, <code class="description-inline-code">exp</code>) и единый формат proof для бэкенда. Как выдаёте сессию после успешной проверки — JWT, cookie и т.д. — остаётся на вашей стороне.</p>
+
+<h2>Как работает</h2>
+<ol class="description-list">
+<li class="description-list-item">Сервер генерирует challenge, сохраняет <code class="description-inline-code">nonce</code>, отдаёт клиенту текст сообщения</li>
+<li class="description-list-item">Клиент подписывает сообщение (Wallet, Key или Passkey в компоненте ниже)</li>
+<li class="description-list-item">Клиент отправляет <b>proof</b> на API</li>
+<li class="description-list-item">Сервер вызывает <code class="description-inline-code">verifySecretAuthProof</code> — проверяет подпись, домен и срок действия</li>
+<li class="description-list-item">При успехе — выдаёте свою сессию</li>
+</ol>
+
+<h2>Формат challenge</h2>
+<div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">example.com wants you to prove your signing key:
+
+nonce: k8f3m2x9
+exp: 1719667500</pre></div>
+<p class="description-paragraph">Собирается через <code class="description-inline-code">formatSecretAuthChallenge</code>; <code class="description-inline-code">nonce</code> — <code class="description-inline-code">generateSecretAuthNonce()</code>.</p>
+
+<h2>Формат proof</h2>
+<div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">{
+  "message": "example.com wants you to prove…",
+  "signature": { "value": "0x…" },
+  "pubKey": {
+    "algorithm": "secp256k1",
+    "source": "ethereum",
+    "value": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+    "encoding": "hex"
+  }
+}</pre></div>
+<p class="description-paragraph"><code class="description-inline-code">algorithm</code> — криптография (<code class="description-inline-code">secp256k1</code>, <code class="description-inline-code">Ed25519</code>, <code class="description-inline-code">ES256</code>). <code class="description-inline-code">source</code> — откуда ключ: сеть кошелька, <code class="description-inline-code">raw</code> (сырой ключ) или <code class="description-inline-code">webauthn</code> (passkey). <code class="description-inline-code">signature</code> — объект с <code class="description-inline-code">value</code>; для WebAuthn дополнительно <code class="description-inline-code">signature.extension</code> с <code class="description-inline-code">authenticatorData</code> и <code class="description-inline-code">clientDataJSON</code>.</p>
+<ul class="description-list">
+<li class="description-list-item"><code class="description-inline-code">secp256k1</code> + <code class="description-inline-code">ethereum</code> — EIP-191 / address</li>
+<li class="description-list-item"><code class="description-inline-code">secp256k1</code> + <code class="description-inline-code">tron</code> — Tron address</li>
+<li class="description-list-item"><code class="description-inline-code">secp256k1</code> + <code class="description-inline-code">raw</code> — сырой secp256k1 (EIP-191)</li>
+<li class="description-list-item"><code class="description-inline-code">Ed25519</code> + <code class="description-inline-code">ton</code> / <code class="description-inline-code">solana</code> — кошелёк</li>
+<li class="description-list-item"><code class="description-inline-code">Ed25519</code> + <code class="description-inline-code">raw</code> — сырой ключ</li>
+<li class="description-list-item"><code class="description-inline-code">ES256</code> + <code class="description-inline-code">webauthn</code> — passkey; на сервере нужен публичный ключ credential после регистрации</li>
+</ul>
+
+<h2>Сервер</h2>
+<div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import {
+  formatSecretAuthChallenge,
+  generateSecretAuthNonce,
+  verifySecretAuthProof,
+} from "cruzo-web3/secret-auth";
+
+const challenge = {
+  domain: "example.com",
+  nonce: generateSecretAuthNonce(),
+  exp: Math.floor(Date.now() / 1000) + 300,
+};
+
+const message = formatSecretAuthChallenge(challenge);
+
+const ok = await verifySecretAuthProof(proof, { domain: challenge.domain });</pre></div>`,
+          2: `<h2>Компонент</h2>
+<p class="description-paragraph">Ниже — <code class="description-inline-code">secret-auth-component</code> из пакета <code class="description-inline-code">cruzo-web3</code>: подключение кошелька, ввод ключа или passkey, подпись challenge и сбор proof в state bucket. Режимы <b>Wallet</b>, <b>Key</b> и <b>Passkey</b>; <code class="description-inline-code">signed</code> в state означает «proof готов», а не ответ сервера.</p>
+
+<h2>Подключение</h2>
+<div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import { RxBucket, componentsRegistryService } from "cruzo";
+import "cruzo-web3/components/secret-auth";
+
+const authBucket = new RxBucket({
+  secretAuth: {
+    config: { title: "Sign in" },
+  },
+});
+
+componentsRegistryService.connectBucket(authBucket);
+
+authBucket.setState("secretAuth", {
+  challenge: { domain: "example.com", nonce: "...", exp: 1719667500 },
+  proof: null,
+  signed: false,
+  pubKey: null,
+  mode: null,
+  wallet: null,
+  passkey: null,
+});
+
+const current = authBucket.getState("secretAuth") ?? {};
+authBucket.setState("secretAuth", {
+  ...current,
+  challenge,
+  proof: null,
+  signed: false,
+  pubKey: null,
+  wallet: null,
+});</pre></div>
+<div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">&lt;secret-auth-component
+  component-id="secretAuth"
+  bucket-id="myAuthBucket"&gt;
+&lt;/secret-auth-component&gt;</pre></div>
+<p class="description-paragraph">Challenge — в <code class="description-inline-code">state</code> bucket (<code class="description-inline-code">setState</code>), заголовок — в <code class="description-inline-code">config</code>. Готовый proof: <code class="description-inline-code">authBucket.getState("secretAuth")?.proof</code> — отправьте на ваш API и вызовите <code class="description-inline-code">verifySecretAuthProof</code>.</p>`,
+          3: secretAuthProofDemo(),
         },
       },
       [SectionIds["ui-components"]]: {

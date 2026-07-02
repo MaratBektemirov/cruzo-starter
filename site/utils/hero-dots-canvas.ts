@@ -2,9 +2,7 @@ import { drawCruzoLogoStar } from "site/utils/cruzo-logo-star";
 
 const TWINKLE_RANGE_MS = 3200;
 
-// Matches `.github-star-icon` in sidebar (14×14px).
 const GITHUB_STAR_ICON_PX = 14;
-// drawCruzoLogoStar `size` maps logo radius → pixels (~half the visual diameter).
 const STAR_BASE_SIZE = GITHUB_STAR_ICON_PX / 2;
 
 type StarSpec = {

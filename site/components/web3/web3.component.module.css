@@ -14,3 +14,40 @@
   font-size: 15px;
   line-height: 1.55;
 }
+
+.signIntro h2 {
+  margin-bottom: var(--s);
+}
+
+.signIntro h2:not(:first-child) {
+  margin-top: var(--xl);
+}
+
+.signIntro .block {
+  margin-top: var(--m);
+}
+
+.demoPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--m);
+}
+
+.demoPanel h2 {
+  margin: 0 0 var(--s);
+}
+
+.demoPanel .description-paragraph {
+  margin-top: 0;
+}
+
+.serverVerify {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

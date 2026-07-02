@@ -67,7 +67,6 @@ const bucket = new RouteUrlBucket({
 });
 
 const profileUrl = bucket.buildUrl("profile", { id: "42" });
-// "/profile/42"
 `;
 
 export const exampleRouterLoadResources = `import { RouteUrlBucket, delay, routerService, RxBucket } from "cruzo";

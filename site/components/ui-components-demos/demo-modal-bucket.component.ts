@@ -1,4 +1,3 @@
-// Modal body: demo-modal-body.component.ts (onclick/emitEvent — inner-html does not compile nested templates)
 import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
 import { ModalComponent, ModalConfig } from "cruzo/ui-components/modal";
 import { UI_KIT } from "cruzo/ui-components/const";

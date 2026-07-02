@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import * as ts from "typescript";
+import { defineConfig } from "vite";
 
 function typedCssModulesPlugin(rootDir: string) {
   let proc: ReturnType<typeof spawn> | undefined;

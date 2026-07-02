@@ -10,8 +10,6 @@ const interceptors = {
     options: HttpRequestOptions
   ) => {
     options.headers = options.headers ?? {};
-    // Example: add auth headers when needed
-    // options.headers['Authorization'] = 'Bearer ' + token;
   },
   success: async (
     _method: HttpMethod,
@@ -20,7 +18,6 @@ const interceptors = {
     _data: unknown,
     _response: Response
   ) => {
-    // Example: check response headers, refresh token, etc.
   },
   error: async (
     _method: HttpMethod,
@@ -31,7 +28,6 @@ const interceptors = {
     _response: Response | null
   ) => {
     if (status === 401) {
-      // Example: clear session, redirect to login
     }
   },
 };

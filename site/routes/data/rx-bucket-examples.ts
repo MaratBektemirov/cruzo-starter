@@ -19,8 +19,6 @@ const formBucket = new RxBucket({
 formBucket.setValue("name", "Marat");
 const name = formBucket.getValue("name");
 
-// One config for a group of same components (same component-id, different indexes):
-// All <input-component component-id="name" ...> instances use the same descriptor config.
 const html = \`
   <input-component component-id="name" bucket-id="\${formBucket.id}" component-index="0"></input-component>
   <input-component component-id="name" bucket-id="\${formBucket.id}" component-index="1"></input-component>
@@ -37,19 +35,13 @@ class OrderFormComponent extends AbstractComponent {
     status: {},
   });
 
-  // Creates local reactive value not bound to bucket.
   discountPercent$ = this.newRx(10);
 
-  // Subscribes to bucket value by component-id (single value stream).
   quantity$ = this.newRxValueFromBucket(this.innerBucket, "quantity");
-  // Subscribes to bucket value by component-id (single value stream).
   productName$ = this.newRxValueFromBucket(this.innerBucket, "productName");
-  // Subscribes to bucket state by component-id.
   quantityState$ = this.newRxStateFromBucket(this.innerBucket, "quantity");
-  // Subscribes to bucket event by component-id.
   statusChangeEvent$ = this.newRxEventFromBucket(this.innerBucket, "status", "change");
 
-  // Creates derived reactive value from dependencies.
   summary$ = this.newRxFunc(
     (quantity, productName, discountPercent) => ({
       productName,
@@ -62,7 +54,6 @@ class OrderFormComponent extends AbstractComponent {
     this.discountPercent$
   );
 
-  // Multiple indexes for one id: separate per-index streams merged via newRxFunc (no ByIndex helpers for value/state in AbstractComponent).
   quantityAt0$ = this.newRxValueFromBucket(this.innerBucket, "quantity", "0");
   quantityAt1$ = this.newRxValueFromBucket(this.innerBucket, "quantity", "1");
   quantitiesByIndex$ = this.newRxFunc(
@@ -77,13 +68,9 @@ class OrderFormComponent extends AbstractComponent {
     this.quantityStateAt0$,
     this.quantityStateAt1$
   );
-  // Events for all indexes: { [index]: event } (available in AbstractComponent).
   statusEventsByIndex$ = this.newRxEventFromBucketByIndex(this.innerBucket, "status", "change");
 
-  // Direct RxBucket usage (low-level, usually not needed in components):
-  // newRxValue callback args: (value, index, byUser)
   rawQuantity$ = this.innerBucket.newRxValue("quantity", (value, index, byUser) => ({ value, index, byUser }), this.rxList);
-  // newRxEvent callback args: (event, index)
   rawStatusChanges$ = this.innerBucket.newRxEvent("status", "change", (event, index) => ({ payload: event.data, index }), this.rxList);
 
   connectedCallback() {
@@ -115,11 +102,8 @@ class OrderFormComponent extends AbstractComponent {
 }
 
 class OrderService extends AbstractService {
-  // Base reactive value for service-level state.
   taxPercent$ = this.newRx(20);
-  // Another service state value.
   deliveryCity$ = this.newRx("Almaty");
-  // Derived service state from multiple dependencies.
   deliveryNote$ = this.newRxFunc(
     (taxPercent, deliveryCity) => "Shipping to " + deliveryCity + " with VAT " + taxPercent + "%",
     this.taxPercent$,
@@ -149,7 +133,4 @@ bucket.setValuesAtIndex(
   "0",
   true
 );
-
-// Subscriptions: bucket.newRxValue / newRxState / newRxEvent(id, name, fn, rxList) — per (id, index).
-// Combine multiple fields via newRxFunc(...) from newRxValue(...) streams or this.newRxValueFromBucket(...).
 `;
