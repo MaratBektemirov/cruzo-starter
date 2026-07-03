@@ -1,0 +1,24 @@
+{
+  "ru": {
+    "title": "Overview",
+    "description": "Дополнительные компоненты и web3Service для Cruzo: подключение кошельков, подпись и верификация. Есть возможность подключения новых приложений, посредством реализации интерфейса через Web3Provider.",
+    "installationTitle": "Установка",
+    "quickStartTitle": "Быстрый старт",
+    "mobileWalletsTitle": "Настройка mobile-кошельков",
+    "installCommand": "npm install cruzo cruzo-web3",
+    "quickStartCode": "import { web3Service } from \"cruzo-web3\";\n\nconst tonManifestUrl = new URL(\"/tonconnect-manifest.json\", window.location.href).href;\nweb3Service.setWalletConnectProjectId(projectId);\nweb3Service.setTonManifestUrl(tonManifestUrl);",
+    "ethereumWalletConnect": "Project ID на cloud.walletconnect.com, переменная VITE_WALLETCONNECT_PROJECT_ID",
+    "tonSetup": "публичный tonconnect-manifest.json (url, name, iconUrl) и setTonManifestUrl"
+  },
+  "en": {
+    "title": "Overview",
+    "description": "Additional components and web3Service for Cruzo: wallet connection, signing, and verification. New applications can also be connected by implementing the interface through Web3Provider.",
+    "installationTitle": "Installation",
+    "quickStartTitle": "Quick start",
+    "mobileWalletsTitle": "Mobile wallet setup",
+    "installCommand": "npm install cruzo cruzo-web3",
+    "quickStartCode": "import { web3Service } from \"cruzo-web3\";\n\nconst tonManifestUrl = new URL(\"/tonconnect-manifest.json\", window.location.href).href;\nweb3Service.setWalletConnectProjectId(projectId);\nweb3Service.setTonManifestUrl(tonManifestUrl);",
+    "ethereumWalletConnect": "Project ID from cloud.walletconnect.com, variable VITE_WALLETCONNECT_PROJECT_ID",
+    "tonSetup": "public tonconnect-manifest.json (url, name, iconUrl) and setTonManifestUrl"
+  }
+}

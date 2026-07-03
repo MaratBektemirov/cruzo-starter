@@ -1,0 +1,12 @@
+{
+  "ru": {
+    "simulateLoading": "Симулировать загрузку",
+    "spinnerState": "Состояние спиннера",
+    "inactive": "неактивен"
+  },
+  "en": {
+    "simulateLoading": "Simulate loading",
+    "spinnerState": "Spinner state",
+    "inactive": "inactive"
+  }
+}

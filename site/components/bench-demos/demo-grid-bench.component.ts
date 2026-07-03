@@ -1,9 +1,15 @@
-import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
-import styles from "./demo-grid-bench.component.module.css";
-import { UI_KIT } from "cruzo/ui-components/const";
+import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
+import { UI_KIT } from "cruzo/ui-components/const"
+import { langService } from 'site/services/lang.service'
+import i18n from './demo-grid-bench.component.i18n.json'
+import styles from "./demo-grid-bench.component.module.css"
 
 export class DemoGridBench extends AbstractComponent {
   static selector = "demo-grid-bench";
+
+  i18n = i18n;
+  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
+  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
 
   rows: Rx<any>[][] = [];
 
@@ -11,7 +17,7 @@ export class DemoGridBench extends AbstractComponent {
 
   protected getHTML(): string {
     return `<div>
-        <button onclick="{{ root.updateRandom() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">Update 25% random nodes from 1K</button>
+        <button onclick="{{ root.updateRandom() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">{{ root.t$::rx.updateButtom }}</button>
 
         <div
           class="${styles["grid-color-container"]}"

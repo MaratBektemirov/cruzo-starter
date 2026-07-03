@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "route": "Маршрут",
+    "loadsChunkVia": "грузит chunk через",
+    "loadResources": "loadResources",
+    "goToLazyDemo": "Перейти на /lazy-demo",
+    "resourcesLoading": "resourcesLoading$"
+  },
+  "en": {
+    "route": "Route",
+    "loadsChunkVia": "loads a chunk via",
+    "loadResources": "loadResources",
+    "goToLazyDemo": "Go to /lazy-demo",
+    "resourcesLoading": "resourcesLoading$"
+  }
+}

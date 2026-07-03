@@ -1,0 +1,12 @@
+{
+  "ru": {
+    "buttonSizes": "Размеры кнопок",
+    "fillVariants": "Варианты заливки",
+    "checkboxExample": "Пример чекбокса"
+  },
+  "en": {
+    "buttonSizes": "Button sizes",
+    "fillVariants": "Fill variants",
+    "checkboxExample": "Checkbox example"
+  }
+}

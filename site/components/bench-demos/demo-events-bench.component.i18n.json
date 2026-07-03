@@ -1,0 +1,10 @@
+{
+	"ru": {
+		"reset": "Сбросить 1тыс счетчиков",
+		"value": "Значение"
+	},
+	"en": {
+		"reset": "Reset 1K counters",
+		"value": "value"
+	}
+}

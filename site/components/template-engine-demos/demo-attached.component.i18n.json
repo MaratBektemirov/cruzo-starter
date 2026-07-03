@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "toggle": "Toggle",
+    "note": "Этот блок реально присутствует в DOM только когда"
+  },
+  "en": {
+    "toggle": "Toggle",
+    "note": "This block is actually present in the DOM only when"
+  }
+}

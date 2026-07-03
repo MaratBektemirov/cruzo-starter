@@ -1,6 +1,6 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo"
-import styles from "../../css/lang-switch.css?inline"
-import { langService } from "../../services/lang.service.js"
+import { UI_KIT } from "cruzo/ui-components/const"
+import { langService } from "site/services/lang.service"
 
 export class LangSwitchComponent extends AbstractComponent {
   static selector = "lang-switch-component";
@@ -16,8 +16,9 @@ export class LangSwitchComponent extends AbstractComponent {
 
   getHTML() {
     return `
-      <style>${styles}</style>
-      <button class="lang-switch" onclick="{{ root.toggle() }}">
+      <button
+        class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary"
+        onclick="{{ root.toggle() }}">
         {{ root.lang$::rx === "ru" ? "EN" : "RU" }}
       </button>
     `;

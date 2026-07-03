@@ -1,0 +1,10 @@
+{
+	"ru": {
+		"smthWrong": "Что-то пошло не так",
+		"userOpinion": "Если вы думаете что это случилось по нашей вине, напишите нам"
+	},
+	"en": {
+		"smthWrong": "Something went wrong",
+		"userOpinion": "If you think this happened because of us, please write to us."
+	}
+}

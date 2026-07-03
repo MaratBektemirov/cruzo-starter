@@ -1,9 +1,15 @@
-import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
-import { UploadComponent, UploadConfig } from "cruzo/ui-components/upload";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo"
+import { UploadComponent, UploadConfig } from "cruzo/ui-components/upload"
+import { langService } from "site/services/lang.service"
+import i18n from "./demo-upload-bucket.component.i18n.json"
 
 export class DemoUploadBucketComponent extends AbstractComponent {
   static selector = "demo-upload-bucket-component";
   dependencies = new Set([UploadComponent.selector]);
+
+  i18n = i18n;
+  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
+  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
 
   innerBucket = new RxBucket({
     upload: {
@@ -27,14 +33,21 @@ export class DemoUploadBucketComponent extends AbstractComponent {
         </upload-component>
 
         <div class="mt_s">
-          <div>Files: <b>{{ root.getFilesInfo(root.uploadedFiles$::rx) }}</b></div>
+          <div>{{ root.t$::rx.files }}: <b>{{ root.getFilesInfo(root.uploadedFiles$::rx) }}</b></div>
         </div>
       </div>`;
   }
 
   getFilesInfo(files: File[]) {
-    if (!files || files.length === 0) return "No files selected";
-    return `${files.length} file(s): ${Array.from(files).map(f => f.name).join(", ")}`;
+    const t = this.t$.actual;
+
+    if (!files || files.length === 0) {
+      return t?.noFilesSelected ?? "No files selected";
+    }
+
+    return (t?.filesSelected ?? "{{count}} file(s): {{names}}")
+      .replace("{{count}}", String(files.length))
+      .replace("{{names}}", Array.from(files).map((f) => f.name).join(", "));
   }
 
   connectedCallback() {

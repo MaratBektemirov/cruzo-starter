@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "html": "<b>Жирный</b> и <em>курсив</em>",
+    "label": "html"
+  },
+  "en": {
+    "html": "<b>Bold</b> and <em>italic</em>",
+    "label": "html"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "ru": {
+    "title": "Ленивая страница загружена",
+    "description": "Этот компонент попал в бандл только после",
+    "goHome": "На главную"
+  },
+  "en": {
+    "title": "Lazy route loaded",
+    "description": "This component was added to the bundle only after",
+    "goHome": "Go home"
+  }
+}

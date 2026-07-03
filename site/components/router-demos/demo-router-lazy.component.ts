@@ -2,35 +2,35 @@ import { AbstractComponent, componentsRegistryService, routerService } from "cru
 import { UI_KIT } from "cruzo/ui-components/const"
 import { langService } from "site/services/lang.service"
 import { routerUrlBucket } from "site/urls"
+import i18n from "./demo-router-lazy.component.i18n.json"
 
 export class DemoRouterLazyComponent extends AbstractComponent {
   static selector = "demo-router-lazy-component";
 
+  i18n = i18n;
   loading$ = routerService.resourcesLoading$;
-  lang$ = this.newRxFunc(
-    () => langService.lang$.actual,
-    langService.lang$
-  );
+  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
+  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
 
   getHTML() {
     return `<div>
         <p class="description-paragraph mb_s">
-          {{ root.lang$::rx === "ru"
-            ? "Маршрут"
-            : "Route" }}
+          {{ root.t$::rx.route }}
           <code class="description-inline-code">/lazy-demo</code>
-          {{ root.lang$::rx === "ru"
-            ? "грузит chunk через"
-            : "loads a chunk via" }}
-          <code class="description-inline-code">loadResources</code>
+          {{ root.t$::rx.loadsChunkVia }}
+          <code class="description-inline-code">{{ root.t$::rx.loadResources }}</code>
         </p>
-        <button type="button"
+
+        <button
+          type="button"
           class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s"
-          onclick="{{ root.openLazy() }}">
-          {{ root.lang$::rx === "ru" ? "Перейти на /lazy-demo" : "Go to /lazy-demo" }}
+          onclick="{{ root.openLazy() }}"
+        >
+          {{ root.t$::rx.goToLazyDemo }}
         </button>
+
         <div class="mt_s">
-          resourcesLoading$: <b>{{ root.loading$::rx }}</b>
+          {{ root.t$::rx.resourcesLoading }}: <b>{{ root.loading$::rx }}</b>
         </div>
       </div>`;
   }

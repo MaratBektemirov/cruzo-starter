@@ -65,7 +65,7 @@ const trsSections: Translate = {
             В отличие от популярных фреймворков, где требуется изучать JSX, специальные директивы или сложные системы шаблонов,
             здесь используется обычный HTML с минимальными дополнениями.
           </p>
-`,
+        `,
       },
       [SectionIds["router"]]: {
         title: "Router",
@@ -879,8 +879,9 @@ web3Service.setTonManifestUrl(tonManifestUrl);</pre></div>
       [SectionIds.http]: {
         title: "HTTP",
         description: `<p class="description-paragraph">
-            <code class="description-inline-code">HttpClient</code> — HTTP client with a unified API, interceptors, caching and <code class="description-inline-code">AbortSignal</code> support.
-          </p>`,
+          <code class="description-inline-code">HttpClient</code> is an HTTP request client with a unified API (<code class="description-inline-code">request/get/post/put/patch/delete</code>), interceptors, caching, and support for <code class="description-inline-code">AbortSignal</code>.
+          </p>
+        `,
         demos: {
           1: `<h2 class="mt_xl">HttpClient API</h2>
             <p class="description-paragraph">
@@ -912,15 +913,35 @@ web3Service.setTonManifestUrl(tonManifestUrl);</pre></div>
       [SectionIds["template-engine"]]: {
         title: "Template",
         description: `<p class="description-paragraph">
-            The core idea: less is more. Pure native HTML with a minimal set of additions:
+          The main idea when designing the templating engine is "less is better." It is built on pure native HTML, with a very small set of features added on top:
           </p>
+
           <ul class="description-list">
-            <li class="description-list-item">expression interpolation in text and attributes</li>
-            <li class="description-list-item"><code class="description-inline-code">attached</code>, <code class="description-inline-code">repeat</code>, <code class="description-inline-code">inner-html</code> attributes</li>
-            <li class="description-list-item"><code class="description-inline-code">::rx</code> — access to reactive values</li>
-            <li class="description-list-item"><code class="description-inline-code">once::</code> — one-time evaluation and update</li>
-            <li class="description-list-item"><code class="description-inline-code">let-name-of-variable</code> — declare variables in the template</li>
-          </ul>`,
+          <li class="description-list-item">
+          embedding expressions directly in text and attributes
+          </li>
+          <li class="description-list-item">
+          attributes <code class="description-inline-code">attached</code>, <code class="description-inline-code">repeat</code>, <code class="description-inline-code">inner-html</code>
+          </li>
+          <li class="description-list-item">
+          <code class="description-inline-code">::rx</code> — access to reactive values
+          </li>
+          <li class="description-list-item">
+          <code class="description-inline-code">once::</code> — one-time evaluation and update
+          </li>
+          <li class="description-list-item">
+          <code class="description-inline-code">let-name-of-variable</code> — declaring variables in the template
+          </li>
+          </ul>
+
+          <p class="description-paragraph">
+          We didn't want to invent a new syntax — we aimed to carefully extend what already exists. Any "new language" in templates usually means time spent learning it, and people generally don't have that time.
+          </p>
+
+          <p class="description-paragraph">
+          Unlike popular frameworks that require learning JSX, special directives, or complex templating systems, this approach uses plain HTML with minimal additions.
+          </p>
+        `,
       },
       [SectionIds["template-engine-js-subset"]]: {
         title: "",
@@ -1052,7 +1073,13 @@ web3Service.setTonManifestUrl(tonManifestUrl);</pre></div>
           1: `<p class="description-paragraph"></p>`,
         },
       },
-      [SectionIds["cmp-interaction"]]: { title: "Interaction", description: `` },
+      [SectionIds["cmp-interaction"]]: {
+        title: "RxBucket",
+        description: `<p class="description-paragraph">
+          <code class="description-inline-code">RxBucket</code> is a named-state container for related components. Components connect using a <code class="description-inline-code">bucket-id</code> and a <code class="description-inline-code">component-id</code>, and they read/update values, configuration, and events within the same bucket.
+          </p>
+        `,
+      },
       [SectionIds["cmp-interaction-attributes"]]: {
         title: "",
         demos: {

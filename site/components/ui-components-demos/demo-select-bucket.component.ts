@@ -3,8 +3,10 @@ import {
   componentsRegistryService,
   Rx,
   RxBucket,
-} from "cruzo";
-import { SelectComponent, SelectConfig } from "cruzo/ui-components/select";
+} from "cruzo"
+import { SelectComponent, SelectConfig } from "cruzo/ui-components/select"
+import { langService } from 'site/services/lang.service'
+import i18n from './demo-select-bucket.component.i18n.json'
 
 const MODEL_ITEMS = [
   { label: "00X00", value: 1 },
@@ -17,6 +19,10 @@ const MODEL_ITEMS = [
 export class DemoSelectBucketComponent extends AbstractComponent {
   static selector = "demo-select-bucket-component";
   dependencies = new Set([SelectComponent.selector]);
+
+  i18n = i18n;
+  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
+  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
 
   select$: Rx<any> = null;
   selectMulti$: Rx<any> = null;
@@ -52,7 +58,7 @@ export class DemoSelectBucketComponent extends AbstractComponent {
           bucket-id="${this.innerBucket.id}">
         </select-component>
         <div class="mt_s">
-          Значение из bucket (value$): <b>{{ root.stringify(root.select$::rx) }}</b>
+          {{ root.t$::rx.bucketValue }}: <b>{{ root.stringify(root.select$::rx) }}</b>
         </div>
 
         <select-component
@@ -62,7 +68,7 @@ export class DemoSelectBucketComponent extends AbstractComponent {
         </select-component>
 
         <div class="mt_s">
-          Значение из bucket (value$): <b>{{ root.stringify(root.selectMulti$::rx) }}</b>
+          {{ root.t$::rx.bucketValue }}: <b>{{ root.stringify(root.selectMulti$::rx) }}</b>
         </div>
       </div>`;
   }

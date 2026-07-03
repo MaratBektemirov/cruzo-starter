@@ -1,0 +1,32 @@
+{
+  "ru": {
+    "anchor": "anchor",
+    "element": "element",
+    "defaultPage": "default (page)",
+    "alignX": "alignX",
+    "left": "left",
+    "center": "center",
+    "right": "right",
+    "alignY": "alignY",
+    "top": "top",
+    "bottom": "bottom",
+    "successToast": "Success toast",
+    "infoToast": "Info toast",
+    "errorToast": "Error toast"
+  },
+  "en": {
+    "anchor": "anchor",
+    "element": "element",
+    "defaultPage": "default (page)",
+    "alignX": "alignX",
+    "left": "left",
+    "center": "center",
+    "right": "right",
+    "alignY": "alignY",
+    "top": "top",
+    "bottom": "bottom",
+    "successToast": "Success toast",
+    "infoToast": "Info toast",
+    "errorToast": "Error toast"
+  }
+}

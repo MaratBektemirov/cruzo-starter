@@ -1,0 +1,14 @@
+{
+	"ru": {
+		"current": "Текущее значение",
+		"clear": "Очистить",
+		"setByIndex": "Установить по индексу",
+		"index": "Индекс"
+	},
+	"en": {
+		"current": "Current",
+		"clear": "Clear",
+		"setByIndex": "Set by index",
+		"index": "Index"
+	}
+}

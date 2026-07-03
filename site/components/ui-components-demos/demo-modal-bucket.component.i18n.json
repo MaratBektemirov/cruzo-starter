@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "openModal": "Открыть модальное окно",
+    "lastResult": "Последний результат",
+    "noActionsYet": "Действий пока не было",
+    "closedWithOk": "Закрыто через OK",
+    "closedWithCancelOrBackdrop": "Закрыто через Отмена или клик по фону"
+  },
+  "en": {
+    "openModal": "Open modal",
+    "lastResult": "Last result",
+    "noActionsYet": "No actions yet",
+    "closedWithOk": "Closed with OK",
+    "closedWithCancelOrBackdrop": "Closed with Cancel/backdrop"
+  }
+}

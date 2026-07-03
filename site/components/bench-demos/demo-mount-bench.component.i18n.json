@@ -1,0 +1,12 @@
+{
+	"ru": {
+		"mountButton": "Вмонтировать",
+		"unmountButton": "Размонтировать",
+		"mounted": "вмонтирован"
+	},
+	"en": {
+		"mountButton": "Mount",
+		"unmountButton": "Unmount",
+		"mounted": "mounted"
+	}
+}

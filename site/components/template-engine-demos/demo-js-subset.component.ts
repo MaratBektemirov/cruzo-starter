@@ -1,4 +1,6 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { langService } from "site/services/lang.service"
+import i18n from "./demo-js-subset.component.i18n.json"
 
 export class DemoJsSubsetComponent extends AbstractComponent {
   static selector = "demo-js-subset-component";
@@ -8,6 +10,16 @@ export class DemoJsSubsetComponent extends AbstractComponent {
     tags: ["admin", "editor"],
     meta: { lastLogin: Date.now() },
   });
+
+  i18n = i18n;
+  lang$ = this.newRxFunc(
+    () => langService.lang$.actual,
+    langService.lang$
+  );
+  t$ = this.newRxFunc(
+    (lang) => this.i18n[lang],
+    this.lang$
+  );
 
   upperTags(tags: string[]) {
     return tags.map((t) => t.toUpperCase());
@@ -25,33 +37,33 @@ export class DemoJsSubsetComponent extends AbstractComponent {
   protected getHTML(): string {
     return `<div let-name="{{ root.user::rx.name }}" let-tags="{{ root.user::rx.tags }}">
         <div>
-          Name:
+          {{ root.t$::rx.name }}:
           <b>{{ root.user::rx.name ?? "Anonymous" }}</b>
         </div>
 
         <div class="mt_s">
-          Tags:
+          {{ root.t$::rx.tags }}:
           <b>{{ root.upperTags(root.user::rx.tags ?? []).join(", ") }}</b>
         </div>
 
         <div class="mt_s">
-          Last login:
+          {{ root.t$::rx.lastLogin }}:
           <b>{{ root.formatDate(root.user::rx.meta?.lastLogin) }}</b>
         </div>
 
         <div class="mt_s">
-          Role:
+          {{ root.t$::rx.role }}:
           <b>{{ root.isAdmin?.(root.user::rx.tags ?? []) ? "admin" : "user" }}</b>
         </div>
 
         <div class="mt_s">
-          Object shorthand:
+          {{ root.t$::rx.shorthand }}:
           <b>{{ ({ name, tags }).name }}</b>
         </div>
 
         <div class="mt_s">
-          Optional call:
-          <b>{{ root.maybeFormat?.(root.user::rx.meta?.lastLogin) ?? "no formatter" }}</b>
+          {{ root.t$::rx.optionalCall }}:
+          <b>{{ root.maybeFormat?.(root.user::rx.meta?.lastLogin) ?? root.t$::rx.noFormatter }}</b>
         </div>
       </div>`;
   }

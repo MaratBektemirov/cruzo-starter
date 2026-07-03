@@ -1,0 +1,16 @@
+{
+	"ru": {
+		"toogleA": "Переключить A",
+		"toogleB": "Переключить B",
+
+		"blockA": "Блок A виден",
+		"blockB": "Блок B виден"
+	},
+	"en": {
+		"toogleA": "Toogle A",
+		"toogleB": "Toogle B",
+		
+		"blockA": "Block A is visible",
+		"blockB": "Block B is visible"
+	}
+}

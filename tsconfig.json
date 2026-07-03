@@ -10,6 +10,9 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
 
+    // Просто убрал ошибки связанные с этой настройкой насчет версии ts. (Просто заткнул ts)
+    "ignoreDeprecations": "6.0",
+
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
 

@@ -1,0 +1,14 @@
+{
+	"ru": {
+		"increment": "Увеличить значение",
+		"changeName": "Поменять никнейм",
+		"user": "Пользователь",
+		"count": "Счетчик"
+	},
+	"en": {
+		"increment": "Increment count",
+		"changeName": "Change name",
+		"user": "User",
+		"count": "count"
+	}
+}

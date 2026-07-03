@@ -1,10 +1,16 @@
-import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
-import { UI_KIT } from "cruzo/ui-components/const";
+import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
+import { UI_KIT } from "cruzo/ui-components/const"
+import { langService } from 'site/services/lang.service'
+import i18n from './demo-list-bench.component.i18n.json'
 
 type ListItem = { id: string; value: number; name: string; tag: string; active: boolean };
 
 export class DemoListBench extends AbstractComponent {
   static selector = "demo-list-bench";
+
+  i18n = i18n;
+  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
+  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
 
   items: Rx<ListItem>[] = [];
   private readonly size = 2000;
@@ -13,13 +19,13 @@ export class DemoListBench extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx mb_s">
-          <button onclick="{{ root.updateMany() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Update many</button>
-          <button onclick="{{ root.toggleActive() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Toggle active</button>
+          <button onclick="{{ root.updateMany() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">{{ root.t$::rx.updateButton }}</button>
+          <button onclick="{{ root.toggleActive() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">{{ root.t$::rx.toogleButton }}</button>
         </div>
         <div repeat="{{ root.items }}" class="mb_xs fx fx-alc fx-wrap" let-active="{{ this::rx.active }}">
           <span class="mr_s">#{{ this::rx.id }}</span>
           <span class="mr_s">{{ this::rx.name }}</span>
-          <span class="mr_s">value: {{ this::rx.value }}</span>
+          <span class="mr_s">{{ root.t$::rx.value }}: {{ this::rx.value }}</span>
           <span class="mr_s">[{{ this::rx.tag }}]</span>
           <span attached="{{ active }}" class="mr_s">active</span>
           <span attached="{{ !active }}" class="mr_s">—</span>

@@ -1,5 +1,5 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo";
-import { UI_KIT } from "cruzo/ui-components/const";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { UI_KIT } from "cruzo/ui-components/const"
 
 export class DemoRxValueComponent extends AbstractComponent {
   static selector = "demo-rx-value-component";

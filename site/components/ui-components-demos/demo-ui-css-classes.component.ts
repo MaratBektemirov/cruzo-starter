@@ -1,14 +1,21 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo";
-import { UI_KIT } from "cruzo/ui-components/const";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { UI_KIT } from "cruzo/ui-components/const"
+import { langService } from "site/services/lang.service"
+import i18n from "./demo-ui-css-classes.component.i18n.json"
 
 export class DemoUiCssClassesComponent extends AbstractComponent {
   static selector = "demo-ui-css-classes-component";
 
+  i18n = i18n;
+  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
+  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
+
   getHTML() {
     const k = UI_KIT;
+
     return `<div>
         <div class="mb_m">
-          <div class="description-note mb_s">Размеры кнопок</div>
+          <div class="description-note mb_s">{{ root.t$::rx.buttonSizes }}</div>
           <div class="demo-ui-css-classes_sizes">
             <div class="demo-ui-css-classes_slot">
               <button type="button" class="${k}_button ${k}_button-xxs ${k}_button-primary">xxs</button>
@@ -33,8 +40,9 @@ export class DemoUiCssClassesComponent extends AbstractComponent {
             </div>
           </div>
         </div>
+
         <div class="mb_m">
-          <div class="description-note mb_s">Варианты заливки</div>
+          <div class="description-note mb_s">{{ root.t$::rx.fillVariants }}</div>
           <div class="demo-ui-css-classes_sizes">
             <div class="demo-ui-css-classes_slot">
               <button type="button" class="${k}_button ${k}_button-s ${k}_button-primary">primary</button>
@@ -44,10 +52,11 @@ export class DemoUiCssClassesComponent extends AbstractComponent {
             </div>
           </div>
         </div>
+
         <div>
           <label class="${k}_checkbox">
             <input type="checkbox" class="${k}_checkbox-input" checked />
-            Пример чекбокса
+            {{ root.t$::rx.checkboxExample }}
           </label>
         </div>
       </div>`;
