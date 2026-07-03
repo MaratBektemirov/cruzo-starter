@@ -204,6 +204,14 @@ export const routerUrlBucket = new RouteUrlBucket({
       await import("site/components/web3/web3-sign.component");
     },
   },
+  secretAuth: {
+    url: `${startPath}/web3/auth`,
+    componentSelectorUnbox: () => "secret-auth-page-component",
+    routeSelectorUnbox: () => ".section",
+    loadResources: async () => {
+      await import("site/components/web3/secret-auth-page.component");
+    },
+  },
   docsDefault: {
     url: `${startPath}/docs`,
     redirectTo: `${startPath}/docs/template-engine`,

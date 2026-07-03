@@ -8,7 +8,11 @@
 
 .description-list {
   margin-top: var(--m);
-  padding-left: var(--m);
+  padding-left: var(--l);
+}
+
+ol.description-list {
+  list-style-type: decimal;
 }
 
 .description-list-item {

@@ -78,25 +78,40 @@ function buildTestsBreadcrumbs(sections: Record<string, SectionMeta> | null): Br
   return finalizeCrumbs([{ label: title, href: routerUrlBucket.buildUrl("tests") }]);
 }
 
+const WEB3_PAGES: Record<string, { sectionId: SectionIds; routeKey: "web3Sign" | "secretAuth" | "web3Overview" }> = {
+  sign: { sectionId: SectionIds["web3-sign"], routeKey: "web3Sign" },
+  auth: { sectionId: SectionIds["web3-secret-auth"], routeKey: "secretAuth" },
+};
+
+const WEB3_INTRO = {
+  sectionId: SectionIds["web3-intro"],
+  routeKey: "web3Overview" as const,
+};
+
+function sectionTitle(
+  id: SectionIds,
+  sections: Record<string, SectionMeta> | null,
+  fallback?: string,
+) {
+  return sections?.[id]?.title || findSectionLabel(id) || fallback;
+}
+
 function buildWeb3Breadcrumbs(
   routeSection: string,
   sections: Record<string, SectionMeta> | null,
 ): Breadcrumb[] {
-  const childId =
-    routeSection === "sign" ? SectionIds["web3-sign"] : SectionIds["web3-intro"];
+  const { sectionId, routeKey } = WEB3_PAGES[routeSection] ?? WEB3_INTRO;
 
-  const crumbs: Breadcrumb[] = [
+  return finalizeCrumbs([
     {
-      label: sections?.[SectionIds.web3]?.title || findSectionLabel(SectionIds.web3) || "Web3",
+      label: sectionTitle(SectionIds.web3, sections, "Web3"),
       href: routerUrlBucket.buildUrl("web3Default"),
     },
     {
-      label: sections?.[childId]?.title || findSectionLabel(childId) || routeSection,
-      href: routerUrlBucket.buildUrl(routeSection === "sign" ? "web3Sign" : "web3Overview"),
+      label: sectionTitle(sectionId, sections, routeSection),
+      href: routerUrlBucket.buildUrl(routeKey),
     },
-  ];
-
-  return finalizeCrumbs(crumbs);
+  ]);
 }
 
 export function buildBreadcrumbs(

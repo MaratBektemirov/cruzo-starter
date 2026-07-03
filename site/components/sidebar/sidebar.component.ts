@@ -168,6 +168,11 @@ export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
         title: "Sign",
         path: routerUrlBucket.buildUrl("web3Sign"),
       },
+      {
+        id: SectionIds["web3-secret-auth"],
+        title: "SecretAuth",
+        path: routerUrlBucket.buildUrl("secretAuth"),
+      },
     ],
   },
 ];

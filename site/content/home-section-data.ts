@@ -50,7 +50,6 @@ const client = new HttpClient("https://api.example.com", {
   },
   error: async (method, url, options, status) => {
     if (status === 401) {
-      // logout
     }
   },
 });

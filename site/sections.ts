@@ -40,6 +40,7 @@ export enum SectionIds {
   "web3" = "web3",
   "web3-intro" = "web3-intro",
   "web3-sign" = "web3-sign",
+  "web3-secret-auth" = "web3-secret-auth",
   "router" = "router",
   "router-routes" = "router-routes",
   "router-navigation" = "router-navigation",

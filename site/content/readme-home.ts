@@ -1,6 +1,3 @@
-/**
- * Контент главной страницы — README на русском (стилистика как в разделах Docs).
- */
 import DemoComponentCode from "site/components/home-demos/demo-readme-1.component?raw";
 import DemoExpressionsComponentCode from "site/components/home-demos/demo-readme-2.component?raw";
 import DemoBucketComponentCode from "site/components/home-demos/demo-readme-bucket.component?raw";
@@ -35,7 +32,7 @@ export const readmeBlocks: ReadmeBlock[] = [
     code: `import { Template, componentsRegistryService, routerService } from "cruzo";
 import "cruzo/ui-components/input";
 import "cruzo/ui-components/button-group";
-import "cruzo/ui-components/router-link"; // and other UI imports as needed
+import "cruzo/ui-components/router-link";
 
 Template.setAppVariables({});
 componentsRegistryService.initApp();
@@ -118,7 +115,6 @@ const client = new HttpClient("https://api.example.com", {
   },
   error: async (method, url, options, status) => {
     if (status === 401) {
-      // logout
     }
   },
 });
