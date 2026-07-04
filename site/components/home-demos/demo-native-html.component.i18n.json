@@ -1,8 +1,10 @@
 {
 	"ru": {
-		"clicks": "Кликов"
+		"clicks": "Кликов",
+		"title": "Нативный HTML"
 	},
 	"en": {
-		"clicks": "Clicks"
+		"clicks": "Clicks",
+		"title": "Native HTML"
 	}
 }

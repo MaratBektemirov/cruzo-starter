@@ -1,15 +1,13 @@
 import { AbstractComponent, componentsRegistryService, toastService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
 import type { ToastAlignX, ToastAlignY } from "cruzo/ui-components/toast"
-import { langService } from "site/services/lang.service"
+import { getTranslater } from 'site/utils/get-translater'
 import i18n from "./demo-toast.component.i18n.json"
 
 export class DemoToastComponent extends AbstractComponent {
   static selector = "demo-toast-component";
 
-  i18n = i18n;
-  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
-  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
+  t$ = getTranslater(i18n, this)
 
   alignX$ = this.newRx<ToastAlignX>("center");
   alignY$ = this.newRx<ToastAlignY>("top");
@@ -20,14 +18,14 @@ export class DemoToastComponent extends AbstractComponent {
 
     return `<div>
         <div class="mb_s">
-          <div class="description-note mb_xs">{{ root.t$::rx.anchor }}</div>
+          <div class="description-note mb_xs">{{ root.t$::rx?.anchor }}</div>
           <label class="${k}_checkbox mr_s">
             <input
               type="checkbox"
               class="${k}_checkbox-input"
               checked="{{root.anchorMode$::rx === 'element'}}"
               oninput="{{root.setAnchorMode('element')}}" />
-            {{ root.t$::rx.element }}
+            {{ root.t$::rx?.element }}
           </label>
           <label class="${k}_checkbox mr_s">
             <input
@@ -35,19 +33,19 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_checkbox-input"
               checked="{{root.anchorMode$::rx === 'default'}}"
               oninput="{{root.setAnchorMode('default')}}" />
-            {{ root.t$::rx.defaultPage }}
+            {{ root.t$::rx?.defaultPage }}
           </label>
         </div>
 
         <div class="mb_s">
-          <div class="description-note mb_xs">{{ root.t$::rx.alignX }}</div>
+          <div class="description-note mb_xs">{{ root.t$::rx?.alignX }}</div>
           <label class="${k}_checkbox mr_s">
             <input
               type="checkbox"
               class="${k}_checkbox-input"
               checked="{{root.alignX$::rx === 'left'}}"
               oninput="{{root.setAlignX('left')}}" />
-            {{ root.t$::rx.left }}
+            {{ root.t$::rx?.left }}
           </label>
           <label class="${k}_checkbox mr_s">
             <input
@@ -55,7 +53,7 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_checkbox-input"
               checked="{{root.alignX$::rx === 'center'}}"
               oninput="{{root.setAlignX('center')}}" />
-            {{ root.t$::rx.center }}
+            {{ root.t$::rx?.center }}
           </label>
           <label class="${k}_checkbox">
             <input
@@ -63,19 +61,19 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_checkbox-input"
               checked="{{root.alignX$::rx === 'right'}}"
               oninput="{{root.setAlignX('right')}}" />
-            {{ root.t$::rx.right }}
+            {{ root.t$::rx?.right }}
           </label>
         </div>
 
         <div class="mb_s">
-          <div class="description-note mb_xs">{{ root.t$::rx.alignY }}</div>
+          <div class="description-note mb_xs">{{ root.t$::rx?.alignY }}</div>
           <label class="${k}_checkbox mr_s">
             <input
               type="checkbox"
               class="${k}_checkbox-input"
               checked="{{root.alignY$::rx === 'top'}}"
               oninput="{{root.setAlignY('top')}}" />
-            {{ root.t$::rx.top }}
+            {{ root.t$::rx?.top }}
           </label>
           <label class="${k}_checkbox mr_s">
             <input
@@ -83,7 +81,7 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_checkbox-input"
               checked="{{root.alignY$::rx === 'center'}}"
               oninput="{{root.setAlignY('center')}}" />
-            {{ root.t$::rx.center }}
+            {{ root.t$::rx?.center }}
           </label>
           <label class="${k}_checkbox">
             <input
@@ -91,7 +89,7 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_checkbox-input"
               checked="{{root.alignY$::rx === 'bottom'}}"
               oninput="{{root.setAlignY('bottom')}}" />
-            {{ root.t$::rx.bottom }}
+            {{ root.t$::rx?.bottom }}
           </label>
         </div>
 
@@ -102,7 +100,7 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_button ${k}_button-s ${k}_button-secondary"
               onclick="{{root.toastSuccess(event.currentTarget)}}"
             >
-              {{ root.t$::rx.successToast }}
+              {{ root.t$::rx?.successToast }}
             </button>
           </div>
           <div class="demo-ui-css-classes_slot">
@@ -111,7 +109,7 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_button ${k}_button-s ${k}_button-secondary"
               onclick="{{root.toastInfo(event.currentTarget)}}"
             >
-              {{ root.t$::rx.infoToast }}
+              {{ root.t$::rx?.infoToast }}
             </button>
           </div>
           <div class="demo-ui-css-classes_slot">
@@ -120,7 +118,7 @@ export class DemoToastComponent extends AbstractComponent {
               class="${k}_button ${k}_button-s ${k}_button-secondary"
               onclick="{{root.toastError(event.currentTarget)}}"
             >
-              {{ root.t$::rx.errorToast }}
+              {{ root.t$::rx?.errorToast }}
             </button>
           </div>
         </div>

@@ -1188,6 +1188,119 @@ authBucket.setState("secretAuth", {
           1: `<p class="description-paragraph"></p>`,
         },
       },
+      [SectionIds["web3-secret-auth"]]: {
+        title: "SecretAuth",
+        description: `<p class="description-paragraph">
+            SecretAuth is a UX solution for authentication via cryptographic key. Instead of a password, the user proves
+            ownership of a key they already have: in a wallet, passkey, or locally. For the server it's a standard
+            signature check; for the user — login without a separate password and without transmitting sensitive data.
+          </p>
+          <p class="description-paragraph">
+            The result is signed data that the client sends to the server. The server verifies the signature,
+            confirms that the public key is authorized for this user, and then issues the session the app expects:
+            JWT, cookie, or any other session token.
+          </p>`,
+        demos: {
+          1: `<h2 class="mt_xl">What it is</h2>
+      <p class="description-paragraph">From a cryptographic standpoint, SecretAuth is the same signature check as in the <b>Sign</b> section: the server receives a message, signature and public key, and verifies that the signature is valid. There's nothing new in verify.</p>
+      <p class="description-paragraph">SecretAuth exists because users already have crypto wallets — MetaMask, Tonkeeper, Phantom and others. The protocol builds on this reality: the challenge is signed via a familiar wallet, without a password and without copying keys. For scenarios outside a wallet — there's a raw key mode or passkey (WebAuthn).</p>
+      <p class="description-paragraph">On top of a standard signature, SecretAuth adds a standardized challenge (<code class="description-inline-code">domain</code>, <code class="description-inline-code">nonce</code>, <code class="description-inline-code">exp</code>) and a unified proof format for the backend. How you issue the session after a successful check — JWT, cookie, etc. — is up to you.</p>
+
+      <h2>How it works</h2>
+      <ol class="description-list">
+      <li class="description-list-item">Server generates a challenge, stores the <code class="description-inline-code">nonce</code>, sends the message text to the client</li>
+      <li class="description-list-item">Client signs the message (Wallet, Key or Passkey in the component below)</li>
+      <li class="description-list-item">Client sends the <b>proof</b> to the API</li>
+      <li class="description-list-item">Server calls <code class="description-inline-code">verifySecretAuthProof</code> — verifies the signature, domain and expiry</li>
+      <li class="description-list-item">On success — issue your session</li>
+      </ol>
+
+      <h2>Challenge format</h2>
+      <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">example.com wants you to prove your signing key:
+
+      nonce: k8f3m2x9
+      exp: 1719667500</pre></div>
+      <p class="description-paragraph">Built via <code class="description-inline-code">formatSecretAuthChallenge</code>; <code class="description-inline-code">nonce</code> — <code class="description-inline-code">generateSecretAuthNonce()</code>.</p>
+
+      <h2>Proof format</h2>
+      <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">{
+        "message": "example.com wants you to prove…",
+        "signature": { "value": "0x…" },
+        "pubKey": {
+          "algorithm": "secp256k1",
+          "source": "ethereum",
+          "value": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+          "encoding": "hex"
+        }
+      }</pre></div>
+      <p class="description-paragraph"><code class="description-inline-code">algorithm</code> — cryptography (<code class="description-inline-code">secp256k1</code>, <code class="description-inline-code">Ed25519</code>, <code class="description-inline-code">ES256</code>). <code class="description-inline-code">source</code> — key origin: wallet network, <code class="description-inline-code">raw</code> (raw key) or <code class="description-inline-code">webauthn</code> (passkey). <code class="description-inline-code">signature</code> — object with <code class="description-inline-code">value</code>; for WebAuthn additionally <code class="description-inline-code">signature.extension</code> with <code class="description-inline-code">authenticatorData</code> and <code class="description-inline-code">clientDataJSON</code>.</p>
+      <ul class="description-list">
+      <li class="description-list-item"><code class="description-inline-code">secp256k1</code> + <code class="description-inline-code">ethereum</code> — EIP-191 / address</li>
+      <li class="description-list-item"><code class="description-inline-code">secp256k1</code> + <code class="description-inline-code">tron</code> — Tron address</li>
+      <li class="description-list-item"><code class="description-inline-code">secp256k1</code> + <code class="description-inline-code">raw</code> — raw secp256k1 (EIP-191)</li>
+      <li class="description-list-item"><code class="description-inline-code">Ed25519</code> + <code class="description-inline-code">ton</code> / <code class="description-inline-code">solana</code> — wallet</li>
+      <li class="description-list-item"><code class="description-inline-code">Ed25519</code> + <code class="description-inline-code">raw</code> — raw key</li>
+      <li class="description-list-item"><code class="description-inline-code">ES256</code> + <code class="description-inline-code">webauthn</code> — passkey; server needs credential public key after registration</li>
+      </ul>
+
+      <h2>Server</h2>
+      <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import {
+        formatSecretAuthChallenge,
+        generateSecretAuthNonce,
+        verifySecretAuthProof,
+      } from "cruzo-web3/secret-auth";
+
+      const challenge = {
+        domain: "example.com",
+        nonce: generateSecretAuthNonce(),
+        exp: Math.floor(Date.now() / 1000) + 300,
+      };
+
+      const message = formatSecretAuthChallenge(challenge);
+
+      const ok = await verifySecretAuthProof(proof, { domain: challenge.domain });</pre></div>`,
+          2: `<h2>Component</h2>
+      <p class="description-paragraph">Below — <code class="description-inline-code">secret-auth-component</code> from the <code class="description-inline-code">cruzo-web3</code> package: wallet connection, key or passkey input, challenge signing and proof collection into a state bucket. Modes <b>Wallet</b>, <b>Key</b> and <b>Passkey</b>; <code class="description-inline-code">signed</code> in state means "proof is ready", not a server response.</p>
+
+      <h2>Setup</h2>
+      <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import { RxBucket, componentsRegistryService } from "cruzo";
+      import "cruzo-web3/components/secret-auth";
+
+      const authBucket = new RxBucket({
+        secretAuth: {
+          config: { title: "Sign in" },
+        },
+      });
+
+      componentsRegistryService.connectBucket(authBucket);
+
+      authBucket.setState("secretAuth", {
+        challenge: { domain: "example.com", nonce: "...", exp: 1719667500 },
+        proof: null,
+        signed: false,
+        pubKey: null,
+        mode: null,
+        wallet: null,
+        passkey: null,
+      });
+
+      const current = authBucket.getState("secretAuth") ?? {};
+      authBucket.setState("secretAuth", {
+        ...current,
+        challenge,
+        proof: null,
+        signed: false,
+        pubKey: null,
+        wallet: null,
+      });</pre></div>
+      <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">&lt;secret-auth-component
+        component-id="secretAuth"
+        bucket-id="myAuthBucket"&gt;
+      &lt;/secret-auth-component&gt;</pre></div>
+      <p class="description-paragraph">Challenge — in the <code class="description-inline-code">state</code> bucket (<code class="description-inline-code">setState</code>), title — in <code class="description-inline-code">config</code>. Ready proof: <code class="description-inline-code">authBucket.getState("secretAuth")?.proof</code> — send it to your API and call <code class="description-inline-code">verifySecretAuthProof</code>.</p>`,
+          3: secretAuthProofDemo(),
+        },
+      },
       [SectionIds["cmp-interaction"]]: {
         title: "RxBucket",
         description: `<p class="description-paragraph">

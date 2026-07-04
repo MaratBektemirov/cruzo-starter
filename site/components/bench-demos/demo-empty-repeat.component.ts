@@ -1,14 +1,12 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
-import { langService } from 'site/services/lang.service'
+import { getTranslater } from 'site/utils/get-translater'
 import i18n from './demo-empty-repeat.component.i18n.json'
 
 export class DemoEmptyRepeat extends AbstractComponent {
   static selector = "demo-empty-repeat";
 
-  i18n = i18n;
-  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
-  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
+  t$ = getTranslater(i18n, this)
 
   items: Rx<{ id: string; label: string }>[] = [];
   count$ = this.newRx(0);
@@ -23,7 +21,7 @@ export class DemoEmptyRepeat extends AbstractComponent {
         <div repeat="{{ root.items }}" class="mb_xs">
           <span>{{ this::rx.id }} — {{ this::rx.label }}</span>
         </div>
-        <div attached="{{ root.count$::rx === 0 }}" class="mt_s">{{ root.t$::rx.listEmpty }}</div>
+        <div attached="{{ root.count$::rx === 0 }}" class="mt_s">{{ root.t$::rx?.listEmpty }}</div>
       </div>`;
   }
 

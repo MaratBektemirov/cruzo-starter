@@ -1,21 +1,17 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo"
-import { langService } from "site/services/lang.service"
+import { getTranslater } from 'site/utils/get-translater'
 import i18n from "./demo-readme-2.component.i18n.json"
 
 export class DemoExpressionsComponent extends AbstractComponent {
   static selector = "demo-expressions-component";
 
-  i18n = i18n;
-  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
-  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
+  t$ = getTranslater(i18n, this)
 
   user$ = this.newRx({
     name: "John",
     tags: ["admin", "editor"],
     meta: { lastLogin: Date.now() },
   });
-  en_html$ = this.newRx("<b>bold</b>");
-  ru_html$ = this.newRx("<b>Жирный</b>");
 
   upperTags(tags: string[]) {
     return tags?.map((t) => t.toUpperCase()).join(", ") ?? "-";
@@ -47,7 +43,7 @@ export class DemoExpressionsComponent extends AbstractComponent {
           {{ root.t$::rx?.objectShorthand }}: <b>{{ ({ name, tags }).name }}</b>
         </div>
         <div class="mt_s">
-          <span inner-html="{{ root.lang$::rx === 'ru' ? root.ru_html$::rx : root.en_html$::rx }}"></span>
+          <span inner-html="{{ root.t$::rx?.html }}"></span>
         </div>
       </div>`;
   }

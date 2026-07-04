@@ -4,9 +4,9 @@ import { UI_KIT } from "cruzo/ui-components/const"
 import { LangSwitchComponent } from "site/components/lang/lang-switch.component"
 import { SectionIds } from "site/sections"
 import { appService } from "site/services/app.service"
-import { langService } from "site/services/lang.service"
 import { routerUrlBucket } from "site/urls"
 import { buildBreadcrumbs, type Breadcrumb } from "site/utils/docs-breadcrumbs"
+import { getTranslater } from 'site/utils/get-translater'
 import i18n from "./header.component.i18n.json"
 
 const CRUZO_GITHUB_REPO = "https://github.com/MaratBektemirov/cruzo";
@@ -24,15 +24,7 @@ export class HeaderComponent extends AbstractComponent {
 
   dependencies = new Set([LangSwitchComponent.selector]);
 
-  i18n = i18n;
-  lang$ = this.newRxFunc(
-    () => langService.lang$.actual,
-    langService.lang$
-  );
-  t$ = this.newRxFunc(
-    (lang) => this.i18n[lang],
-    this.lang$
-  );
+  t$ = getTranslater(i18n, this)
 
   labels$ = this.newRxFunc(
     (section) => section?.labels ?? {},
@@ -58,7 +50,7 @@ export class HeaderComponent extends AbstractComponent {
                 class="${UI_KIT}_button ${UI_KIT}_button-m ${UI_KIT}_button-secondary"
                 href="${this.githubUrl}"
                 target="_blank"
-                rel="noopener noreferrer">{{ root.t$::rx.github }}</a>
+                rel="noopener noreferrer">{{ root.t$::rx?.github }}</a>
             </div>
             <p class="home-hero__tags">{{ root.labels$::rx.bundleSize }}</p>
           </div>

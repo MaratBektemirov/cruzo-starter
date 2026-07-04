@@ -1,14 +1,12 @@
 import { AbstractComponent, componentsRegistryService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
-import { langService } from 'site/services/lang.service'
+import { getTranslater } from 'site/utils/get-translater'
 import i18n from './demo-conditional.component.i18n.json'
 
 export class DemoConditional extends AbstractComponent {
   static selector = "demo-conditional";
 
-  i18n = i18n;
-  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
-  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
+  t$ = getTranslater(i18n, this)
 
   showA$ = this.newRx(true);
   showB$ = this.newRx(false);

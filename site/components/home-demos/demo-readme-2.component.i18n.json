@@ -6,7 +6,8 @@
     "role": "Роль",
     "objectShorthand": "Сокращённая запись объекта",
     "admin": "администратор",
-    "user": "пользователь"
+    "user": "пользователь",
+    "html": "<b>Жирный</b>"
   },
   "en": {
     "name": "Name",
@@ -15,6 +16,7 @@
     "role": "Role",
     "objectShorthand": "Object shorthand",
     "admin": "admin",
-    "user": "user"
+    "user": "user",
+    "html": "<b>bold</b>"
   }
 }

@@ -62,11 +62,11 @@ export class DemoModalBucketComponent extends AbstractComponent {
           class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary"
           onclick="{{ root.openModal() }}"
         >
-          {{ root.t$::rx.openModal }}
+          {{ root.t$::rx?.openModal }}
         </button>
 
         <div class="mt_s">
-          {{ root.t$::rx.lastResult }}: <b>{{ root.modalResult$::rx }}</b>
+          {{ root.t$::rx?.lastResult }}: <b>{{ root.modalResult$::rx }}</b>
         </div>
       </div>`;
   }

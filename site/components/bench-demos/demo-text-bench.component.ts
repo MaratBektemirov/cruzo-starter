@@ -1,6 +1,6 @@
 import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
-import { langService } from 'site/services/lang.service'
+import { getTranslater } from 'site/utils/get-translater'
 import i18n from './demo-text-bench.component.i18n.json'
 
 type TextItem = { id: string; value: number; label: string; status: "ok" | "pending" | "done" };
@@ -8,9 +8,7 @@ type TextItem = { id: string; value: number; label: string; status: "ok" | "pend
 export class DemoTextBench extends AbstractComponent {
   static selector = "demo-text-bench";
 
-  i18n = i18n;
-  lang$ = this.newRxFunc(() => langService.lang$.actual, langService.lang$);
-  t$ = this.newRxFunc((lang) => this.i18n[lang], this.lang$);
+  t$ = getTranslater(i18n, this)
 
   items: Rx<any>[] = [];
   private readonly size = 500;
@@ -19,16 +17,16 @@ export class DemoTextBench extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx mb_s">
-          <button onclick="{{ root.updateMany() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">{{ root.t$::rx.updateMany }}</button>
-          <button onclick="{{ root.rotateStatus() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">{{ root.t$::rx.rotateStatus }}</button>
+          <button onclick="{{ root.updateMany() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">{{ root.t$::rx?.updateMany }}</button>
+          <button onclick="{{ root.rotateStatus() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">{{ root.t$::rx?.rotateStatus }}</button>
         </div>
         <div repeat="{{ root.items }}" class="mb_xs fx fx-alc">
           <span class="mr_s">#{{ this::rx.id }}</span>
-          <span class="mr_s">{{ root.t$::rx.value }}: {{ this::rx.value }}</span>
+          <span class="mr_s">{{ root.t$::rx?.value }}: {{ this::rx.value }}</span>
           <span class="mr_s">({{ this::rx.label }})</span>
-          <span attached="{{ this::rx.status === 'ok' }}" class="mr_s">{{ root.t$::rx.ok }}</span>
-          <span attached="{{ this::rx.status === 'pending' }}" class="mr_s">{{ root.t$::rx.pending }}</span>
-          <span attached="{{ this::rx.status === 'done' }}" class="mr_s">{{ root.t$::rx.done }}</span>
+          <span attached="{{ this::rx.status === 'ok' }}" class="mr_s">{{ root.t$::rx?.ok }}</span>
+          <span attached="{{ this::rx.status === 'pending' }}" class="mr_s">{{ root.t$::rx?.pending }}</span>
+          <span attached="{{ this::rx.status === 'done' }}" class="mr_s">{{ root.t$::rx?.done }}</span>
         </div>
       </div>`;
   }

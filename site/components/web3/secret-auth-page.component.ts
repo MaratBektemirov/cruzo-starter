@@ -1,18 +1,20 @@
 import styles from "./web3.component.module.css"
 
 import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo"
-import { UI_KIT } from "cruzo/ui-components/const"
+import type { SecretAuthState } from "cruzo-web3"
 import { SecretAuthComponent } from "cruzo-web3/components/secret-auth"
 import {
   generateSecretAuthNonce,
   verifySecretAuthProofLocal,
 } from "cruzo-web3/secret-auth"
-import type { SecretAuthState } from "cruzo-web3"
+import { UI_KIT } from "cruzo/ui-components/const"
 
+import { secretAuthProofDemo } from "site/content/secret-auth-proof-type"
 import { SectionIds } from "site/sections"
 import { appService } from "site/services/app.service"
-
+import { getTranslater } from "site/utils/get-translater"
 import "site/web3-setup"
+import i18n from "./secret-auth-page.component.i18n.json"
 
 function mockServerIssueSecretAuthChallenge() {
   return {
@@ -27,7 +29,10 @@ export class SecretAuthPageComponent extends AbstractComponent {
 
   dependencies = new Set([SecretAuthComponent.selector]);
 
-  sections$ = appService.sections$;
+  t$ = getTranslater(i18n, this);
+
+  proofDemo = secretAuthProofDemo();
+
   serverVerify$ = this.newRx("—");
 
   innerBucket = new RxBucket({
@@ -45,23 +50,44 @@ export class SecretAuthPageComponent extends AbstractComponent {
 
   private verifyGeneration = 0;
 
+  constructor() {
+    super();
+
+    this.newRxFunc((t) => {
+      this.innerBucket.setValuesAtIndex({
+        secretAuth: {
+          config: {
+            // @ts-expect-error
+            title: t?.title ?? "SecretAuth",
+            devMode: import.meta.env.DEV,
+          },
+        },
+      });
+
+      if (this.serverVerify$.actual === "—") {
+        // @ts-expect-error
+        this.serverVerify$.update(t?.dash ?? "—");
+      }
+    }, this.t$);
+  }
+
   getHTML() {
     const k = UI_KIT;
-    const secretAuthId = SectionIds["web3-secret-auth"];
 
     return `<div class="${styles.page}">
         <div class="${styles.signSection}">
           <div class="${styles.signIntro}"
-            inner-html="{{ root.sections$::rx?.['${secretAuthId}']?.demos?.[3] }}"></div>
+            inner-html="{{ root.t$::rx?.intro }}"></div>
+          <div inner-html="{{ once::root.proofDemo }}"></div>
           <div class="${styles.demoPanel}">
             <div>
               <button type="button"
                 class="${k}_button ${k}_button-s ${k}_button-secondary"
-                onclick="{{ root.refreshChallenge() }}">Refresh challenge</button>
+                onclick="{{ root.refreshChallenge() }}">{{ root.t$::rx?.refreshChallenge }}</button>
             </div>
 
             <div attached="{{ root.devMode$::rx }}">
-              <div class="description-paragraph mb_xs">Verify:</div>
+              <div class="description-paragraph mb_xs">{{ root.t$::rx?.verify }}:</div>
               <div class="block">
                 <pre class="${styles.serverVerify}">{{ root.serverVerify$::rx }}</pre>
               </div>
@@ -89,7 +115,8 @@ export class SecretAuthPageComponent extends AbstractComponent {
 
   refreshChallenge() {
     this.innerBucket.setState("secretAuth", this.initialState());
-    this.serverVerify$.update("—");
+    // @ts-expect-error
+    this.serverVerify$.update(this.t$.actual?.dash ?? "—");
   }
 
   private initialState(): SecretAuthState {
@@ -106,9 +133,13 @@ export class SecretAuthPageComponent extends AbstractComponent {
 
   private updateServerVerify(state: SecretAuthState | null | undefined) {
     const generation = ++this.verifyGeneration;
+    const t = this.t$.actual;
 
     if (!state?.proof) {
-      this.serverVerify$.update(state?.signed ? "waiting for proof" : "—");
+      this.serverVerify$.update(
+        // @ts-expect-error
+        state?.signed ? (t?.waitingForProof ?? "waiting for proof") : (t?.dash ?? "—")
+      );
       return;
     }
 
@@ -124,11 +155,17 @@ export class SecretAuthPageComponent extends AbstractComponent {
       if (generation !== this.verifyGeneration) return;
 
       if (result.ok === false) {
-        this.serverVerify$.update(`rejected: ${result.reason}`);
+        this.serverVerify$.update(
+          // @ts-expect-error
+          (this.t$.actual?.rejected ?? "rejected: {{reason}}").replace("{{reason}}", String(result.reason))
+        );
         return;
       }
 
-      this.serverVerify$.update("ok — would issue session token");
+      this.serverVerify$.update(
+        // @ts-expect-error
+        this.t$.actual?.sessionTokenIssued ?? "ok — would issue session token"
+      );
     });
   }
 }
