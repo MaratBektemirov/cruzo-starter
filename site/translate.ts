@@ -804,6 +804,7 @@ authBucket.setState("secretAuth", {
             </p>`,
         },
       },
+      [SectionIds["demo-lazy-page"]]: { title: "Ленивая страница", description: "", demos: { 1: ``, 2: `` } },
       [SectionIds["router-bucket"]]: {
         title: "",
         demos: {
@@ -1395,6 +1396,7 @@ authBucket.setState("secretAuth", {
           2: ``,
         },
       },
+      [SectionIds["demo-lazy-page"]]: { title: "Lazy page demo", description: "", demos: { 1: ``, 2: `` } },
       [SectionIds["router-bucket"]]: {
         title: "",
         demos: {
@@ -1518,7 +1520,6 @@ authBucket.setState("secretAuth", {
             </p>`,
         },
       },
-      [SectionIds["demo-lazy-page"]]: { title: "", demos: { 1: ``, 2: `` } },
       [SectionIds["service"]]: {
         title: "Service",
         description: `<p class="description-paragraph">
