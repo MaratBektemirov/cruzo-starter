@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "placeholder": "Печатайте здесь",
+    "text": "text",
+    "lastKey": "lastKey",
+    "checked": "checked",
+    "reset": "Сбросить"
+  },
+  "en": {
+    "placeholder": "Type here",
+    "text": "text",
+    "lastKey": "lastKey",
+    "checked": "checked",
+    "reset": "Reset"
+  }
+}

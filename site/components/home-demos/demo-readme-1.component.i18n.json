@@ -1,0 +1,22 @@
+{
+  "ru": {
+    "update": "Обновить",
+    "text": "Текст",
+    "toggle": "Переключить",
+    "info": "В DOM только когда открыто",
+    "open": "Открыто",
+    "name": "Имя",
+    "full": "Полное значение",
+    "selected": "Выбрано"
+  },
+  "en": {
+    "update": "Update",
+    "text": "Text",
+    "toggle": "Toggle",
+    "info": "In DOM only when open",
+    "open": "Open",
+    "name": "Name",
+    "full": "Full value",
+    "selected": "Selected"
+  }
+}

@@ -1,0 +1,10 @@
+{
+	"ru": {
+		"hello": "Привет",
+		"name": "Мир"
+	},
+	"en": {
+		"hello": "Hello",
+		"name": "World"
+	}
+}

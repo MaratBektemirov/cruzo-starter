@@ -1,0 +1,22 @@
+{
+  "ru": {
+    "name": "Имя",
+    "tags": "Теги",
+    "lastLogin": "Последний вход",
+    "role": "Роль",
+    "objectShorthand": "Сокращённая запись объекта",
+    "admin": "администратор",
+    "user": "пользователь",
+    "html": "<b>Жирный</b>"
+  },
+  "en": {
+    "name": "Name",
+    "tags": "Tags",
+    "lastLogin": "Last login",
+    "role": "Role",
+    "objectShorthand": "Object shorthand",
+    "admin": "admin",
+    "user": "user",
+    "html": "<b>bold</b>"
+  }
+}

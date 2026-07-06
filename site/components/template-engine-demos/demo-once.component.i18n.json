@@ -1,0 +1,14 @@
+{
+  "ru": {
+    "label": "значение при монтировании",
+    "afterClick": "после клика",
+    "description": "— выражение выполняется и обновляется только один раз.",
+    "updateButton": "Обновить label"
+  },
+  "en": {
+    "label": "value at mount time",
+    "afterClick": "after click",
+    "description": "— the expression is evaluated and updated only once.",
+    "updateButton": "Update label"
+  }
+}

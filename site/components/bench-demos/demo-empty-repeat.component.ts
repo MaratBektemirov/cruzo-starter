@@ -1,8 +1,12 @@
-import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
-import { UI_KIT } from "cruzo/ui-components/const";
+import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
+import { UI_KIT } from "cruzo/ui-components/const"
+import { getTranslater } from 'site/utils/get-translater'
+import i18n from './demo-empty-repeat.component.i18n.json'
 
 export class DemoEmptyRepeat extends AbstractComponent {
   static selector = "demo-empty-repeat";
+
+  t$ = getTranslater(i18n, this)
 
   items: Rx<{ id: string; label: string }>[] = [];
   count$ = this.newRx(0);
@@ -10,14 +14,14 @@ export class DemoEmptyRepeat extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx mb_s">
-          <button onclick="{{ root.add() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">Add item</button>
-          <button onclick="{{ root.clear() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">Clear</button>
+          <button onclick="{{ root.add() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">{{ root.t$::rx?.addItemButton }}</button>
+          <button onclick="{{ root.clear() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">{{ root.t$::rx?.clearButton }}</button>
         </div>
-        <p class="mb_s">Count: {{ root.count$::rx }}</p>
+        <p class="mb_s">{{ root.t$::rx?.count }}: {{ root.count$::rx }}</p>
         <div repeat="{{ root.items }}" class="mb_xs">
           <span>{{ this::rx.id }} — {{ this::rx.label }}</span>
         </div>
-        <div attached="{{ root.count$::rx === 0 }}" class="mt_s">List is empty.</div>
+        <div attached="{{ root.count$::rx === 0 }}" class="mt_s">{{ root.t$::rx?.listEmpty }}</div>
       </div>`;
   }
 

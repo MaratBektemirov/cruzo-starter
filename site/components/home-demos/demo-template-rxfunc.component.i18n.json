@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "countPlusOne": "Счётчик +1",
+    "factorPlusOne": "Множитель +1",
+    "count": "Счётчик",
+    "factor": "Множитель",
+    "product": "Произведение"
+  },
+  "en": {
+    "countPlusOne": "Count +1",
+    "factorPlusOne": "Factor +1",
+    "count": "Count",
+    "factor": "Factor",
+    "product": "Product"
+  }
+}

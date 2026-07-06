@@ -1,7 +1,11 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { getTranslater } from 'site/utils/get-translater'
+import i18n from './error.component.i18n.json'
 
 export class ErrorComponent extends AbstractComponent {
   static selector = "error-component";
+
+  t$ = getTranslater(i18n, this)
 
   constructor() {
     super();
@@ -14,11 +18,11 @@ export class ErrorComponent extends AbstractComponent {
   getHTML() {
     return `<div class="container_content__article">
         <h2 class="title_with-content">
-          Что-то пошло не так
+          {{ root.t$::rx?.smthWrong }}
           <close-filled-icon icon-color="#ff2f2f" class="title-icon"></close-filled-icon>
         </h2>
         <div>
-          Если вы думаете что это случилось по нашей вине, напишите нам
+          {{ root.t$::rx?.userOpinion }}
         </div>
       </div>`;
   }

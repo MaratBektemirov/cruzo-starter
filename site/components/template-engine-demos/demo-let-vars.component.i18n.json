@@ -1,0 +1,14 @@
+{
+  "ru": {
+    "fullName": "Полное имя",
+    "greeting": "Приветствие",
+    "hello": "Привет",
+    "randomize": "Перемешать"
+  },
+  "en": {
+    "fullName": "Full name",
+    "greeting": "Greeting",
+    "hello": "Hello",
+    "randomize": "Randomize"
+  }
+}

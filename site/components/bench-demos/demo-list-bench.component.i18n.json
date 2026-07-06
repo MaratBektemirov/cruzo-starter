@@ -1,0 +1,12 @@
+{
+	"ru": {
+		"updateButton": "Обновить много",
+		"toogleButton": "Переключить в активное состояние",
+		"value": "значение"
+	},
+	"en": {
+		"updateButton": "Update many",
+		"toogleButton": "Toggle active",
+		"value": "value"
+	}
+}

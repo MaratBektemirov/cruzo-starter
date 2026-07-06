@@ -1,0 +1,18 @@
+{
+	"ru": {
+		"updateMany": "Обновить много",
+		"rotateStatus": "Повернуть статус",
+		"value": "значение",
+		"ok": "ok",
+		"pending": "в ожидании",
+		"done": "выполнено"
+	},
+	"en": {
+		"updateMany": "Update many",
+		"rotateStatus": "Rotate status",
+		"value": "value",
+		"ok": "ok",
+		"pending": "pending",
+		"done": "done"
+	}
+}

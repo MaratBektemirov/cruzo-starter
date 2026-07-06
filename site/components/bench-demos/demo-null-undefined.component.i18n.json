@@ -1,0 +1,14 @@
+{
+	"ru": {
+		"setString": "Установить строку",
+		"setNull": "Установить null",
+		"setUndefined": "Установить undefined",
+		"value": "Значение"
+	},
+	"en": {
+		"setString": "Set string",
+		"setNull": "Set null",
+		"setUndefined": "Set undefined",
+		"value": "Value"
+	}
+}

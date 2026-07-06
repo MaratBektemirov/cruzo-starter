@@ -1,0 +1,14 @@
+{
+	"ru": {
+		"addItemButton": "Добавить товар",
+		"clearButton": "Очистить",
+		"listEmpty": "Список пуст",
+		"count": "Счетчик"
+	},
+	"en": {
+		"addItemButton": "Add item",
+		"clearButton": "Clear",
+		"listEmpty": "List is empty",
+		"count": "Count"
+	}
+}

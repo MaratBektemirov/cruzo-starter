@@ -1,0 +1,10 @@
+{
+	"ru": {
+		"input": "Поле ввода",
+		"choice": "Выбор"
+	},
+	"en": {
+		"input": "Input",
+		"choice": "Choice"
+	}
+}

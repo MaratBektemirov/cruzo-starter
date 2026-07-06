@@ -1,0 +1,14 @@
+{
+  "ru": {
+    "title": "Демо-модальное окно",
+    "description": "Закройте окно кнопкой или кликом по фону.",
+    "ok": "OK",
+    "cancel": "Отмена"
+  },
+  "en": {
+    "title": "Demo modal",
+    "description": "Close the modal using the button or by clicking the backdrop.",
+    "ok": "OK",
+    "cancel": "Cancel"
+  }
+}

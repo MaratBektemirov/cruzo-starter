@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "title": "Sign",
+    "description": "Демо подписи контента через популярные кошельки."
+  },
+  "en": {
+    "title": "Sign",
+    "description": "Demo of content signing via popular wallets."
+  }
+}

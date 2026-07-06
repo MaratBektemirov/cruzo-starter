@@ -1,0 +1,12 @@
+{
+  "ru": {
+    "files": "Файлы",
+    "noFilesSelected": "Файлы не выбраны",
+    "filesSelected": "{{count}} файл(ов): {{names}}"
+  },
+  "en": {
+    "files": "Files",
+    "noFilesSelected": "No files selected",
+    "filesSelected": "{{count}} file(s): {{names}}"
+  }
+}

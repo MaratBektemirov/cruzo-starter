@@ -1,12 +1,12 @@
-import { AbstractComponent, AbstractComponentConstructor, componentsRegistryService, routerService, type Rx } from "cruzo";
-import { createHighlighter, HighlighterGeneric } from "shiki";
+import { AbstractComponent, AbstractComponentConstructor, componentsRegistryService, routerService } from "cruzo"
+import { createHighlighter, HighlighterGeneric } from "shiki"
 
-import { appService } from "site/services/app.service";
-import type { ComponentConnectedParams } from "cruzo";
-import { DocsSectionItem, DocsSectionRouteData, SectionKey, SectionsData } from "site/urls";
-import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages";
-import { scrollToSectionFromSearch } from "site/section-scroll";
-import { getDemoDesc } from "site/sections";
+import type { ComponentConnectedParams } from "cruzo"
+import { SITE_SHIKI_LANGS } from "site/config/shiki-cruzo-languages"
+import { scrollToSectionFromSearch } from "site/section-scroll"
+import { getDemoDesc } from "site/sections"
+import { appService } from "site/services/app.service"
+import { DocsSectionItem, DocsSectionRouteData, SectionKey, SectionsData } from "site/urls"
 
 export class DocsSectionComponent extends AbstractComponent<any, any> {
   static selector = "docs-section-component";

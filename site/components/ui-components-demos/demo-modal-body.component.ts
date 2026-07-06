@@ -1,9 +1,13 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo";
-import { UI_KIT } from "cruzo/ui-components/const";
-import { DEMO_MODAL_ID, demoModalScope } from "./demo-modal-scope";
+import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { UI_KIT } from "cruzo/ui-components/const"
+import { getTranslater } from 'site/utils/get-translater'
+import i18n from "./demo-modal-body.component.i18n.json"
+import { DEMO_MODAL_ID, demoModalScope } from "./demo-modal-scope"
 
 export class DemoModalBodyComponent extends AbstractComponent {
   static selector = "demo-modal-body-component";
+
+  t$ = getTranslater(i18n, this)
 
   close(isOK: boolean) {
     demoModalScope.bucket?.emitEvent(DEMO_MODAL_ID, "closeModal", { data: { isOK } });
@@ -11,13 +15,24 @@ export class DemoModalBodyComponent extends AbstractComponent {
 
   getHTML() {
     return `<div>
-        <h3 class="mb_s">Demo modal</h3>
+        <h3 class="mb_s">{{ root.t$::rx?.title }}</h3>
+
         <p class="description-paragraph">
-          Закройте окно кнопкой или кликом по фону.
+          {{ root.t$::rx?.description }}
         </p>
+
         <div class="mt_m">
-          <button type="button" class="${UI_KIT}_button ${UI_KIT}_button-primary ${UI_KIT}_button-s mr_s" onclick="{{ root.close(true) }}">OK</button>
-          <button type="button" class="${UI_KIT}_button ${UI_KIT}_button-s" onclick="{{ root.close(false) }}">Cancel</button>
+          <button
+            type="button"
+            class="${UI_KIT}_button ${UI_KIT}_button-primary ${UI_KIT}_button-s mr_s"
+            onclick="{{ root.close(true) }}"
+          >{{ root.t$::rx?.ok }}</button>
+
+          <button
+            type="button"
+            class="${UI_KIT}_button ${UI_KIT}_button-s"
+            onclick="{{ root.close(false) }}"
+          >{{ root.t$::rx?.cancel }}</button>
         </div>
       </div>`;
   }

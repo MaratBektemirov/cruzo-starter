@@ -1,4 +1,6 @@
-import { AbstractComponent, componentsRegistryService, Rx } from "cruzo";
+import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
+import { getTranslater } from 'site/utils/get-translater'
+import i18n from "./demo-repeat.component.i18n.json"
 
 export class DemoRepeatComponent extends AbstractComponent {
   static selector = "demo-repeat-component";
@@ -10,6 +12,8 @@ export class DemoRepeatComponent extends AbstractComponent {
   ];
 
   selected = this.newRx<number>(null);
+
+  t$ = getTranslater(i18n, this)
 
   protected getHTML(): string {
     return `
@@ -33,7 +37,7 @@ export class DemoRepeatComponent extends AbstractComponent {
         </div>
 
         <div class="mt_s">
-          selected id: <b>{{ root.selected::rx }}</b>
+          {{ root.t$::rx?.selected }}: <b>{{ root.selected::rx }}</b>
         </div>
       </div>`;
   }

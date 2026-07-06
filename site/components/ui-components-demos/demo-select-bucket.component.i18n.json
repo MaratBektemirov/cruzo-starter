@@ -1,0 +1,8 @@
+{
+  "ru": {
+    "bucketValue": "Значение из bucket (value$)"
+  },
+  "en": {
+    "bucketValue": "Value from bucket (value$)"
+  }
+}

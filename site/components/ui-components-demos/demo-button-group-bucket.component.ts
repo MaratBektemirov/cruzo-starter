@@ -1,9 +1,13 @@
-import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo";
-import { ButtonGroupComponent, ButtonGroupConfig } from "cruzo/ui-components/button-group";
+import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo"
+import { ButtonGroupComponent, ButtonGroupConfig } from "cruzo/ui-components/button-group"
+import { getTranslater } from 'site/utils/get-translater'
+import i18n from './demo-button-group-bucket.component.i18n.json'
 
 export class DemoButtonGroupBucketComponent extends AbstractComponent {
   static selector = "demo-button-group-bucket-component";
   dependencies = new Set([ButtonGroupComponent.selector]);
+
+  t$ = getTranslater(i18n, this)
 
   innerBucket = new RxBucket({
     button_group: {
@@ -12,7 +16,7 @@ export class DemoButtonGroupBucketComponent extends AbstractComponent {
           { label: "Option A", value: "a" },
           { label: "Option B", value: "b" },
           { label: "Option C", value: "c" }
-        ]
+        ],
       })
     }
   });
@@ -31,7 +35,7 @@ export class DemoButtonGroupBucketComponent extends AbstractComponent {
         </button-group-component>
 
         <div class="mt_s">
-          Selected: <b>{{ root.currentButtonGroupValue$::rx }}</b>
+          {{ root.t$::rx?.selected }}: <b>{{ root.currentButtonGroupValue$::rx }}</b>
         </div>
       </div>`;
   }

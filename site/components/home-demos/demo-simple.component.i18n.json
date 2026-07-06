@@ -1,0 +1,10 @@
+{
+	"ru": {
+		"title": "Привет, Cruzo",
+		"text": "Простой компонент без лишнего"
+	},
+	"en": {
+		"title": "Hello, Cruzo",
+		"text": "A simple component without any extras"
+	}
+}

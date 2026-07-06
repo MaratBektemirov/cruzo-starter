@@ -1,11 +1,11 @@
-import { AbstractService } from "cruzo";
-import { SectionIds } from "site/sections";
-import { Lang, trs } from "site/translate";
+import { AbstractService } from "cruzo"
+import { SectionIds } from "site/sections"
+import { langService } from "site/services/lang.service"
+import { trs } from "site/translate"
 
 class AppService extends AbstractService {
   trs$ = this.newRx(trs);
 
-  currentLanguage$ = this.newRx<Lang>(Lang.ru);
   currentSectionId$ = this.newRx<SectionIds>(null);
 
   section$ = this.newRxFunc(
@@ -14,7 +14,7 @@ class AppService extends AbstractService {
       return trs[lang].sections[sectionId];
     },
     this.trs$ as any,
-    this.currentLanguage$ as any,
+    langService.lang$ as any,
     this.currentSectionId$ as any
   );
 
@@ -24,7 +24,7 @@ class AppService extends AbstractService {
       return trs[lang].sections;
     },
     this.trs$ as any,
-    this.currentLanguage$ as any
+    langService.lang$ as any,
   );
 
   constructor() {
