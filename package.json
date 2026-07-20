@@ -8,8 +8,8 @@
     "build:site": "vite build --config site/vite.config.ts"
   },
   "dependencies": {
-    "cruzo": "1.0.1",
-    "cruzo-web3": "0.2.1",
+    "cruzo": "1.1.0",
+    "cruzo-web3": "0.3.0",
     "effect-tricks": "0.1.0",
     "shiki": "3.21.0"
   },
