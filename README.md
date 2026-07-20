@@ -10,7 +10,7 @@ This repository contains a demo/docs site with examples of:
 - router — `loadResources` lazy chunks, `resourcesLoading$`
 - built-in UI components (`input`, `select`, `button-group`, `upload`, `spinner`, `modal` — body via child component + `emitEvent`)
 
-Requires `cruzo` **0.9.889+**.
+Requires `cruzo` **1.1.0+**.
 
 ## Framework
 
