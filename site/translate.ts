@@ -138,7 +138,7 @@ web3Service.setTonManifestUrl(tonManifestUrl);</pre></div>
 <h2>Как работает</h2>
 <ol class="description-list">
 <li class="description-list-item">Сервер генерирует challenge, сохраняет <code class="description-inline-code">nonce</code>, отдаёт клиенту текст сообщения</li>
-<li class="description-list-item">Клиент подписывает сообщение (Wallet, Key или Passkey в компоненте ниже)</li>
+<li class="description-list-item">Клиент подписывает сообщение (Ephemeral, Wallet, Key или Passkey в компоненте ниже)</li>
 <li class="description-list-item">Клиент отправляет <b>proof</b> на API</li>
 <li class="description-list-item">Сервер вызывает <code class="description-inline-code">verifySecretAuthProof</code> — проверяет подпись, домен и срок действия</li>
 <li class="description-list-item">При успехе — выдаёте свою сессию</li>
@@ -189,7 +189,7 @@ const message = formatSecretAuthChallenge(challenge);
 
 const ok = await verifySecretAuthProof(proof, { domain: challenge.domain });</pre></div>`,
           2: `<h2>Компонент</h2>
-<p class="description-paragraph">Ниже — <code class="description-inline-code">secret-auth-component</code> из пакета <code class="description-inline-code">cruzo-web3</code>: подключение кошелька, ввод ключа или passkey, подпись challenge и сбор proof в state bucket. Режимы <b>Wallet</b>, <b>Key</b> и <b>Passkey</b>; <code class="description-inline-code">signed</code> в state означает «proof готов», а не ответ сервера.</p>
+<p class="description-paragraph">Ниже — <code class="description-inline-code">secret-auth-component</code> из пакета <code class="description-inline-code">cruzo-web3</code>: подключение кошелька, ввод ключа или passkey, подпись challenge и сбор proof в state bucket. Режим по умолчанию — <b>Ephemeral</b> (одноразовый ключ), также <b>Wallet</b>, <b>Key</b> и <b>Passkey</b>. Строки компонента следуют <code class="description-inline-code">i18nService.setLang</code>. <code class="description-inline-code">signed</code> в state означает «proof готов», а не ответ сервера.</p>
 
 <h2>Подключение</h2>
 <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import { RxBucket, componentsRegistryService } from "cruzo";
@@ -1205,7 +1205,7 @@ authBucket.setState("secretAuth", {
       <h2>How it works</h2>
       <ol class="description-list">
       <li class="description-list-item">Server generates a challenge, stores the <code class="description-inline-code">nonce</code>, sends the message text to the client</li>
-      <li class="description-list-item">Client signs the message (Wallet, Key or Passkey in the component below)</li>
+      <li class="description-list-item">Client signs the message (Ephemeral, Wallet, Key or Passkey in the component below)</li>
       <li class="description-list-item">Client sends the <b>proof</b> to the API</li>
       <li class="description-list-item">Server calls <code class="description-inline-code">verifySecretAuthProof</code> — verifies the signature, domain and expiry</li>
       <li class="description-list-item">On success — issue your session</li>
@@ -1256,7 +1256,7 @@ authBucket.setState("secretAuth", {
 
       const ok = await verifySecretAuthProof(proof, { domain: challenge.domain });</pre></div>`,
           2: `<h2>Component</h2>
-      <p class="description-paragraph">Below — <code class="description-inline-code">secret-auth-component</code> from the <code class="description-inline-code">cruzo-web3</code> package: wallet connection, key or passkey input, challenge signing and proof collection into a state bucket. Modes <b>Wallet</b>, <b>Key</b> and <b>Passkey</b>; <code class="description-inline-code">signed</code> in state means "proof is ready", not a server response.</p>
+      <p class="description-paragraph">Below — <code class="description-inline-code">secret-auth-component</code> from the <code class="description-inline-code">cruzo-web3</code> package: wallet connection, key or passkey input, challenge signing and proof collection into a state bucket. Default mode is <b>Ephemeral</b> (one-time key), plus <b>Wallet</b>, <b>Key</b> and <b>Passkey</b>. Component strings follow <code class="description-inline-code">i18nService.setLang</code>. <code class="description-inline-code">signed</code> in state means "proof is ready", not a server response.</p>
 
       <h2>Setup</h2>
       <div class="block"><pre style="margin:0;font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;">import { RxBucket, componentsRegistryService } from "cruzo";
