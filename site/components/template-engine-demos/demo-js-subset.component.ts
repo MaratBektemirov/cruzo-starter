@@ -1,5 +1,4 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo"
-import { getTranslater } from 'site/utils/get-translater'
+import { AbstractComponent, componentsRegistryService, i18nService } from "cruzo"
 import i18n from "./demo-js-subset.component.i18n.json"
 
 export class DemoJsSubsetComponent extends AbstractComponent {
@@ -11,7 +10,7 @@ export class DemoJsSubsetComponent extends AbstractComponent {
     meta: { lastLogin: Date.now() },
   });
 
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
   upperTags(tags: string[]) {
     return tags.map((t) => t.toUpperCase());
@@ -29,33 +28,33 @@ export class DemoJsSubsetComponent extends AbstractComponent {
   protected getHTML(): string {
     return `<div let-name="{{ root.user::rx.name }}" let-tags="{{ root.user::rx.tags }}">
         <div>
-          {{ root.t$::rx?.name }}:
+          {{ root.i18n$::rx.name }}:
           <b>{{ root.user::rx.name ?? "Anonymous" }}</b>
         </div>
 
         <div class="mt_s">
-          {{ root.t$::rx?.tags }}:
+          {{ root.i18n$::rx.tags }}:
           <b>{{ root.upperTags(root.user::rx.tags ?? []).join(", ") }}</b>
         </div>
 
         <div class="mt_s">
-          {{ root.t$::rx?.lastLogin }}:
+          {{ root.i18n$::rx.lastLogin }}:
           <b>{{ root.formatDate(root.user::rx.meta?.lastLogin) }}</b>
         </div>
 
         <div class="mt_s">
-          {{ root.t$::rx?.role }}:
+          {{ root.i18n$::rx.role }}:
           <b>{{ root.isAdmin?.(root.user::rx.tags ?? []) ? "admin" : "user" }}</b>
         </div>
 
         <div class="mt_s">
-          {{ root.t$::rx?.shorthand }}:
+          {{ root.i18n$::rx.shorthand }}:
           <b>{{ ({ name, tags }).name }}</b>
         </div>
 
         <div class="mt_s">
-          {{ root.t$::rx?.optionalCall }}:
-          <b>{{ root.maybeFormat?.(root.user::rx.meta?.lastLogin) ?? root.t$::rx?.noFormatter }}</b>
+          {{ root.i18n$::rx.optionalCall }}:
+          <b>{{ root.maybeFormat?.(root.user::rx.meta?.lastLogin) ?? root.i18n$::rx.noFormatter }}</b>
         </div>
       </div>`;
   }

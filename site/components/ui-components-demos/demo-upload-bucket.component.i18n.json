@@ -2,11 +2,19 @@
   "ru": {
     "files": "Файлы",
     "noFilesSelected": "Файлы не выбраны",
-    "filesSelected": "{{count}} файл(ов): {{names}}"
+    "filesSelected": {
+      "one": "{{n}} файл",
+      "few": "{{n}} файла",
+      "many": "{{n}} файлов",
+      "other": "{{n}} файла"
+    }
   },
   "en": {
     "files": "Files",
     "noFilesSelected": "No files selected",
-    "filesSelected": "{{count}} file(s): {{names}}"
+    "filesSelected": {
+      "one": "{{n}} file",
+      "other": "{{n}} files"
+    }
   }
 }

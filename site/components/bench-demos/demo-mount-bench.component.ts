@@ -1,12 +1,11 @@
-import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
+import { AbstractComponent, componentsRegistryService, Rx, i18nService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
-import { getTranslater } from 'site/utils/get-translater'
 import i18n from './demo-mount-bench.component.i18n.json'
 
 export class DemoMountBench extends AbstractComponent {
   static selector = "demo-mount-bench";
 
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
 
   mounted = this.newRx(true);
@@ -15,9 +14,9 @@ export class DemoMountBench extends AbstractComponent {
   protected getHTML(): string {
     return `<div>
         <div class="fx fx-alc mb_s">
-          <button onclick="{{ root.mount() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">{{ root.t$::rx?.mountButton }}</button>
-          <button onclick="{{ root.unmount() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">{{ root.t$::rx?.unmountButton }}</button>
-          <span class="ml_s">{{ root.t$::rx?.mounted }}: <b>{{ root.mounted::rx }}</b></span>
+          <button onclick="{{ root.mount() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s">{{ root.i18n$::rx.mountButton }}</button>
+          <button onclick="{{ root.unmount() }}" class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-secondary">{{ root.i18n$::rx.unmountButton }}</button>
+          <span class="ml_s">{{ root.i18n$::rx.mounted }}: <b>{{ root.mounted::rx }}</b></span>
         </div>
 
         <div repeat="{{ root.items }}" class="mb_xs">

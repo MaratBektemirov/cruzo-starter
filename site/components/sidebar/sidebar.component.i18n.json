@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "tagline": "технологичный минималистичный и понятный фреймворк с expression VM.",
+    "cssClasses": "CSS классы"
+  },
+  "en": {
+    "tagline": "tech minimalistic and intuitive framework with an expression VM.",
+    "cssClasses": "CSS classes"
+  }
+}

@@ -1,11 +1,10 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo"
-import { getTranslater } from 'site/utils/get-translater'
+import { AbstractComponent, componentsRegistryService, i18nService } from "cruzo"
 import i18n from "./demo-readme-2.component.i18n.json"
 
 export class DemoExpressionsComponent extends AbstractComponent {
   static selector = "demo-expressions-component";
 
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
   user$ = this.newRx({
     name: "John",
@@ -28,22 +27,22 @@ export class DemoExpressionsComponent extends AbstractComponent {
   getHTML() {
     return `<div let-name="{{ root.user$::rx.name }}" let-tags="{{ root.user$::rx.tags }}">
         <div>
-          {{ root.t$::rx?.name }}: <b>{{ root.user$::rx.name ?? "Anonymous" }}</b>
+          {{ root.i18n$::rx.name }}: <b>{{ root.user$::rx.name ?? "Anonymous" }}</b>
         </div>
         <div class="mt_s">
-          {{ root.t$::rx?.tags }}: <b>{{ root.upperTags(root.user$::rx.tags) }}</b>
+          {{ root.i18n$::rx.tags }}: <b>{{ root.upperTags(root.user$::rx.tags) }}</b>
         </div>
         <div class="mt_s">
-          {{ root.t$::rx?.lastLogin }}: <b>{{ root.formatDate(root.user$::rx.meta?.lastLogin) }}</b>
+          {{ root.i18n$::rx.lastLogin }}: <b>{{ root.formatDate(root.user$::rx.meta?.lastLogin) }}</b>
         </div>
         <div class="mt_s">
-          {{ root.t$::rx?.role }}: <b>{{ root.isAdmin?.(root.user$::rx.tags) ? root.t$::rx?.admin : root.t$::rx?.user }}</b>
+          {{ root.i18n$::rx.role }}: <b>{{ root.isAdmin?.(root.user$::rx.tags) ? root.i18n$::rx.admin : root.i18n$::rx.user }}</b>
         </div>
         <div class="mt_s">
-          {{ root.t$::rx?.objectShorthand }}: <b>{{ ({ name, tags }).name }}</b>
+          {{ root.i18n$::rx.objectShorthand }}: <b>{{ ({ name, tags }).name }}</b>
         </div>
         <div class="mt_s">
-          <span inner-html="{{ root.t$::rx?.html }}"></span>
+          <span inner-html="{{ root.i18n$::rx.html }}"></span>
         </div>
       </div>`;
   }

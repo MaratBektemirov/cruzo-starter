@@ -11,7 +11,7 @@ import "./css/home-hero.css";
 import "./css/code-block.css";
 import "./css/docs-breadcrumbs.css";
 
-import { Template, componentsRegistryService, routerService } from "cruzo";
+import { Template, componentsRegistryService, i18nService, routerService } from "cruzo";
 routerService.setHashMode(true)
 
 import "cruzo/ui-components/input.css";
@@ -36,6 +36,7 @@ import "cruzo/ui-components/textarea";
 import { ToastComponent } from "cruzo/ui-components/toast";
 
 function initApp() {
+  i18nService.setLang("ru");
   componentsRegistryService.define(ToastComponent);
   Template.setAppVariables({});
   componentsRegistryService.initApp();

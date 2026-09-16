@@ -1,22 +1,21 @@
-import { AbstractComponent, componentsRegistryService, routerService } from "cruzo"
+import { AbstractComponent, componentsRegistryService, routerService, i18nService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
 import { routerUrlBucket } from "site/urls"
-import { getTranslater } from 'site/utils/get-translater'
 import i18n from "./demo-router-lazy.component.i18n.json"
 
 export class DemoRouterLazyComponent extends AbstractComponent {
   static selector = "demo-router-lazy-component";
 
   loading$ = routerService.resourcesLoading$;
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
   getHTML() {
     return `<div>
         <p class="description-paragraph mb_s">
-          {{ root.t$::rx?.route }}
+          {{ root.i18n$::rx.route }}
           <code class="description-inline-code">/lazy-demo</code>
-          {{ root.t$::rx?.loadsChunkVia }}
-          <code class="description-inline-code">{{ root.t$::rx?.loadResources }}</code>
+          {{ root.i18n$::rx.loadsChunkVia }}
+          <code class="description-inline-code">{{ root.i18n$::rx.loadResources }}</code>
         </p>
 
         <button
@@ -24,11 +23,11 @@ export class DemoRouterLazyComponent extends AbstractComponent {
           class="${UI_KIT}_button ${UI_KIT}_button-s ${UI_KIT}_button-primary mr_s"
           onclick="{{ root.openLazy() }}"
         >
-          {{ root.t$::rx?.goToLazyDemo }}
+          {{ root.i18n$::rx.goToLazyDemo }}
         </button>
 
         <div class="mt_s">
-          {{ root.t$::rx?.resourcesLoading }}: <b>{{ root.loading$::rx }}</b>
+          {{ root.i18n$::rx.resourcesLoading }}: <b>{{ root.loading$::rx }}</b>
         </div>
       </div>`;
   }

@@ -1,10 +1,8 @@
 {
   "ru": {
-    "text": "Интерполяция, реактивность, циклы — всё просто",
-    "items": ["Один", "Два", "Три"]
+    "text": "Интерполяция, реактивность, циклы — всё просто"
   },
   "en": {
-    "text": "Interpolation, reactivity, loops—it's all simple",
-    "items": ["One", "Two", "Three"]
+    "text": "Interpolation, reactivity, loops—it's all simple"
   }
 }

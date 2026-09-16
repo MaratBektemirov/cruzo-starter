@@ -1,13 +1,12 @@
-import { AbstractComponent, componentsRegistryService, RxBucket } from "cruzo"
+import { AbstractComponent, componentsRegistryService, RxBucket, i18nService } from "cruzo"
 import { InputComponent, InputConfig } from "cruzo/ui-components/input"
-import { getTranslater } from 'site/utils/get-translater'
 import i18n from './demo-input-bucket.component.i18n.json'
 
 export class DemoInputBucketComponent extends AbstractComponent {
   static selector = "demo-input-bucket-component";
   dependencies = new Set([InputComponent.selector]);
 
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
   innerBucket = new RxBucket({
     input: {
@@ -31,7 +30,7 @@ export class DemoInputBucketComponent extends AbstractComponent {
         </input-component>
 
         <div class="mt_s">
-          {{ root.t$::rx?.value }}: <b>{{ root.currentInputValue$::rx }}</b>
+          {{ root.i18n$::rx.value }}: <b>{{ root.currentInputValue$::rx }}</b>
         </div>
       </div>`;
   }

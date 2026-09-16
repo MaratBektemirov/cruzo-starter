@@ -1,17 +1,13 @@
-import { AbstractComponent, componentsRegistryService } from "cruzo"
+import { AbstractComponent, componentsRegistryService, i18nService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
-import { langService } from "site/services/lang.service"
 
 export class LangSwitchComponent extends AbstractComponent {
   static selector = "lang-switch-component";
 
-  lang$ = this.newRxFunc(
-    () => langService.lang$.actual,
-    langService.lang$
-  );
+  lang$ = this.newRxFunc(() => i18nService.lang$.actual, i18nService.lang$);
 
   toggle() {
-    langService.toggle();
+    i18nService.setLang(this.lang$.actual === "ru" ? "en" : "ru");
   }
 
   getHTML() {

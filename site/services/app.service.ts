@@ -1,35 +1,26 @@
-import { AbstractService } from "cruzo"
+import { AbstractService, i18nService } from "cruzo"
 import { SectionIds } from "site/sections"
-import { langService } from "site/services/lang.service"
-import { trs } from "site/translate"
+import { Lang, trs } from "site/translate"
 
 class AppService extends AbstractService {
-  trs$ = this.newRx(trs);
-
   currentSectionId$ = this.newRx<SectionIds>(null);
 
   section$ = this.newRxFunc(
-    (trs, lang, sectionId) => {
-      if (!trs || !lang || !sectionId) return null;
-      return trs[lang].sections[sectionId];
+    (lang: string, sectionId: SectionIds) => {
+      if (!lang || !sectionId) return null;
+      return trs[lang as Lang]?.sections[sectionId] ?? null;
     },
-    this.trs$ as any,
-    langService.lang$ as any,
-    this.currentSectionId$ as any
+    i18nService.lang$,
+    this.currentSectionId$
   );
 
   sections$ = this.newRxFunc(
-    (trs, lang) => {
-      if (!trs || !lang) return null;
-      return trs[lang].sections;
+    (lang: string) => {
+      if (!lang) return null;
+      return trs[lang as Lang]?.sections ?? null;
     },
-    this.trs$ as any,
-    langService.lang$ as any,
+    i18nService.lang$,
   );
-
-  constructor() {
-    super();
-  }
 }
 
 export const appService = new AppService();

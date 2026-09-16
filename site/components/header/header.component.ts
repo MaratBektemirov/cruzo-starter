@@ -1,4 +1,4 @@
-import { AbstractComponent, componentsRegistryService, routerService } from "cruzo"
+import { AbstractComponent, componentsRegistryService, routerService, i18nService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
 
 import { LangSwitchComponent } from "site/components/lang/lang-switch.component"
@@ -6,7 +6,6 @@ import { SectionIds } from "site/sections"
 import { appService } from "site/services/app.service"
 import { routerUrlBucket } from "site/urls"
 import { buildBreadcrumbs, type Breadcrumb } from "site/utils/docs-breadcrumbs"
-import { getTranslater } from 'site/utils/get-translater'
 import i18n from "./header.component.i18n.json"
 
 const CRUZO_GITHUB_REPO = "https://github.com/MaratBektemirov/cruzo";
@@ -24,7 +23,7 @@ export class HeaderComponent extends AbstractComponent {
 
   dependencies = new Set([LangSwitchComponent.selector]);
 
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
   labels$ = this.newRxFunc(
     (section) => section?.labels ?? {},
@@ -50,7 +49,7 @@ export class HeaderComponent extends AbstractComponent {
                 class="${UI_KIT}_button ${UI_KIT}_button-m ${UI_KIT}_button-secondary"
                 href="${this.githubUrl}"
                 target="_blank"
-                rel="noopener noreferrer">{{ root.t$::rx?.github }}</a>
+                rel="noopener noreferrer">{{ root.i18n$::rx.github }}</a>
             </div>
             <p class="home-hero__tags">{{ root.labels$::rx.bundleSize }}</p>
           </div>
@@ -66,7 +65,10 @@ export class HeaderComponent extends AbstractComponent {
               </li>
             </ol>
           </nav>
-          <h1 class="mt_l">{{ section?.title }}</h1>
+          <div class="fx" style="align-items: center; justify-content: space-between; gap: 12px;">
+            <h1 class="mt_l">{{ section?.title }}</h1>
+            <lang-switch-component></lang-switch-component>
+          </div>
           <span class="header__description" inner-html="{{ section?.description }}"></span>
         </div>
       </div>

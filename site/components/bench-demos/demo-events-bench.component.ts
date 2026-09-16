@@ -1,26 +1,25 @@
-import { AbstractComponent, componentsRegistryService, Rx } from "cruzo"
+import { AbstractComponent, componentsRegistryService, Rx, i18nService } from "cruzo"
 import { UI_KIT } from "cruzo/ui-components/const"
-import { getTranslater } from 'site/utils/get-translater'
 import i18n from './demo-events-bench.component.i18n.json'
 
 export class DemoEventsBench extends AbstractComponent {
   static selector = "demo-events-bench";
 
-  t$ = getTranslater(i18n, this)
+  i18n$ = i18nService.connect(this, i18n);
 
   counters: Rx<any>[] = [];
 
   protected getHTML(): string {
     return `<div>
         <button onclick="{{ root.reset() }}" class="${UI_KIT}_button ${UI_KIT}_button-s mb_s ${UI_KIT}_button-primary">
-          {{ root.t$::rx?.reset }}
+          {{ root.i18n$::rx.reset }}
         </button>
 
         <div repeat="{{ root.counters }}" class="mb_xs fx fx-jcsb">
           <button onclick="{{ root.inc(this) }}" class="${UI_KIT}_button ${UI_KIT}_button-xs ${UI_KIT}_button-secondary">
             +1
           </button>
-          <span>#{{ index }} — {{ root.t$::rx?.value }} : <b>{{ this::rx.value }}</b></span>
+          <span>#{{ index }} — {{ root.i18n$::rx.value }} : <b>{{ this::rx.value }}</b></span>
         </div>
       </div>`;
   }

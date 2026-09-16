@@ -6,12 +6,6 @@ export enum Lang {
   'en' = 'en',
 }
 
-type TranslateVariants = {
-  one: string;
-  two: string;
-  five: string;
-}
-
 type Translate = { [key in Lang]: {
   sections: Partial<{ [key in SectionIds]: {
     title: string; 
@@ -617,6 +611,7 @@ authBucket.setState("secretAuth", {
               <li class="description-list-item"><b>RxBucket</b> — именованные «buckets» состояния для компонентов</li>
               <li class="description-list-item"><b>Роутер</b> — декларативные маршруты, параметры, редиректы</li>
               <li class="description-list-item"><b>HttpClient</b> — кэш, интерцепторы, AbortSignal</li>
+              <li class="description-list-item"><b>i18n</b> — <code class="description-inline-code">i18nService</code>, словари локалей и плюрализация через <code class="description-inline-code">Intl.PluralRules</code></li>
               <li class="description-list-item"><b>UI-набор</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink в <code class="description-inline-code">cruzo/ui-components</code></li>
             </ul>`,
         },
@@ -1545,6 +1540,7 @@ authBucket.setState("secretAuth", {
               <li class="description-list-item"><b>RxBucket</b> — named state buckets for components</li>
               <li class="description-list-item"><b>Router</b> — declarative routes, params, redirects</li>
               <li class="description-list-item"><b>HttpClient</b> — cache, interceptors, AbortSignal</li>
+              <li class="description-list-item"><b>i18n</b> — <code class="description-inline-code">i18nService</code>, locale dictionaries, and pluralization via <code class="description-inline-code">Intl.PluralRules</code></li>
               <li class="description-list-item"><b>UI kit</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink in <code class="description-inline-code">cruzo/ui-components</code></li>
             </ul>`,
           2: ``,
@@ -1677,19 +1673,4 @@ authBucket.setState("secretAuth", {
   },
 };
 
-export const trs = Object.assign({
-  [Lang.ru]: {
-    days: { one: "день", two: "дня", five: "дней" },
-    daysLeft: { one: "остался %% день", two: "осталось %% дня", five: "осталось %% дней" },
-    seconds: { one: "секунда", two: "секунды", five: "секунд" },
-    hours: { one: "час", two: "часа", five: "часов" },
-    minutes: { one: "минута", two: "минуты", five: "минут" },
-  },
-  [Lang.en]: {
-    days: { one: "day", two: "days", five: "days" },
-    daysLeft: { one: "%% day left", two: "%% days left", five: "%% days left" },
-    seconds: { one: "second", two: "seconds", five: "seconds" },
-    hours: { one: "hour", two: "hours", five: "hours" },
-    minutes: { one: "minute", two: "minutes", five: "minutes" },
-  },
-}, trsSections);
+export const trs = trsSections;

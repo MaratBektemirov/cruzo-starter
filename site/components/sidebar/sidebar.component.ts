@@ -1,6 +1,6 @@
 import styles from "./sidebar.component.module.css";
 
-import { AbstractComponent, componentsRegistryService, routerService } from "cruzo";
+import { AbstractComponent, componentsRegistryService, i18nService, routerService } from "cruzo";
 import { PixelReveal, type PixelRevealOptions } from "effect-tricks";
 
 import { routerUrlBucket } from "site/urls";
@@ -10,6 +10,7 @@ import { SidebarLinkComponent } from "site/components/sidebar-link/sidebar-link.
 import { SectionIds } from "site/sections";
 import { githubStarsService } from "site/services/github-stars.service";
 import { HeroDotsCanvas } from "site/utils/hero-dots-canvas";
+import messages from "./sidebar.component.i18n.json";
 
 export interface SidebarSubSection {
   id: SectionIds;
@@ -105,7 +106,7 @@ export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
           { id: SectionIds["ui-components-spinner"], title: "spinner" },
           { id: SectionIds["ui-components-modal"], title: "modal" },
           { id: SectionIds["ui-components-toast"], title: "toast" },
-          { id: SectionIds["ui-components-css-classes"], title: "CSS классы" },
+          { id: SectionIds["ui-components-css-classes"], title: "CSS classes" },
         ],
       },
     ],
@@ -186,6 +187,7 @@ export class SidebarComponent extends AbstractComponent {
     githubStars: { config: SpinnerConfig({ size: "4px" }) },
   });
 
+  i18n$ = i18nService.connect(this, messages);
   sections = this.newRx(SIDEBAR_SECTIONS);
   githubStars$ = this.newRxFunc(
     (count) => (count == null ? "" : String(count)),
@@ -222,7 +224,7 @@ export class SidebarComponent extends AbstractComponent {
             <div>
               <div>Cruzo</div>
               <div style="font-size:11px; text-transform:none; letter-spacing:0; color:var(--text-muted);">
-                tech minimalistic and intuitive framework with an expression VM.
+                {{ root.i18n$::rx.tagline }}
               </div>
             </div>
           </a>
@@ -281,9 +283,23 @@ export class SidebarComponent extends AbstractComponent {
 
   async connectedCallback() {
     super.connectedCallback();
-    this.innerBucket.setValues({
-      link: Object.fromEntries(SIDEBAR_SECTIONS.map((s, i) => [String(i), s])),
-    });
+    this.newRxFunc((view) => {
+      const title = typeof view.cssClasses === "string" ? view.cssClasses : "CSS classes";
+      const sections = SIDEBAR_SECTIONS.map((section) => ({
+        ...section,
+        children: section.children?.map((child) => ({
+          ...child,
+          sub: child.sub?.map((sub) =>
+            sub.id === SectionIds["ui-components-css-classes"] ? { ...sub, title } : sub
+          ),
+        })),
+      }));
+
+      this.sections.update(sections);
+      this.innerBucket.setValues({
+        link: Object.fromEntries(sections.map((s, i) => [String(i), s])),
+      });
+    }, this.i18n$);
 
     this.newRxFunc((loading) => {
       this.innerBucket.setValue(
