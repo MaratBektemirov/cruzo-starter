@@ -39,7 +39,7 @@ const trsSections: Translate = {
               вставки выражений прямо в текст и атрибуты
             </li>
             <li class="description-list-item">
-              атрибуты <code class="description-inline-code">attached</code>, <code class="description-inline-code">repeat</code>, <code class="description-inline-code">inner-html</code>
+              атрибуты <code class="description-inline-code">attached</code>, <code class="description-inline-code">repeat</code>, <code class="description-inline-code">repeat-key</code>, <code class="description-inline-code">inner-html</code>
             </li>
             <li class="description-list-item">
               <code class="description-inline-code">::rx</code> — доступ к реактивным значениям
@@ -556,6 +556,38 @@ authBucket.setState("secretAuth", {
               <b>Важно:</b> <code class="description-inline-code">repeat</code> работает с массивом или числом.
               Если выражение возвращает число, создаётся указанное количество элементов
               (в этом случае <code class="description-inline-code">this</code> будет равен индексу).
+            </div>
+
+            <div class="description-note">
+              По умолчанию <code class="description-inline-code">repeat</code> сопоставляет клоны по <b>ссылке на объект</b>.
+              Для JSON-обновлений, где приходят новые объекты с тем же id, используйте
+              <code class="description-inline-code">repeat-key</code>.
+            </div>`,
+        },
+      },
+      [SectionIds["template-engine-repeat-key"]]: {
+        title: "",
+        demos: {
+          1: `<h2 class="mt_xl">repeat-key="{{ ... }}"</h2>
+
+            <p class="description-paragraph">
+              <code class="description-inline-code">repeat-key</code> — opt-in ключ для
+              <code class="description-inline-code">repeat</code>. По умолчанию Cruzo переиспользует
+              DOM-клоны по <b>ссылке на элемент массива</b>: стабильные объекты сохраняют свой клон
+              при вставке, удалении и перестановке. Если список пришёл заново как JSON
+              (новые объекты, те же id), без ключа клоны пересоздаются.
+            </p>
+
+            <p class="description-paragraph">
+              С <code class="description-inline-code">repeat-key="{{ this.id }}"</code> клоны
+              сопоставляются по ключу. Счётчики в демо ниже — локальное состояние дочернего
+              компонента: слева после «Обновить как JSON» они сбрасываются, справа остаются.
+            </p>`,
+          2: `<div class="description-note">
+              <b>Важно:</b> ключи должны быть уникальными и не
+              <code class="description-inline-code">null</code> /
+              <code class="description-inline-code">undefined</code>.
+              Дубликаты бросают <code class="description-inline-code">duplicate repeat-key: …</code>.
             </div>`,
         },
       },
@@ -612,6 +644,7 @@ authBucket.setState("secretAuth", {
               <li class="description-list-item"><b>Роутер</b> — декларативные маршруты, параметры, редиректы</li>
               <li class="description-list-item"><b>HttpClient</b> — кэш, интерцепторы, AbortSignal</li>
               <li class="description-list-item"><b>i18n</b> — <code class="description-inline-code">i18nService</code>, словари локалей и плюрализация через <code class="description-inline-code">Intl.PluralRules</code></li>
+              <li class="description-list-item"><b>repeat-key</b> — opt-in ключ, чтобы <code class="description-inline-code">repeat</code> переиспользовал DOM при новых объектах с тем же id</li>
               <li class="description-list-item"><b>UI-набор</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink в <code class="description-inline-code">cruzo/ui-components</code></li>
             </ul>`,
         },
@@ -1032,7 +1065,7 @@ authBucket.setState("secretAuth", {
           embedding expressions directly in text and attributes
           </li>
           <li class="description-list-item">
-          attributes <code class="description-inline-code">attached</code>, <code class="description-inline-code">repeat</code>, <code class="description-inline-code">inner-html</code>
+          attributes <code class="description-inline-code">attached</code>, <code class="description-inline-code">repeat</code>, <code class="description-inline-code">repeat-key</code>, <code class="description-inline-code">inner-html</code>
           </li>
           <li class="description-list-item">
           <code class="description-inline-code">::rx</code> — access to reactive values
@@ -1120,8 +1153,35 @@ authBucket.setState("secretAuth", {
           1: `<h2 class="mt_xl">repeat</h2>
             <p class="description-paragraph">
               <code class="description-inline-code">repeat="{{ list }}"</code> renders the element for each item in the array. Inside: <code class="description-inline-code">this</code> — current item, <code class="description-inline-code">index</code> — current index.
+            </p>
+            <p class="description-paragraph">
+              By default, clones are matched by <b>object reference</b>. For JSON refreshes with new objects and the same id, use <code class="description-inline-code">repeat-key</code>.
             </p>`,
           2: ``,
+        },
+      },
+      [SectionIds["template-engine-repeat-key"]]: {
+        title: "",
+        demos: {
+          1: `<h2 class="mt_xl">repeat-key="{{ ... }}"</h2>
+            <p class="description-paragraph">
+              <code class="description-inline-code">repeat-key</code> is an opt-in key for
+              <code class="description-inline-code">repeat</code>. By default Cruzo reuses
+              DOM clones by <b>array item reference</b>: stable objects keep their clone
+              on insert, delete, and reorder. If the list comes back as JSON
+              (new objects, same ids), clones remount without a key.
+            </p>
+            <p class="description-paragraph">
+              With <code class="description-inline-code">repeat-key="{{ this.id }}"</code>,
+              clones are matched by key. The counters below are local child state:
+              after "Refresh as JSON" they reset on the left and stay on the right.
+            </p>`,
+          2: `<div class="description-note">
+              <b>Important:</b> keys must be unique and not
+              <code class="description-inline-code">null</code> /
+              <code class="description-inline-code">undefined</code>.
+              Duplicates throw <code class="description-inline-code">duplicate repeat-key: …</code>.
+            </div>`,
         },
       },
       [SectionIds["template-engine-rx"]]: {
@@ -1541,6 +1601,7 @@ authBucket.setState("secretAuth", {
               <li class="description-list-item"><b>Router</b> — declarative routes, params, redirects</li>
               <li class="description-list-item"><b>HttpClient</b> — cache, interceptors, AbortSignal</li>
               <li class="description-list-item"><b>i18n</b> — <code class="description-inline-code">i18nService</code>, locale dictionaries, and pluralization via <code class="description-inline-code">Intl.PluralRules</code></li>
+              <li class="description-list-item"><b>repeat-key</b> — opt-in key so <code class="description-inline-code">repeat</code> reuses DOM when new objects share the same id</li>
               <li class="description-list-item"><b>UI kit</b> — Input, Select, ButtonGroup, Upload, Spinner, Modal, RouterLink in <code class="description-inline-code">cruzo/ui-components</code></li>
             </ul>`,
           2: ``,

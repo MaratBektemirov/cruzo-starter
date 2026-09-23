@@ -36,7 +36,7 @@ import "cruzo/ui-components/textarea";
 import { ToastComponent } from "cruzo/ui-components/toast";
 
 function initApp() {
-  i18nService.setLang("ru");
+  i18nService.setDefaultLang("ru");
   componentsRegistryService.define(ToastComponent);
   Template.setAppVariables({});
   componentsRegistryService.initApp();

@@ -66,6 +66,7 @@ export const SIDEBAR_SECTIONS: SidebarSectionConfig[] = [
           { id: SectionIds["template-engine-inner-html"], title: "inner-html" },
           { id: SectionIds["template-engine-once"], title: "once::" },
           { id: SectionIds["template-engine-repeat"], title: "repeat" },
+          { id: SectionIds["template-engine-repeat-key"], title: "repeat-key" },
         ],
       },
       {

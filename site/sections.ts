@@ -24,6 +24,7 @@ export enum SectionIds {
   "template-engine-inner-html" = "template-engine-inner-html",
   "template-engine-once" = "template-engine-once",
   "template-engine-repeat" = "template-engine-repeat",
+  "template-engine-repeat-key" = "template-engine-repeat-key",
   "template-engine-rx" = "template-engine-rx",
 
   "tests" = "tests",

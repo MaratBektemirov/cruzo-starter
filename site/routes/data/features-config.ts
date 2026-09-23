@@ -9,6 +9,8 @@ import DemoLetVarsComponentCode from "site/components/template-engine-demos/demo
 import { DemoLetVarsComponent } from "site/components/template-engine-demos/demo-let-vars.component";
 import DemoRepeatComponentCode from "site/components/template-engine-demos/demo-repeat.component?raw";
 import { DemoRepeatComponent } from "site/components/template-engine-demos/demo-repeat.component";
+import DemoRepeatKeyComponentCode from "site/components/template-engine-demos/demo-repeat-key.component?raw";
+import { DemoRepeatKeyComponent } from "site/components/template-engine-demos/demo-repeat-key.component";
 import DemoRxValueComponentCode from "site/components/template-engine-demos/demo-rx-value.component?raw";
 import { DemoRxValueComponent } from "site/components/template-engine-demos/demo-rx-value.component";
 import DemoJsSubsetComponentCode from "site/components/template-engine-demos/demo-js-subset.component?raw";
@@ -59,12 +61,14 @@ const FEATURES_CONFIG: Record<string, DocsSectionRouteData> = {
       { code: DemoInnerHtmlComponentCode, component: DemoInnerHtmlComponent, id: SectionIds["template-engine-inner-html"] },
       { code: DemoOnceComponentCode, component: DemoOnceComponent, id: SectionIds["template-engine-once"] },
       { code: DemoRepeatComponentCode, component: DemoRepeatComponent, id: SectionIds["template-engine-repeat"] },
+      { code: DemoRepeatKeyComponentCode, component: DemoRepeatKeyComponent, id: SectionIds["template-engine-repeat-key"] },
     ],
     dependencies: [
       DemoAttachedComponent.selector,
       DemoHtmlEventsComponent.selector,
       DemoLetVarsComponent.selector,
       DemoRepeatComponent.selector,
+      DemoRepeatKeyComponent.selector,
       DemoRxValueComponent.selector,
       DemoJsSubsetComponent.selector,
       DemoInnerHtmlComponent.selector,

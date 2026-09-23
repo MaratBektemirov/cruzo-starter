@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "refresh": "Обновить как JSON",
+    "shuffle": "Переставить",
+    "clicks": "клики",
+    "withoutKey": "Без repeat-key — новые объекты пересоздают DOM",
+    "withKey": "С repeat-key=\"{{ this.id }}\" — клоны остаются"
+  },
+  "en": {
+    "refresh": "Refresh as JSON",
+    "shuffle": "Reorder",
+    "clicks": "clicks",
+    "withoutKey": "Without repeat-key — new objects remount the DOM",
+    "withKey": "With repeat-key=\"{{ this.id }}\" — clones stay"
+  }
+}

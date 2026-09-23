@@ -7,20 +7,21 @@ class AppService extends AbstractService {
 
   section$ = this.newRxFunc(
     (lang: string, sectionId: SectionIds) => {
-      if (!lang || !sectionId) return null;
-      return trs[lang as Lang]?.sections[sectionId] ?? null;
+      if (!sectionId) return null;
+      return this.sectionsFor(lang)[sectionId] ?? null;
     },
     i18nService.lang$,
     this.currentSectionId$
   );
 
   sections$ = this.newRxFunc(
-    (lang: string) => {
-      if (!lang) return null;
-      return trs[lang as Lang]?.sections ?? null;
-    },
+    (lang: string) => this.sectionsFor(lang),
     i18nService.lang$,
   );
+
+  private sectionsFor(lang: string) {
+    return (trs[lang as Lang] ?? trs.ru).sections;
+  }
 }
 
 export const appService = new AppService();
